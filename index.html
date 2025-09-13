@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="icon" type="image/jpg" href="images/logo.jpg">
+    <link rel="stylesheet" href="styles.css">
     <style>
         body { font-family: 'Inter', sans-serif; }
         .hero-background {
@@ -97,7 +98,7 @@
         }
     </style>
 </head>
-<body class="bg-gray-50 text-gray-900 leading-normal tracking-wide">
+<body>
     <!-- Header with logo and navigation -->
     <header class="bg-white shadow-sm sticky top-0 z-50">
         <div class="container mx-auto px-4 md:px-6 py-4 flex justify-between items-center">
@@ -153,13 +154,27 @@
                 <div class="modal-container">
                     <span class="modal-close-button" data-close="woman">&times;</span>
                     <h2 class="text-2xl font-bold text-purple-700 mb-4">Sign Up as a Woman</h2>
-                    <form>
-                        <label class="block mb-2 font-medium text-gray-700">Name</label>
-                        <input type="text" class="w-full mb-4 px-3 py-2 border rounded-lg" required>
-                        <label class="block mb-2 font-medium text-gray-700">Email</label>
-                        <input type="email" class="w-full mb-4 px-3 py-2 border rounded-lg" required>
-                        <button type="submit" class="w-full bg-purple-700 text-white py-2 rounded-lg font-semibold hover:bg-purple-800 transition">Sign Up</button>
-                    </form>
+                    <!-- Woman Modal Form -->
+<form id="woman-signup-form">
+    <label class="block mb-2 font-medium text-gray-700">Name</label>
+    <input type="text" id="woman-name" class="w-full mb-4 px-3 py-2 border rounded-lg" required>
+    <label class="block mb-2 font-medium text-gray-700">Email</label>
+    <input type="email" id="woman-email" class="w-full mb-4 px-3 py-2 border rounded-lg" required>
+    <label class="block mb-2 font-medium text-gray-700">Password</label>
+    <input type="password" id="woman-password" class="w-full mb-4 px-3 py-2 border rounded-lg" required>
+    <button type="submit" class="w-full bg-purple-700 text-white py-2 rounded-lg font-semibold hover:bg-purple-800 transition">
+        Sign Up
+    </button>
+    <!-- Sign Up with Google Button -->
+    <button type="button" id="google-signup-woman" class="w-full mt-2 bg-white border border-gray-300 text-gray-800 py-2 rounded-lg font-semibold flex items-center justify-center hover:bg-gray-100 transition">
+        <i class="fab fa-google mr-2"></i> Sign Up with Google
+    </button>
+    <!-- Sign In Link -->
+    <p class="mt-4 text-center text-gray-600">
+        Already have an account?
+        <button type="button" id="open-signin-woman" class="text-purple-700 underline">Sign In</button>
+    </p>
+</form>
                 </div>
             </div>
             <!-- Sign Up Modal for Employers -->
@@ -167,13 +182,27 @@
                 <div class="modal-container">
                     <span class="modal-close-button" data-close="employer">&times;</span>
                     <h2 class="text-2xl font-bold text-purple-700 mb-4">Sign Up as an Employer</h2>
-                    <form>
-                        <label class="block mb-2 font-medium text-gray-700">Company Name</label>
-                        <input type="text" class="w-full mb-4 px-3 py-2 border rounded-lg" required>
-                        <label class="block mb-2 font-medium text-gray-700">Contact Email</label>
-                        <input type="email" class="w-full mb-4 px-3 py-2 border rounded-lg" required>
-                        <button type="submit" class="w-full bg-purple-700 text-white py-2 rounded-lg font-semibold hover:bg-purple-800 transition">Sign Up</button>
-                    </form>
+                    <!-- Employer Modal Form -->
+<form id="employer-signup-form">
+    <label class="block mb-2 font-medium text-gray-700">Company Name</label>
+    <input type="text" id="employer-name" class="w-full mb-4 px-3 py-2 border rounded-lg" required>
+    <label class="block mb-2 font-medium text-gray-700">Contact Email</label>
+    <input type="email" id="employer-email" class="w-full mb-4 px-3 py-2 border rounded-lg" required>
+    <label class="block mb-2 font-medium text-gray-700">Password</label>
+    <input type="password" id="employer-password" class="w-full mb-4 px-3 py-2 border rounded-lg" required>
+    <button type="submit" class="w-full bg-purple-700 text-white py-2 rounded-lg font-semibold hover:bg-purple-800 transition">
+        Sign Up
+    </button>
+    <!-- Sign Up with Google Button -->
+    <button type="button" id="google-signup-employer" class="w-full mt-2 bg-white border border-gray-300 text-gray-800 py-2 rounded-lg font-semibold flex items-center justify-center hover:bg-gray-100 transition">
+        <i class="fab fa-google mr-2"></i> Sign Up with Google
+    </button>
+    <!-- Sign In Link -->
+    <p class="mt-4 text-center text-gray-600">
+        Already have an account?
+        <button type="button" id="open-signin-employer" class="text-purple-700 underline">Sign In</button>
+    </p>
+</form>
                 </div>
             </div>
         </section>
@@ -528,7 +557,8 @@
         // Import the functions you need from the SDKs you need
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
         import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-analytics.js";
-        // TODO: Add SDKs for Firebase products that you want to use
+        import { getAuth, signInWithPopup, GoogleAuthProvider, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+        import { getFirestore, setDoc, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
         // Your web app's Firebase configuration
         const firebaseConfig = {
@@ -544,7 +574,134 @@
         // Initialize Firebase
         const app = initializeApp(firebaseConfig);
         const analytics = getAnalytics(app);
+        const auth = getAuth(app);
+        const provider = new GoogleAuthProvider();
+        const db = getFirestore(app);
+
+        document.getElementById('google-signup-woman').addEventListener('click', async () => {
+            try {
+                const result = await signInWithPopup(auth, provider);
+                alert(`Signed up as: ${result.user.displayName}`);
+                signupModalWoman.classList.add('hidden');
+                // After Google sign-in in woman modal
+                window.location.href = 'dashboard-woman.html';
+            } catch (error) {
+                alert('Google sign-in failed.');
+            }
+        });
+
+        document.getElementById('google-signup-employer').addEventListener('click', async () => {
+            try {
+                const result = await signInWithPopup(auth, provider);
+                alert(`Signed up as: ${result.user.displayName}`);
+                signupModalEmployer.classList.add('hidden');
+                // After Google sign-in in employer modal
+                window.location.href = 'dashboard-employer.html';
+            } catch (error) {
+                alert('Google sign-in failed.');
+            }
+        });
+
+        // Woman form sign up
+document.getElementById('woman-signup-form').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const email = document.getElementById('woman-email').value;
+    const password = document.getElementById('woman-password').value;
+    try {
+        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+        // Save role to Firestore
+        await setDoc(doc(db, "users", userCredential.user.uid), {
+            role: "woman",
+            name: document.getElementById('woman-name').value,
+            email: email
+        });
+        window.location.href = 'dashboard-woman.html';
+    } catch (error) {
+        alert('Sign up failed: ' + error.message);
+    }
+});
+
+// Employer form sign up
+document.getElementById('employer-signup-form').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const email = document.getElementById('employer-email').value;
+    const password = document.getElementById('employer-password').value;
+    try {
+        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+        // Save role to Firestore
+        await setDoc(doc(db, "users", userCredential.user.uid), {
+            role: "employer",
+            name: document.getElementById('employer-name').value,
+            email: email
+        });
+        window.location.href = 'dashboard-employer.html';
+    } catch (error) {
+        alert('Sign up failed: ' + error.message);
+    }
+});
+
+        const signinModal = document.getElementById('signin-modal');
+        const closeSigninModal = document.getElementById('close-signin-modal');
+
+        // Open sign in modal from either sign up modal
+        document.getElementById('open-signin-woman').addEventListener('click', () => {
+            signinModal.classList.remove('hidden');
+        });
+        document.getElementById('open-signin-employer').addEventListener('click', () => {
+            signinModal.classList.remove('hidden');
+        });
+
+        // Close sign in modal
+        closeSigninModal.addEventListener('click', () => {
+            signinModal.classList.add('hidden');
+        });
+        signinModal.addEventListener('click', (e) => {
+            if (e.target === signinModal) {
+                signinModal.classList.add('hidden');
+            }
+        });
+
+        // Handle sign in
+        document.getElementById('signin-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const email = document.getElementById('signin-email').value;
+            const password = document.getElementById('signin-password').value;
+            try {
+                const userCredential = await signInWithEmailAndPassword(auth, email, password);
+                // Get user role from Firestore
+                const userDoc = await getDoc(doc(db, "users", userCredential.user.uid));
+                if (userDoc.exists()) {
+                    const role = userDoc.data().role;
+                    if (role === "woman") {
+                        window.location.href = 'dashboard-woman.html';
+                    } else if (role === "employer") {
+                        window.location.href = 'dashboard-employer.html';
+                    } else {
+                        alert('User role not set.');
+                    }
+                } else {
+                    alert('User profile not found.');
+                }
+            } catch (error) {
+                alert('Sign in failed: ' + error.message);
+            }
+        });
     </script>
+
+    <!-- Sign In Modal -->
+<div id="signin-modal" class="modal-overlay hidden">
+    <div class="modal-container">
+        <span id="close-signin-modal" class="modal-close-button">&times;</span>
+        <h2 class="text-2xl font-bold text-purple-700 mb-4">Sign In</h2>
+        <form id="signin-form">
+            <label class="block mb-2 font-medium text-gray-700">Email</label>
+            <input type="email" id="signin-email" class="w-full mb-4 px-3 py-2 border rounded-lg" required>
+            <label class="block mb-2 font-medium text-gray-700">Password</label>
+            <input type="password" id="signin-password" class="w-full mb-4 px-3 py-2 border rounded-lg" required>
+            <button type="submit" class="w-full bg-purple-700 text-white py-2 rounded-lg font-semibold hover:bg-purple-800 transition">Sign In</button>
+        </form>
+    </div>
+</div>
 
 </body>
 </html>
