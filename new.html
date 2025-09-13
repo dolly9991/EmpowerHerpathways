@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EmpowerHer Pathways - Redefining Career Re-Entry</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .hero-background {
+            background-image: url('uploaded:image_2b8772.png-4a57cb6c-a7ed-465b-b86d-96941c273833');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+        .hero-background::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(138, 99, 210, 0.7); /* Lighter semi-transparent purple overlay */
+        }
+        .text-purple-600 { color: #8a63d2; }
+        .bg-purple-600 { background-color: #8a63d2; }
+        .hover\:text-purple-500:hover { color: #a17feb; }
+        .hover\:bg-purple-500:hover { background-color: #a17feb; }
+        .border-purple-600 { border-color: #8a63d2; }
+        .text-purple-500 { color: #a17feb; }
+        .bg-purple-500 { background-color: #a17feb; }
+        .active-tab { border-color: #a17feb; color: #a17feb; font-weight: 500; }
+        .inactive-tab { border-color: transparent; }
+        
+        .challenge-card { transition: transform 0.6s; transform-style: preserve-3d; }
+        .challenge-card.is-flipped { transform: rotateY(180deg); }
+        .challenge-card .front, .challenge-card .back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 0.75rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 1.5rem;
+        }
+        .challenge-card .front { transform: rotateY(0deg); }
+        .challenge-card .back { transform: rotateY(180deg); background-color: #a17feb; }
+        
+        .tab-button.active-tab {
+            background-color: #a17feb;
+            color: white;
+        }
+        .tab-button:not(.active-tab) {
+            background-color: #e0e0e0;
+            color: #4b5563;
+        }
+        
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-900 leading-normal tracking-wide">
+    <!-- Header with logo and navigation -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="container mx-auto px-4 md:px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <img src="uploaded:logo 2.png-10ee2665-0496-446f-ab80-35c28e336068" alt="EmpowerHer Logo" class="w-10 h-10 rounded-full">
+                <span class="text-2xl font-bold text-purple-600">EmpowerHer Pathways</span>
+            </div>
+            <nav class="hidden md:flex space-x-4">
+                <a href="#about" class="text-gray-600 hover:text-purple-500 font-medium">Home</a>
+                <a href="#about" class="text-gray-600 hover:text-purple-500 font-medium">About</a>
+                <a href="#jobs" class="text-gray-600 hover:text-purple-500 font-medium">Jobs</a>
+                <a href="#forums" class="text-gray-600 hover:text-purple-500 font-medium">Forums</a>
+                <a href="#courses" class="text-gray-600 hover:text-purple-500 font-medium">Courses</a>
+                <a href="#apply" class="text-gray-600 hover:text-purple-500 font-medium">Apply</a>
+                <a href="#" class="text-gray-600 hover:text-purple-500 font-medium">Seminars</a>
+                <a href="#" class="text-gray-600 hover:text-purple-500 font-medium">FAQ</a>
+                <a href="#" class="text-gray-600 hover:text-purple-500 font-medium">Pricing</a>
+            </nav>
+            <!-- Mobile Menu Toggle -->
+            <button id="mobile-menu-button" class="md:hidden text-gray-600 focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                </svg>
+            </button>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white shadow-sm py-2">
+            <nav class="flex flex-col items-center space-y-2">
+                <a href="#about" class="block text-gray-600 hover:text-purple-500 font-medium py-2">Home</a>
+                <a href="#about" class="block text-gray-600 hover:text-purple-500 font-medium py-2">About</a>
+                <a href="#jobs" class="block text-gray-600 hover:text-purple-500 font-medium py-2">Jobs</a>
+                <a href="#forums" class="block text-gray-600 hover:text-purple-500 font-medium py-2">Forums</a>
+                <a href="#courses" class="block text-gray-600 hover:text-purple-500 font-medium py-2">Courses</a>
+                <a href="#apply" class="block text-gray-600 hover:text-purple-500 font-medium py-2">Apply</a>
+                <a href="#" class="block text-gray-600 hover:text-purple-500 font-medium py-2">Seminars</a>
+                <a href="#" class="block text-gray-600 hover:text-purple-500 font-medium py-2">FAQ</a>
+                <a href="#" class="block text-gray-600 hover:text-purple-500 font-medium py-2">Pricing</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section id="about" class="py-20 text-center text-white hero-background">
+            <div class="container mx-auto px-4 md:px-6 relative z-10">
+                <h1 class="text-4xl md:text-6xl font-extrabold leading-tight mb-4">Relaunch Your Career with Confidence</h1>
+                <p class="text-lg md:text-xl mb-8 font-light max-w-2xl mx-auto">
+                    EmpowerHer Pathways helps Botswana women return to the workforce after career breaks through mentorship, skill-building, and networking opportunities.
+                </p>
+                <div class="flex flex-col md:flex-row justify-center items-center space-y-4 md:space-y-0 md:space-x-4">
+                    <button class="bg-white text-purple-600 font-semibold py-3 px-6 rounded-lg shadow-md hover:bg-gray-100 transition-colors duration-300">
+                        Learn More
+                    </button>
+                    <button class="bg-transparent border border-white text-white font-semibold py-3 px-6 rounded-lg hover:bg-white hover:text-purple-600 transition-colors duration-300">
+                        Find Jobs
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Our Mission Section -->
+        <section class="py-16 bg-white">
+            <div class="container mx-auto px-4 md:px-6">
+                <h2 class="text-3xl md:text-4xl font-bold text-center text-purple-600 mb-12">Our Mission</h2>
+                <div class="flex flex-col md:flex-row items-center md:space-x-12">
+                    <div class="md:w-1/2 mb-8 md:mb-0">
+                        <img src="https://placehold.co/500x350/a17feb/FFFFFF?text=Empowerment+Graphic" alt="Empowering Women" class="w-full h-auto rounded-lg shadow-xl">
+                    </div>
+                    <div class="md:w-1/2">
+                        <h3 class="text-2xl font-semibold mb-4 text-gray-800">Empowering Women Returning to Work</h3>
+                        <p class="text-gray-600 mb-6">
+                            EmpowerHer Pathways is dedicated to empowering women to overcome the unique challenges of re-entering the workforce. We provide tailored resources, a supportive community, and practical tools to help them rediscover their potential and secure fulfilling careers.
+                        </p>
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 text-center">
+                            <div class="flex flex-col items-center">
+                                <i class="fas fa-users text-4xl text-purple-600 mb-2"></i>
+                                <h4 class="font-semibold text-gray-800">Community</h4>
+                                <p class="text-sm text-gray-500">A supportive network of peers and mentors.</p>
+                            </div>
+                            <div class="flex flex-col items-center">
+                                <i class="fas fa-tools text-4xl text-purple-600 mb-2"></i>
+                                <h4 class="font-semibold text-gray-800">Skills</h4>
+                                <p class="text-sm text-gray-500">Access to up-to-date and relevant job skills.</p>
+                            </div>
+                            <div class="flex flex-col items-center">
+                                <i class="fas fa-briefcase text-4xl text-purple-600 mb-2"></i>
+                                <h4 class="font-semibold text-gray-800">Jobs</h4>
+                                <p class="text-sm text-gray-500">Curated opportunities that value diverse experiences.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- The Challenge Section (reused from previous version) -->
+        <section id="challenges" class="py-16 bg-gray-50">
+            <div class="container mx-auto px-4 md:px-6">
+                <h2 class="text-3xl md:text-4xl font-bold text-center text-purple-600 mb-12">The Challenges We Face</h2>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="relative w-full h-80">
+                        <div class="challenge-card absolute w-full h-full cursor-pointer" onclick="this.classList.toggle('is-flipped');">
+                            <div class="front bg-white">
+                                <img src="uploaded:image_2b8ebc.png-dedac6f7-6cc2-4591-8c72-72f5a8d70a26" alt="Skills Gap Icon" class="w-16 h-16 mb-4">
+                                <h3 class="text-2xl font-semibold mb-2 text-center text-gray-800">Skills Gap</h3>
+                                <p class="text-center text-gray-600">
+                                    Women returning after a career break often find their skills are no longer up-to-date with current industry standards.
+                                </p>
+                            </div>
+                            <div class="back text-white bg-purple-500">
+                                <p class="text-center font-medium">
+                                    Lack of access to professional development and training opportunities can make it difficult to re-enter the workforce.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="relative w-full h-80">
+                        <div class="challenge-card absolute w-full h-full cursor-pointer" onclick="this.classList.toggle('is-flipped');">
+                            <div class="front bg-white">
+                                <img src="uploaded:image_0f6f3e.png-96d92d27-fdd3-4799-8c62-8daad2d14c27" alt="Bias & Stereotypes Icon" class="w-16 h-16 mb-4">
+                                <h3 class="text-2xl font-semibold mb-2 text-center text-gray-800">Bias & Stereotypes</h3>
+                                <p class="text-center text-gray-600">
+                                    Recruitment processes often hold unconscious biases against candidates with career gaps on their resumes.
+                                </p>
+                            </div>
+                            <div class="back text-white bg-purple-500">
+                                <p class="text-center font-medium">
+                                    These biases can lead to women being overlooked for roles they are perfectly qualified for, based on outdated perceptions.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="relative w-full h-80">
+                        <div class="challenge-card absolute w-full h-full cursor-pointer" onclick="this.classList.toggle('is-flipped');">
+                            <div class="front bg-white">
+                                <img src="uploaded:image_0f6bda.png-43b30d6b-65ae-4db0-b7c8-8abf4f5f4ecf" alt="Lack of Support Icon" class="w-16 h-16 mb-4">
+                                <h3 class="text-2xl font-semibold mb-2 text-center text-gray-800">Lack of Support</h3>
+                                <p class="text-center text-gray-600">
+                                    Many women lack the necessary support systems, such as mentorship and networking, to navigate their career return.
+                                </p>
+                            </div>
+                            <div class="back text-white bg-purple-500">
+                                <p class="text-center font-medium">
+                                    This isolation can hinder their job search and make it difficult to reintegrate into a professional environment.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Our Impact Section (reused from previous version) -->
+        <section id="impact" class="py-16 bg-white">
+            <div class="container mx-auto px-4 md:px-6">
+                <h2 class="text-3xl md:text-4xl font-bold text-center text-purple-600 mb-12">Our Impact</h2>
+                <div class="flex flex-col md:flex-row items-center space-y-8 md:space-y-0 md:space-x-12">
+                    <div class="md:w-1/2 flex justify-center">
+                        <div class="chart-container w-full h-96">
+                            <canvas id="impactChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="md:w-1/2">
+                        <p class="text-gray-600 text-lg">
+                            EmpowerHer Pathways creates a ripple effect, positively impacting individuals, businesses, and society as a whole.
+                        </p>
+                        <ul class="list-none mt-4 space-y-4">
+                            <li class="flex items-start">
+                                <svg class="h-6 w-6 text-purple-600 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586l-1.293-1.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                </svg>
+                                <div>
+                                    <h4 class="font-semibold text-gray-800">For Women:</h4>
+                                    <p class="text-gray-600">Increased confidence, faster job search, higher success rates.</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="h-6 w-6 text-purple-600 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586l-1.293-1.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                </svg>
+                                <div>
+                                    <h4 class="font-semibold text-gray-800">For Employers:</h4>
+                                    <p class="text-gray-600">Access to diverse talent, enhanced DEI, higher retention.</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="h-6 w-6 text-purple-600 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586l-1.293-1.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                </svg>
+                                <div>
+                                    <h4 class="font-semibold text-gray-800">For Society:</h4>
+                                    <p class="text-gray-600">Closes gender pay gap, boosts economic empowerment.</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Meet Our Team Section -->
+        <section class="py-16 bg-gray-50">
+            <div class="container mx-auto px-4 md:px-6">
+                <h2 class="text-3xl md:text-4xl font-bold text-center text-purple-600 mb-12">Meet Our Team</h2>
+                <p class="text-center text-gray-600 mb-8 max-w-2xl mx-auto">
+                    The founders behind EmpowerHer Pathways.
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="bg-white rounded-lg shadow-lg p-6 flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-6">
+                        <img src="https://placehold.co/150x150/a17feb/FFFFFF?text=Botho+Neo" alt="Botho Neo" class="w-36 h-36 rounded-full object-cover">
+                        <div class="text-center md:text-left">
+                            <h3 class="text-2xl font-bold text-gray-800">Botho Neo</h3>
+                            <p class="text-purple-600 font-medium">Co-Founder & CEO</p>
+                            <p class="text-gray-600 mt-2">
+                                Botho has extensive experience in tech leadership and a Master's in Computing from the University of Botswana. Her passion for empowering women led her to co-found EmpowerHer Pathways.
+                            </p>
+                            <div class="flex justify-center md:justify-start space-x-4 mt-4">
+                                <a href="#" class="text-gray-500 hover:text-purple-600"><i class="fab fa-twitter"></i></a>
+                                <a href="#" class="text-gray-500 hover:text-purple-600"><i class="fab fa-linkedin"></i></a>
+                                <a href="#" class="text-gray-500 hover:text-purple-600"><i class="fab fa-facebook"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-lg shadow-lg p-6 flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-6">
+                        <img src="https://placehold.co/150x150/a17feb/FFFFFF?text=Unity+Ndimande" alt="Unity Ndimande" class="w-36 h-36 rounded-full object-cover">
+                        <div class="text-center md:text-left">
+                            <h3 class="text-2xl font-bold text-gray-800">Unity Ndimande</h3>
+                            <p class="text-purple-600 font-medium">Co-Founder & COO</p>
+                            <p class="text-gray-600 mt-2">
+                                With a background in project management and operations, Unity brings strategic insight and a passion for creating impactful programs. She is dedicated to connecting women with employers who value their diverse experience.
+                            </p>
+                            <div class="flex justify-center md:justify-start space-x-4 mt-4">
+                                <a href="#" class="text-gray-500 hover:text-purple-600"><i class="fab fa-twitter"></i></a>
+                                <a href="#" class="text-gray-500 hover:text-purple-600"><i class="fab fa-linkedin"></i></a>
+                                <a href="#" class="text-gray-500 hover:text-purple-600"><i class="fab fa-facebook"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Available Jobs Section -->
+        <section id="jobs" class="py-16 bg-white">
+            <div class="container mx-auto px-4 md:px-6">
+                <div class="flex justify-between items-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-purple-600">Available Jobs</h2>
+                    <div class="flex items-center space-x-4">
+                        <input type="text" placeholder="Search jobs..." class="px-4 py-2 border rounded-full focus:outline-none focus:border-purple-500">
+                        <button class="bg-purple-600 text-white font-semibold py-2 px-6 rounded-full hover:bg-purple-500 transition-colors duration-300">
+                            Search
+                        </button>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Job Card 1 -->
+                    <div class="bg-gray-50 rounded-lg shadow-lg p-6 border-l-4 border-purple-600">
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">Digital Marketing Specialist</h3>
+                        <p class="text-gray-600 mb-1">TechVision Inc.</p>
+                        <p class="text-gray-600 text-sm mb-4"><i class="fas fa-map-marker-alt text-purple-600"></i> Remote</p>
+                        <span class="inline-block bg-purple-200 text-purple-800 text-xs font-semibold px-2.5 py-0.5 rounded-full">Full-time</span>
+                        <p class="text-gray-500 text-sm mt-4">Join our marketing team to lead digital campaigns. Remote hours, perfect for returners.</p>
+                        <div class="mt-6">
+                            <a href="#apply" class="block w-full text-center bg-purple-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-purple-500 transition-colors duration-300">Apply Now</a>
+                        </div>
+                    </div>
+                    <!-- Job Card 2 -->
+                    <div class="bg-gray-50 rounded-lg shadow-lg p-6 border-l-4 border-purple-600">
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">Project Coordinator</h3>
+                        <p class="text-gray-600 mb-1">InnovateCo</p>
+                        <p class="text-gray-600 text-sm mb-4"><i class="fas fa-map-marker-alt text-purple-600"></i> Gaborone</p>
+                        <span class="inline-block bg-purple-200 text-purple-800 text-xs font-semibold px-2.5 py-0.5 rounded-full">Part-time</span>
+                        <p class="text-gray-500 text-sm mt-4">Coordinate our logistics with a collaborative, fast-paced team. A great return-to-work opportunity.</p>
+                        <div class="mt-6">
+                            <a href="#apply" class="block w-full text-center bg-purple-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-purple-500 transition-colors duration-300">Apply Now</a>
+                        </div>
+                    </div>
+                    <!-- Job Card 3 -->
+                    <div class="bg-gray-50 rounded-lg shadow-lg p-6 border-l-4 border-purple-600">
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">Human Resources Manager</h3>
+                        <p class="text-gray-600 mb-1">Global Solutions</p>
+                        <p class="text-gray-600 text-sm mb-4"><i class="fas fa-map-marker-alt text-purple-600"></i> Kasane</p>
+                        <span class="inline-block bg-purple-200 text-purple-800 text-xs font-semibold px-2.5 py-0.5 rounded-full">Full-time</span>
+                        <p class="text-gray-500 text-sm mt-4">We're looking for an HR Manager with flexible working options to enhance our workplace culture.</p>
+                        <div class="mt-6">
+                            <a href="#apply" class="block w-full text-center bg-purple-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-purple-500 transition-colors duration-300">Apply Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Apply Now Section -->
+        <section id="apply" class="py-16 bg-gray-50">
+            <div class="container mx-auto px-4 md:px-6">
+                <h2 class="text-3xl md:text-4xl font-bold text-center text-purple-600 mb-12">Apply Now</h2>
+                <p class="text-center text-gray-600 mb-8 max-w-2xl mx-auto">
+                    Ready to take the next step in your career journey? Submit your application below.
+                </p>
+                <div class="max-w-3xl mx-auto bg-white rounded-lg shadow-lg p-8">
+                    <form action="#" method="POST">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                            <div>
+                                <label for="first_name" class="block text-sm font-medium text-gray-700">First Name</label>
+                                <input type="text" name="first_name" id="first_name" autocomplete="given-name" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-purple-500 focus:ring focus:ring-purple-200 focus:ring-opacity-50">
+                            </div>
+                            <div>
+                                <label for="last_name" class="block text-sm font-medium text-gray-700">Last Name</label>
+                                <input type="text" name="last_name" id="last_name" autocomplete="family-name" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-purple-500 focus:ring focus:ring-purple-200 focus:ring-opacity-50">
+                            </div>
+                            <div class="md:col-span-2">
+                                <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+                                <input type="email" name="email" id="email" autocomplete="email" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-purple-500 focus:ring focus:ring-purple-200 focus:ring-opacity-50">
+                            </div>
+                            <div class="md:col-span-2">
+                                <label for="phone" class="block text-sm font-medium text-gray-700">Phone Number</label>
+                                <input type="tel" name="phone" id="phone" autocomplete="tel" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-purple-500 focus:ring focus:ring-purple-200 focus:ring-opacity-50">
+                            </div>
+                            <div class="md:col-span-2">
+                                <label for="position" class="block text-sm font-medium text-gray-700">Position You're Applying For</label>
+                                <select id="position" name="position" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-purple-500 focus:ring focus:ring-purple-200 focus:ring-opacity-50">
+                                    <option value="">Select a position</option>
+                                    <option value="digital_marketing_specialist">Digital Marketing Specialist</option>
+                                    <option value="project_coordinator">Project Coordinator</option>
+                                    <option value="hr_manager">Human Resources Manager</option>
+                                </select>
+                            </div>
+                            <div class="md:col-span-2">
+                                <label for="years_of_experience" class="block text-sm font-medium text-gray-700">Years of Experience</label>
+                                <input type="number" name="years_of_experience" id="years_of_experience" required min="0" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-purple-500 focus:ring focus:ring-purple-200 focus:ring-opacity-50">
+                            </div>
+                            <div class="md:col-span-2">
+                                <label for="career_break_duration" class="block text-sm font-medium text-gray-700">Career Break Duration (If applicable)</label>
+                                <select id="career_break_duration" name="career_break_duration" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-purple-500 focus:ring focus:ring-purple-200 focus:ring-opacity-50">
+                                    <option value="">Select duration</option>
+                                    <option value="1">Less than 1 year</option>
+                                    <option value="1_3">1-3 years</option>
+                                    <option value="3_5">3-5 years</option>
+                                    <option value="5_plus">5+ years</option>
+                                </select>
+                            </div>
+                            <div class="md:col-span-2">
+                                <label for="cover_letter" class="block text-sm font-medium text-gray-700">Cover Letter</label>
+                                <textarea id="cover_letter" name="cover_letter" rows="4" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-purple-500 focus:ring focus:ring-purple-200 focus:ring-opacity-50"></textarea>
+                                <p class="mt-2 text-sm text-gray-500">Tell us about yourself and why you're interested in this position.</p>
+                            </div>
+                            <div class="md:col-span-2">
+                                <label for="resume" class="block text-sm font-medium text-gray-700">Upload Resume</label>
+                                <input type="file" id="resume" name="resume" class="mt-1 block w-full text-sm text-gray-500
+                                    file:mr-4 file:py-2 file:px-4
+                                    file:rounded-full file:border-0
+                                    file:text-sm file:font-semibold
+                                    file:bg-purple-50 file:text-purple-700
+                                    hover:file:bg-purple-100">
+                                <p class="mt-2 text-sm text-gray-500">PDF or Word document (max 5MB)</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center mb-6">
+                            <input id="terms_and_conditions" name="terms_and_conditions" type="checkbox" required class="h-4 w-4 text-purple-600 focus:ring-purple-500 border-gray-300 rounded">
+                            <label for="terms_and_conditions" class="ml-2 block text-sm text-gray-900">
+                                I agree to the <a href="#" class="text-purple-600 hover:text-purple-500">Terms and Conditions</a> and <a href="#" class="text-purple-600 hover:text-purple-500">Privacy Policy</a>.
+                            </label>
+                        </div>
+                        <div>
+                            <button type="submit" class="w-full py-3 px-6 rounded-lg bg-purple-600 text-white font-semibold shadow-md hover:bg-purple-500 transition-colors duration-300">
+                                Submit Application
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Discussion Forums Section -->
+        <section id="forums" class="py-16 bg-white">
+            <div class="container mx-auto px-4 md:px-6">
+                <h2 class="text-3xl md:text-4xl font-bold text-center text-purple-600 mb-12">Discussion Forums</h2>
+                <p class="text-center text-gray-600 mb-8 max-w-2xl mx-auto">
+                    Connect with other women returning to work and potential employers.
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Forum 1 -->
+                    <div class="bg-gray-50 rounded-lg shadow-lg p-6">
+                        <div class="flex items-center mb-4">
+                            <img src="https://placehold.co/40x40/e0e0e0/505050?text=S" alt="Sarah M" class="w-10 h-10 rounded-full mr-4">
+                            <div>
+                                <h4 class="font-semibold text-gray-800">Sarah Mogomotsi</h4>
+                                <p class="text-sm text-gray-500">2 days ago</p>
+                            </div>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">Launching Our New Returnship Program</h3>
+                        <p class="text-gray-600">
+                            We're excited to announce our new 6-month returnship program for women in tech. Applications open next week!
+                        </p>
+                        <a href="#" class="mt-4 inline-block text-sm text-purple-600 hover:underline">Read More &rarr;</a>
+                    </div>
+                    <!-- Forum 2 -->
+                    <div class="bg-gray-50 rounded-lg shadow-lg p-6">
+                        <div class="flex items-center mb-4">
+                            <img src="https://placehold.co/40x40/e0e0e0/505050?text=J" alt="Jennifer M" class="w-10 h-10 rounded-full mr-4">
+                            <div>
+                                <h4 class="font-semibold text-gray-800">Jennifer Mojaj</h4>
+                                <p class="text-sm text-gray-500">1 day ago</p>
+                            </div>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">How to Address Career Gap in Interviews</h3>
+                        <p class="text-gray-600">
+                            I have an interview next week and I'm nervous about explaining my 4-year career break. Any advice on how to frame the narrative?
+                        </p>
+                        <a href="#" class="mt-4 inline-block text-sm text-purple-600 hover:underline">Read More &rarr;</a>
+                    </div>
+                    <!-- Forum 3 -->
+                    <div class="bg-gray-50 rounded-lg shadow-lg p-6">
+                        <div class="flex items-center mb-4">
+                            <img src="https://placehold.co/40x40/e0e0e0/505050?text=P" alt="Pearl B" class="w-10 h-10 rounded-full mr-4">
+                            <div>
+                                <h4 class="font-semibold text-gray-800">Pearl Bitsang</h4>
+                                <p class="text-sm text-gray-500">5 days ago</p>
+                            </div>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">Best Practices for Supporting Returners</h3>
+                        <p class="text-gray-600">
+                            We are looking for ways to better support our returners. Here are some tips for making them feel welcome and valued.
+                        </p>
+                        <a href="#" class="mt-4 inline-block text-sm text-purple-600 hover:underline">Read More &rarr;</a>
+                    </div>
+                    <!-- Forum 4 -->
+                    <div class="bg-gray-50 rounded-lg shadow-lg p-6">
+                        <div class="flex items-center mb-4">
+                            <img src="https://placehold.co/40x40/e0e0e0/505050?text=D" alt="Deboone M" class="w-10 h-10 rounded-full mr-4">
+                            <div>
+                                <h4 class="font-semibold text-gray-800">Deboone Manna</h4>
+                                <p class="text-sm text-gray-500">3 days ago</p>
+                            </div>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">Completed the Financial Literacy Course!</h3>
+                        <p class="text-gray-600">
+                            I just wanted to say that the financial literacy course was fantastic. It really helped me sharpen my knowledge and my financial skills.
+                        </p>
+                        <a href="#" class="mt-4 inline-block text-sm text-purple-600 hover:underline">Read More &rarr;</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Paid Courses Section -->
+        <section id="courses" class="py-16 bg-gray-50">
+            <div class="container mx-auto px-4 md:px-6">
+                <h2 class="text-3xl md:text-4xl font-bold text-center text-purple-600 mb-12">Paid Courses</h2>
+                <p class="text-center text-gray-600 mb-8 max-w-2xl mx-auto">
+                    Upgrade your skills with our professionally designed courses.
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Course Card 1 -->
+                    <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                        <img src="https://placehold.co/600x400/a17feb/FFFFFF?text=Graphic+Design" alt="Graphic Design Course" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-gray-800 mb-2">Graphic Design Essentials</h3>
+                            <p class="text-sm text-gray-600 mb-4">
+                                Learn the fundamentals of graphic design, including color theory, typography, and layout principles.
+                            </p>
+                            <div class="flex justify-between items-center text-sm text-gray-500 mb-4">
+                                <span><i class="fas fa-clock"></i> 8 weeks</span>
+                                <span><i class="fas fa-signal"></i> Intermediate</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-lg font-bold text-purple-600">P450</span>
+                                <span class="bg-purple-200 text-purple-800 text-xs font-semibold px-2.5 py-0.5 rounded-full">Curated</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Course Card 2 -->
+                    <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                        <img src="https://placehold.co/600x400/a17feb/FFFFFF?text=Financial+Literacy" alt="Financial Literacy Course" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-gray-800 mb-2">Financial Literacy for Professionals</h3>
+                            <p class="text-sm text-gray-600 mb-4">
+                                Master personal and corporate finance concepts, including budgeting, investing, and financial planning.
+                            </p>
+                            <div class="flex justify-between items-center text-sm text-gray-500 mb-4">
+                                <span><i class="fas fa-clock"></i> 6 weeks</span>
+                                <span><i class="fas fa-signal"></i> All levels</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-lg font-bold text-purple-600">P350</span>
+                                <span class="bg-purple-200 text-purple-800 text-xs font-semibold px-2.5 py-0.5 rounded-full">Curated</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Course Card 3 -->
+                    <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                        <img src="https://placehold.co/600x400/a17feb/FFFFFF?text=Project+Management" alt="Project Management Course" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-gray-800 mb-2">Project Management Fundamentals</h3>
+                            <p class="text-sm text-gray-600 mb-4">
+                                Gain the skills to manage projects efficiently, from initiation to closure.
+                            </p>
+                            <div class="flex justify-between items-center text-sm text-gray-500 mb-4">
+                                <span><i class="fas fa-clock"></i> 8 weeks</span>
+                                <span><i class="fas fa-signal"></i> Intermediate</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-lg font-bold text-purple-600">P400</span>
+                                <span class="bg-purple-200 text-purple-800 text-xs font-semibold px-2.5 py-0.5 rounded-full">Curated</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="container mx-auto px-4 md:px-6 text-center">
+            <p>&copy; 2024 EmpowerHer Pathways. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript for responsiveness, tabs, and chart -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile menu functionality
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+            // Hide mobile menu when a link is clicked
+            mobileMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                });
+            });
+            
+            // Challenge card flip functionality
+            document.querySelectorAll('.challenge-card').forEach(card => {
+                card.addEventListener('click', () => {
+                    card.classList.toggle('is-flipped');
+                });
+            });
+
+            // Solutions Tabbed Interface (if you decide to add it back)
+            // This is commented out because the new design doesn't have it, but you can uncomment it if needed.
+            
+            const tabButtons = document.querySelectorAll('.tab-button');
+            const tabContents = document.querySelectorAll('.tab-content');
+
+            tabButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    tabButtons.forEach(btn => {
+                        btn.classList.remove('active-tab');
+                        btn.classList.add('inactive-tab');
+                    });
+                    button.classList.remove('inactive-tab');
+                    button.classList.add('active-tab');
+
+                    tabContents.forEach(content => content.classList.add('hidden'));
+
+                    const tabIndex = Array.from(tabButtons).indexOf(button) + 1;
+                    const contentToShow = document.getElementById(`content-${tabIndex}`);
+                    contentToShow.classList.remove('hidden');
+                });
+            });
+            
+
+            // Chart.js initialization
+            const ctx = document.getElementById('impactChart').getContext('2d');
+            const impactChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['For Women', 'For Employers', 'For Society'],
+                    datasets: [{
+                        label: 'Positive Impact',
+                        data: [100, 80, 95], // Placeholder data
+                        backgroundColor: [
+                            'rgba(161, 127, 235, 0.6)', // Lighter purple with opacity
+                            'rgba(161, 127, 235, 0.6)', // Lighter purple with opacity
+                            'rgba(161, 127, 235, 0.6)' // Lighter purple with opacity
+                        ],
+                        borderColor: [
+                            'rgb(161, 127, 235)',
+                            'rgb(161, 127, 235)',
+                            'rgb(161, 127, 235)'
+                        ],
+                        borderWidth: 1,
+                        borderRadius: 10,
+                        barPercentage: 0.6,
+                        categoryPercentage: 0.7
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    let label = '';
+                                    if (context.label === 'For Women') {
+                                        label = 'Increased confidence, faster job search, higher success rates.';
+                                    } else if (context.label === 'For Employers') {
+                                        label = 'Access to diverse talent, enhanced DEI, higher retention.';
+                                    } else if (context.label === 'For Society') {
+                                        label = 'Closes gender pay gap, boosts economic empowerment.';
+                                    }
+                                    return label.split(', ');
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            beginAtZero: true,
+                            grid: { display: false },
+                            ticks: { display: false }
+                        },
+                        y: {
+                            grid: { display: false },
+                            ticks: { font: { size: 14 } }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
