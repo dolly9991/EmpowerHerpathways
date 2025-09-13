@@ -49,7 +49,52 @@
         .challenge-card .back { transform: rotateY(180deg); background-color: #7c3aed; }
         .chart-container { position: relative; width: 100%; max-width: 600px; height: 400px; }
         html { 
-            scroll-padding-top: 6rem; /* Adjust this value to match your header's height */ }
+            scroll-padding-top: 6rem;  
+        }
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        .modal-container {
+            background-color: #f3f4f6; /* Tailwind's bg-gray-100 */
+            color: #1f2937; /* Tailwind's text-gray-800 */
+            padding: 2rem;
+            border-radius: 1rem;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            position: relative;
+            animation: fadeInScale 0.3s ease-out;
+        }
+        .modal-close-button {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            cursor: pointer;
+            color: #6b7280;
+            transition: color 0.2s;
+        }
+        .modal-close-button:hover {
+            color: #ef4444;
+        }
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-900 leading-normal tracking-wide">
@@ -94,12 +139,41 @@
                     We empower women to successfully return to the workforce and help employers access a vibrant, diverse talent pool.
                 </p>
                 <div class="flex flex-col md:flex-row justify-center items-center space-y-4 md:space-y-0 md:space-x-4">
-                    <button class="bg-transparent border border-white text-white font-semibold py-3 px-6 rounded-lg hover:bg-white hover:text-purple-700 transition-colors duration-300">
+                    <button id="join-woman-btn" class="bg-transparent border border-white text-white font-semibold py-3 px-6 rounded-lg hover:bg-white hover:text-purple-700 transition-colors duration-300">
                         Join as a Woman
                     </button>
-                    <button class="bg-transparent border border-white text-white font-semibold py-3 px-6 rounded-lg hover:bg-white hover:text-purple-700 transition-colors duration-300">
+                    <button id="join-employer-btn"class="bg-transparent border border-white text-white font-semibold py-3 px-6 rounded-lg hover:bg-white hover:text-purple-700 transition-colors duration-300">
                         Join as an Employer
                     </button>
+                </div>
+            </div>
+            
+                        <!-- Sign Up Modal for Women -->
+            <div id="signup-modal-woman" class="modal-overlay hidden">
+                <div class="modal-container">
+                    <span class="modal-close-button" data-close="woman">&times;</span>
+                    <h2 class="text-2xl font-bold text-purple-700 mb-4">Sign Up as a Woman</h2>
+                    <form>
+                        <label class="block mb-2 font-medium text-gray-700">Name</label>
+                        <input type="text" class="w-full mb-4 px-3 py-2 border rounded-lg" required>
+                        <label class="block mb-2 font-medium text-gray-700">Email</label>
+                        <input type="email" class="w-full mb-4 px-3 py-2 border rounded-lg" required>
+                        <button type="submit" class="w-full bg-purple-700 text-white py-2 rounded-lg font-semibold hover:bg-purple-800 transition">Sign Up</button>
+                    </form>
+                </div>
+            </div>
+            <!-- Sign Up Modal for Employers -->
+            <div id="signup-modal-employer" class="modal-overlay hidden">
+                <div class="modal-container">
+                    <span class="modal-close-button" data-close="employer">&times;</span>
+                    <h2 class="text-2xl font-bold text-purple-700 mb-4">Sign Up as an Employer</h2>
+                    <form>
+                        <label class="block mb-2 font-medium text-gray-700">Company Name</label>
+                        <input type="text" class="w-full mb-4 px-3 py-2 border rounded-lg" required>
+                        <label class="block mb-2 font-medium text-gray-700">Contact Email</label>
+                        <input type="email" class="w-full mb-4 px-3 py-2 border rounded-lg" required>
+                        <button type="submit" class="w-full bg-purple-700 text-white py-2 rounded-lg font-semibold hover:bg-purple-800 transition">Sign Up</button>
+                    </form>
                 </div>
             </div>
         </section>
@@ -413,6 +487,41 @@
                 }
             });
         });
+
+        // Modal functionality
+        const signupModalWoman = document.getElementById('signup-modal-woman');
+        const signupModalEmployer = document.getElementById('signup-modal-employer');
+        const joinWomanBtn = document.getElementById('join-woman-btn');
+        const joinEmployerBtn = document.getElementById('join-employer-btn');
+        
+        // Open correct modal
+        joinWomanBtn.addEventListener('click', () => {
+            signupModalWoman.classList.remove('hidden');
+        });
+        joinEmployerBtn.addEventListener('click', () => {
+            signupModalEmployer.classList.remove('hidden');
+        });
+        
+        // Close modals
+        document.querySelectorAll('.modal-close-button').forEach(btn => {
+            btn.addEventListener('click', () => {
+                signupModalWoman.classList.add('hidden');
+                signupModalEmployer.classList.add('hidden');
+            });
+        });
+        
+        // Optional: close modal when clicking outside the modal container
+        signupModalWoman.addEventListener('click', (e) => {
+            if (e.target === signupModalWoman) {
+                signupModalWoman.classList.add('hidden');
+            }
+        });
+        signupModalEmployer.addEventListener('click', (e) => {
+            if (e.target === signupModalEmployer) {
+                signupModalEmployer.classList.add('hidden');
+            }
+        });
+
     </script>
     <!-- Firebase SDKs -->
     <script type="module">
