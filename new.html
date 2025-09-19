@@ -10,7 +10,11 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    <style>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="icon" href="logo 2.png" type="image/x-icon">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
         body { font-family: 'Inter', sans-serif; }
         .hero-background {
             background-image: url('uploaded:image_2b8772.png-4a57cb6c-a7ed-465b-b86d-96941c273833');
@@ -106,6 +110,495 @@
                 <a href="#" class="block text-gray-600 hover:text-purple-500 font-medium py-2">Pricing</a>
             </nav>
         </div>
+         <style id="app-style">
+    :root {
+      --primary: #8456c9;
+      --primary-light: #6e2af4;
+      --primary-dark: #814ed8;
+      --accent: #8A2BE2;
+      --accent-light: #B76BFF;
+      --dark: #222222;
+      --light: #FFFFFF;
+      --light-gray: #F8F9FA;
+      --medium-gray: #E9ECEF;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      overflow-x: hidden;
+      background-color: var(--light);
+      color: var(--dark);
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+    }
+
+    .navbar {
+      background-color: rgba(255, 255, 255, 0.97) !important;
+      box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .navbar-brand {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .nav-link {
+      font-weight: 500;
+      color: var(--dark) !important;
+      transition: all 0.3s;
+      position: relative;
+      padding: 0.5rem 1rem !important;
+    }
+
+    .nav-link:hover {
+      color: var(--primary) !important;
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: 0;
+      left: 0;
+      background-color: var(--primary);
+      transition: width 0.3s;
+    }
+
+    .nav-link:hover::after {
+      width: 100%;
+    }
+
+    .btn-primary {
+      background-color: var(--primary);
+      border-color: var(--primary);
+    }
+
+    .btn-primary:hover {
+      background-color: var(--primary-dark);
+      border-color: var(--primary-dark);
+    }
+
+    .btn-outline-primary {
+      color: var(--primary);
+      border-color: var(--primary);
+    }
+
+    .btn-outline-primary:hover {
+      background-color: var(--primary);
+      color: white;
+    }
+
+    .bouncy-button {
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .bouncy-button:hover {
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+    }
+
+    .bouncy-button:active {
+      transform: translateY(0) scale(0.98);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+    }
+
+    .hero {
+      background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary) 100%);
+      color: white;
+      padding: 8rem 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      background-image: url('https://cdn.pixabay.com/photo/2018/02/23/09/10/woman-3175713_1280.jpg');
+      background-size: cover;
+      background-position: center;
+      opacity: 0.15;
+      mix-blend-mode: overlay;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero h1 {
+      font-size: 3.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    .hero p {
+      font-size: 1.25rem;
+      max-width: 600px;
+      margin: 0 auto 2rem auto;
+      opacity: 0.9;
+    }
+
+    .section-title {
+      position: relative;
+      margin-bottom: 3rem;
+      font-weight: 700;
+      display: inline-block;
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      width: 60px;
+      height: 3px;
+      bottom: -10px;
+      left: 0;
+      background-color: var(--primary);
+    }
+
+    .section-padding {
+      padding: 5rem 0;
+    }
+
+    .bg-light-section {
+      background-color: var(--light-gray);
+    }
+
+    .dev-card {
+      background-color: white;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .dev-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+    }
+
+    .dev-card img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+    }
+
+    .dev-info {
+      padding: 1.5rem;
+    }
+
+    .dev-info h3 {
+      margin-bottom: 0.5rem;
+      font-size: 1.5rem;
+    }
+
+    .dev-info .badge {
+      background-color: var(--primary-light);
+      color: var(--dark);
+      font-weight: 500;
+      margin-bottom: 1rem;
+    }
+
+    .feature-card {
+      border: none;
+      border-radius: 15px;
+      overflow: hidden;
+      height: 100%;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    }
+
+    .feature-card .card-img-top {
+      height: 180px;
+      object-fit: cover;
+    }
+
+    .feature-icon {
+      width: 60px;
+      height: 60px;
+      background-color: var(--primary-light);
+      color: var(--primary-dark);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1rem auto;
+      font-size: 1.5rem;
+    }
+
+    .job-card {
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      transition: all 0.3s;
+    }
+
+    .job-card:hover {
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      transform: translateY(-5px);
+    }
+
+    .course-card {
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      transition: all 0.3s;
+      height: 100%;
+    }
+
+    .course-card:hover {
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      transform: translateY(-5px);
+    }
+
+    .course-card img {
+      height: 180px;
+      object-fit: cover;
+    }
+
+    .book-card {
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      transition: all 0.3s;
+      height: 100%;
+    }
+
+    .book-card:hover {
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      transform: translateY(-5px);
+    }
+
+    .book-card img {
+      height: 250px;
+      object-fit: cover;
+    }
+
+    .accordion-button:not(.collapsed) {
+      background-color: var(--primary-light);
+      color: var(--dark);
+    }
+
+    .accordion-button:focus {
+      box-shadow: 0 0 0 0.25rem rgba(255, 105, 180, 0.25);
+      border-color: var(--primary);
+    }
+
+    .forum-post {
+      border-left: 3px solid var(--primary);
+    }
+
+    .subscription-card {
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s;
+    }
+
+    .subscription-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+    }
+
+    .subscription-card.popular {
+      border: 2px solid var(--primary);
+      transform: scale(1.05);
+    }
+
+    .subscription-card.popular:hover {
+      transform: scale(1.05) translateY(-10px);
+    }
+
+    .subscription-card .card-header {
+      background-color: var(--primary);
+      color: white;
+      text-align: center;
+      padding: 1.5rem;
+    }
+
+    .subscription-card.weekly .card-header {
+      background-color: var(--accent);
+    }
+
+    .subscription-card .price {
+      font-size: 2.5rem;
+      font-weight: 700;
+    }
+
+    .subscription-card .period {
+      font-size: 1rem;
+      opacity: 0.8;
+    }
+
+    .subscription-card ul li {
+      padding: 0.75rem 0;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .subscription-card ul li:last-child {
+      border-bottom: none;
+    }
+
+    .testimonial-card {
+      background-color: white;
+      border-radius: 15px;
+      padding: 2rem;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+      position: relative;
+    }
+
+    .testimonial-card::before {
+      content: '"';
+      position: absolute;
+      top: 10px;
+      left: 20px;
+      font-size: 5rem;
+      opacity: 0.1;
+      font-family: Georgia, serif;
+      line-height: 1;
+    }
+
+    .avatar {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 3px solid white;
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    footer {
+      background-color: var(--dark);
+      color: white;
+      padding: 4rem 0 1rem;
+    }
+
+    .footer-links h5 {
+      color: var(--primary-light);
+      margin-bottom: 1.5rem;
+      font-weight: 600;
+    }
+
+    .footer-links ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .footer-links li {
+      margin-bottom: 0.75rem;
+    }
+
+    .footer-links a {
+      color: rgba(255, 255, 255, 0.7);
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+
+    .footer-links a:hover {
+      color: white;
+      padding-left: 5px;
+    }
+
+    .social-icons a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.1);
+      color: white;
+      margin-right: 10px;
+      transition: all 0.3s;
+    }
+
+    .social-icons a:hover {
+      background-color: var(--primary);
+      transform: translateY(-3px);
+    }
+
+    .copyright {
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .page-section {
+      padding: 80px 0;
+      min-height: 100vh;
+    }
+
+    .apply-form .form-control:focus,
+    .seminar-form .form-control:focus {
+      box-shadow: 0 0 0 0.25rem rgba(255, 105, 180, 0.25);
+      border-color: var(--primary);
+    }
+
+    /* Animation */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .animate-fade-in {
+      animation: fadeIn 0.8s ease-out forwards;
+    }
+
+    /* For different sections */
+    .fade-in-1 { animation-delay: 0.1s; }
+    .fade-in-2 { animation-delay: 0.3s; }
+    .fade-in-3 { animation-delay: 0.5s; }
+    .fade-in-4 { animation-delay: 0.7s; }
+
+    /* Scrollbar styling */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: var(--light-gray);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--primary-light);
+      border-radius: 10px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--primary);
+    }
+
+    /* Loading spinner */
+    .loading-spinner {
+      width: 2rem;
+      height: 2rem;
+    }
+  </style>
     </header>
 
     <!-- Main Content -->
@@ -440,7 +933,460 @@
                 </div>
             </div>
         </section>
+ <!-- Books Section -->
+  <section id="books" class="page-section bg-light-section">
+    <div class="container">
+      <div class="row mb-5">
+        <div class="col-md-12 text-center">
+          <h2 class="section-title animate-fade-in fade-in-1">Free Motivational Books</h2>
+          <p class="animate-fade-in fade-in-2">Download these resources to inspire and guide your career journey</p>
+        </div>
+      </div>
+      
+      <div class="row">
+        <div class="col-lg-3 col-md-6 mb-4 animate-fade-in fade-in-1">
+          <div class="book-card card text-center">
+            <img src="https://cdn.pixabay.com/photo/2016/03/09/09/14/books-1245690_1280.jpg" class="card-img-top" alt="Returning with Confidence">
+            <div class="card-body">
+              <h5 class="card-title">Returning with Confidence</h5>
+              <p class="card-text small">A guide to rebuilding your professional identity after a career break.</p>
+              <a href="javascript:void(0)" class="btn btn-primary bouncy-button">Download PDF</a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-lg-3 col-md-6 mb-4 animate-fade-in fade-in-2">
+          <div class="book-card card text-center">
+            <img src="https://cdn.pixabay.com/photo/2015/11/19/21/14/glasses-1052023_1280.jpg" class="card-img-top" alt="Your Career Comeback">
+            <div class="card-body">
+              <h5 class="card-title">Your Career Comeback</h5>
+              <p class="card-text small">Stories of successful women who relaunched their careers after breaks.</p>
+              <a href="javascript:void(0)" class="btn btn-primary bouncy-button">Download PDF</a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-lg-3 col-md-6 mb-4 animate-fade-in fade-in-3">
+          <div class="book-card card text-center">
+            <img src="https://cdn.pixabay.com/photo/2015/09/05/07/28/writing-923882_1280.jpg" class="card-img-top" alt="Resume Reinvention">
+            <div class="card-body">
+              <h5 class="card-title">Resume Reinvention</h5>
+              <p class="card-text small">Expert tips for crafting a compelling resume that addresses career gaps.</p>
+              <a href="javascript:void(0)" class="btn btn-primary bouncy-button">Download PDF</a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-lg-3 col-md-6 mb-4 animate-fade-in fade-in-4">
+          <div class="book-card card text-center">
+            <img src="https://cdn.pixabay.com/photo/2014/09/05/18/32/old-books-436498_1280.jpg" class="card-img-top" alt="Mindset Matters">
+            <div class="card-body">
+              <h5 class="card-title">Mindset Matters</h5>
+              <p class="card-text small">Developing the confidence and resilience needed to succeed in your career journey.</p>
+              <a href="javascript:void(0)" class="btn btn-primary bouncy-button">Download PDF</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="row mt-4">
+        <div class="col-lg-3 col-md-6 mb-4 animate-fade-in fade-in-1">
+          <div class="book-card card text-center">
+            <img src="https://cdn.pixabay.com/photo/2015/01/09/11/09/meeting-594091_1280.jpg" class="card-img-top" alt="Networking for Returners">
+            <div class="card-body">
+              <h5 class="card-title">Networking for Returners</h5>
+              <p class="card-text small">How to rebuild and leverage professional connections after a career break.</p>
+              <a href="javascript:void(0)" class="btn btn-primary bouncy-button">Download PDF</a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-lg-3 col-md-6 mb-4 animate-fade-in fade-in-2">
+          <div class="book-card card text-center">
+            <img src="https://cdn.pixabay.com/photo/2016/01/19/01/42/library-1147815_1280.jpg" class="card-img-top" alt="Skills That Never Expire">
+            <div class="card-body">
+              <h5 class="card-title">Skills That Never Expire</h5>
+              <p class="card-text small">Identifying and marketing your transferable skills to employers.</p>
+              <a href="javascript:void(0)" class="btn btn-primary bouncy-button">Download PDF</a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-lg-3 col-md-6 mb-4 animate-fade-in fade-in-3">
+          <div class="book-card card text-center">
+            <img src="https://cdn.pixabay.com/photo/2018/03/19/18/20/tea-time-3240766_1280.jpg" class="card-img-top" alt="Work-Life Integration">
+            <div class="card-body">
+              <h5 class="card-title">Work-Life Integration</h5>
+              <p class="card-text small">Strategies for balancing professional and personal responsibilities.</p>
+              <a href="javascript:void(0)" class="btn btn-primary bouncy-button">Download PDF</a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-lg-3 col-md-6 mb-4 animate-fade-in fade-in-4">
+          <div class="book-card card text-center">
+            <img src="https://cdn.pixabay.com/photo/2016/03/26/22/21/books-1281581_1280.jpg" class="card-img-top" alt="The Future of Work">
+            <div class="card-body">
+              <h5 class="card-title">The Future of Work</h5>
+              <p class="card-text small">Navigating flexible work arrangements, remote work, and emerging opportunities.</p>
+              <a href="javascript:void(0)" class="btn btn-primary bouncy-button">Download PDF</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
+  <!-- Seminars Section -->
+  <section id="seminars" class="page-section">
+    <div class="container">
+      <div class="row justify-content-center mb-5">
+        <div class="col-lg-8 text-center">
+          <h2 class="section-title animate-fade-in fade-in-1">Host a Seminar</h2>
+          <p class="animate-fade-in fade-in-2">Are you an expert in your field? Share your knowledge with our community by hosting a paid seminar.</p>
+        </div>
+      </div>
+      
+      <div class="row">
+        <div class="col-lg-6 mb-4 animate-fade-in fade-in-1">
+          <h3 class="h4">Why Host a Seminar?</h3>
+          <ul class="list-group list-group-flush mb-4">
+            <li class="list-group-item border-0 ps-0">
+              <i class="fas fa-check-circle text-primary me-2"></i>
+              Connect with women returning to work in your industry
+            </li>
+            <li class="list-group-item border-0 ps-0">
+              <i class="fas fa-check-circle text-primary me-2"></i>
+              Establish yourself as a thought leader
+            </li>
+            <li class="list-group-item border-0 ps-0">
+              <i class="fas fa-check-circle text-primary me-2"></i>
+              Generate income while helping others
+            </li>
+            <li class="list-group-item border-0 ps-0">
+              <i class="fas fa-check-circle text-primary me-2"></i>
+              Access our platform's growing community
+            </li>
+            <li class="list-group-item border-0 ps-0">
+              <i class="fas fa-check-circle text-primary me-2"></i>
+              We handle marketing and technical aspects
+            </li>
+          </ul>
+          
+          <h3 class="h4">Popular Seminar Topics</h3>
+          <div class="row">
+            <div class="col-md-6">
+              <ul class="list-unstyled">
+                <li class="mb-2"><i class="fas fa-arrow-right text-primary me-2"></i> Resume Crafting</li>
+                <li class="mb-2"><i class="fas fa-arrow-right text-primary me-2"></i> LinkedIn Optimization</li>
+                <li class="mb-2"><i class="fas fa-arrow-right text-primary me-2"></i> Interview Techniques</li>
+              </ul>
+            </div>
+            <div class="col-md-6">
+              <ul class="list-unstyled">
+                <li class="mb-2"><i class="fas fa-arrow-right text-primary me-2"></i> Industry Updates</li>
+                <li class="mb-2"><i class="fas fa-arrow-right text-primary me-2"></i> Confidence Building</li>
+                <li class="mb-2"><i class="fas fa-arrow-right text-primary me-2"></i> Networking Strategies</li>
+              </ul>
+            </div>
+          </div>
+          
+          <div class="card bg-light border-0 mt-4">
+            <div class="card-body">
+              <h4 class="h5">Upcoming Featured Seminar</h4>
+              <h5 class="h6 text-primary">"Negotiating Your Worth After a Career Break"</h5>
+              <p class="mb-1">By: Maria Keneilwe, Career Coach</p>
+              <p class="mb-1">Date: June 15, 2025</p>
+              <p>Price: P200.00</p>
+              <button class="btn btn-primary bouncy-button">Register Now</button>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-lg-6 animate-fade-in fade-in-2">
+          <div class="card shadow border-0">
+            <div class="card-body p-4 p-md-5">
+              <h4 class="mb-4">Submit Your Seminar Proposal</h4>
+              <form class="seminar-form">
+                <div class="mb-3">
+                  <label for="seminarTitle" class="form-label">Seminar Title</label>
+                  <input type="text" class="form-control" id="seminarTitle" required>
+                </div>
+                
+                <div class="row">
+                  <div class="col-md-6 mb-3">
+                    <label for="fullName" class="form-label">Your Full Name</label>
+                    <input type="text" class="form-control" id="fullName" required>
+                  </div>
+                  <div class="col-md-6 mb-3">
+                    <label for="emailAddress" class="form-label">Email Address</label>
+                    <input type="email" class="form-control" id="emailAddress" required>
+                  </div>
+                </div>
+                
+                <div class="mb-3">
+                  <label for="profession" class="form-label">Professional Title</label>
+                  <input type="text" class="form-control" id="profession" placeholder="e.g., Career Coach, HR Director, etc." required>
+                </div>
+                
+                <div class="row">
+                  <div class="col-md-6 mb-3">
+                    <label for="seminarDate" class="form-label">Proposed Date</label>
+                    <input type="date" class="form-control" id="seminarDate" required>
+                  </div>
+                  <div class="col-md-6 mb-3">
+                    <label for="seminarDuration" class="form-label">Duration (hours)</label>
+                    <input type="number" class="form-control" id="seminarDuration" min="1" max="4" required>
+                  </div>
+                </div>
+                
+                <div class="mb-3">
+                  <label for="seminarDescription" class="form-label">Seminar Description</label>
+                  <textarea class="form-control" id="seminarDescription" rows="4" required></textarea>
+                </div>
+                
+                <div class="row">
+                  <div class="col-md-6 mb-3">
+                    <label for="participantLimit" class="form-label">Maximum Participants</label>
+                    <input type="number" class="form-control" id="participantLimit" min="10" max="100">
+                  </div>
+                  <div class="col-md-6 mb-3">
+                    <label for="price" class="form-label">Price ($)</label>
+                    <input type="number" class="form-control" id="price" min="0" required>
+                  </div>
+                </div>
+                
+                <div class="mb-3">
+                  <label for="seminarCV" class="form-label">Upload Your CV/Resume</label>
+                  <input type="file" class="form-control" id="seminarCV">
+                </div>
+                
+                <div class="form-check mb-4">
+                  <input class="form-check-input" type="checkbox" id="seminarTerms" required>
+                  <label class="form-check-label" for="seminarTerms">
+                    I understand that EmpowerHer Pathways will take a 15% fee from seminar registrations
+                  </label>
+                </div>
+                
+                <div class="d-grid">
+                  <button class="btn btn-primary btn-lg bouncy-button" type="submit">Submit Proposal</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section id="faq" class="page-section bg-light-section">
+    <div class="container">
+      <div class="row justify-content-center mb-5">
+        <div class="col-lg-8 text-center">
+          <h2 class="section-title animate-fade-in fade-in-1">Frequently Asked Questions</h2>
+          <p class="animate-fade-in fade-in-2">Find answers to common questions about returning to work and using our platform</p>
+        </div>
+      </div>
+      
+      <div class="row justify-content-center">
+        <div class="col-lg-10 animate-fade-in fade-in-3">
+          <div class="accordion" id="faqAccordion">
+            <div class="accordion-item border mb-3 shadow-sm">
+              <h2 class="accordion-header">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                  How do I explain a career gap on my resume?
+                </button>
+              </h2>
+              <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                  <p>Focus on being honest while highlighting the skills and experiences you gained during your career break. Include volunteer work, freelancing, courses, or community involvement. Create a "Career Break" section that briefly explains the reason and emphasizes your continued professional development. Our free downloadable guide "Resume Reinvention" provides detailed strategies.</p>
+                </div>
+              </div>
+            </div>
+            
+            <div class="accordion-item border mb-3 shadow-sm">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                  What is a returnship program?
+                </button>
+              </h2>
+              <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                  <p>A returnship is a professional internship designed specifically for individuals returning to work after a career break. These programs typically last 3-6 months and provide training, mentorship, and hands-on experience to help participants update their skills and transition back to the workforce. Many returnships lead to permanent positions.</p>
+                </div>
+              </div>
+            </div>
+            
+            <div class="accordion-item border mb-3 shadow-sm">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                  How do I choose which courses to take?
+                </button>
+              </h2>
+              <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                  <p>Consider your career goals and the industry you're targeting. Look at job descriptions in your field to identify required skills, then select courses that address any gaps. Our platform offers skills assessments to help identify areas for development. Start with one course and build from there. Remember, our course instructors are available in the forums to answer questions about specific offerings.</p>
+                </div>
+              </div>
+            </div>
+            
+            <div class="accordion-item border mb-3 shadow-sm">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">
+                  What subscription plan is right for me?
+                </button>
+              </h2>
+              <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                  <p>If you're just exploring options, start with our Semi-Free plan for basic access. The Weekly plan is ideal if you're actively job searching and need intensive support for a short period. The Monthly plan offers the best value for ongoing career development and networking. All paid plans include discounts on courses and seminars, with increasing benefits at each level.</p>
+                </div>
+              </div>
+            </div>
+            
+            <div class="accordion-item border mb-3 shadow-sm">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq5">
+                  How can I network effectively after a career break?
+                </button>
+              </h2>
+              <div id="faq5" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                  <p>Start by reconnecting with former colleagues and classmates. Join our community forums to meet others in similar situations. Attend virtual and in-person networking events in your industry. Update your LinkedIn profile and engage regularly on professional platforms. Consider informational interviews to learn about current industry trends. Our "Networking for Returners" guide provides step-by-step strategies tailored for women returning to work.</p>
+                </div>
+              </div>
+            </div>
+            
+            <div class="accordion-item border mb-3 shadow-sm">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq6">
+                  Do employers really hire people after career breaks?
+                </button>
+              </h2>
+              <div id="faq6" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                  <p>Absolutely! Many employers are recognizing the value of hiring returners for their diverse perspectives, maturity, and commitment. Companies are increasingly implementing returnship programs and flexible work policies specifically to attract this talent pool. All employers posting jobs on our platform have committed to considering candidates with career breaks. Our success stories section features numerous women who have successfully relaunched their careers through our platform.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="row justify-content-center mt-5">
+        <div class="col-md-8 text-center animate-fade-in fade-in-4">
+          <p>Don't see your question answered here?</p>
+          <a href="javascript:void(0)" class="btn btn-primary btn-lg bouncy-button">Contact Support</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing Section -->
+  <section id="pricing" class="page-section">
+    <div class="container">
+      <div class="row justify-content-center mb-5">
+        <div class="col-lg-8 text-center">
+          <h2 class="section-title animate-fade-in fade-in-1">Subscription Plans</h2>
+          <p class="animate-fade-in fade-in-2">Choose the membership level that's right for your career journey</p>
+        </div>
+      </div>
+      
+      <div class="row">
+        <div class="col-lg-4 mb-4 animate-fade-in fade-in-1">
+          <div class="subscription-card card weekly h-100">
+            <div class="card-header">
+              <h3 class="mb-0">Weekly</h3>
+              <p class="mb-0">Short-term intensive support</p>
+            </div>
+            <div class="card-body">
+              <div class="text-center mb-4">
+                <span class="price">P180</span>
+                <span class="period">/week</span>
+              </div>
+              <ul class="list-unstyled">
+                <li><i class="fas fa-check text-success me-2"></i> Access to job listings</li>
+                <li><i class="fas fa-check text-success me-2"></i> Application submission</li>
+                <li><i class="fas fa-check text-success me-2"></i> Basic forum access</li>
+                <li><i class="fas fa-check text-success me-2"></i> Free motivational e-books</li>
+                <li><i class="fas fa-check text-success me-2"></i> 5% discount on courses</li>
+                <li class="text-muted"><i class="fas fa-times text-danger me-2"></i> Career coaching sessions</li>
+                <li class="text-muted"><i class="fas fa-times text-danger me-2"></i> Resume review</li>
+              </ul>
+              <div class="d-grid mt-4">
+                <button class="btn btn-accent bouncy-button">Start Weekly</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-lg-4 mb-4 animate-fade-in fade-in-2">
+          <div class="subscription-card card popular h-100">
+            <div class="card-header">
+              <span class="badge bg-light text-primary position-absolute top-0 start-50 translate-middle">Most Popular</span>
+              <h3 class="mb-0">Monthly</h3>
+              <p class="mb-0">Comprehensive career support</p>
+            </div>
+            <div class="card-body">
+              <div class="text-center mb-4">
+                <span class="price">P400</span>
+                <span class="period">/month</span>
+              </div>
+              <ul class="list-unstyled">
+                <li><i class="fas fa-check text-success me-2"></i> All Weekly features</li>
+                <li><i class="fas fa-check text-success me-2"></i> Priority job applications</li>
+                <li><i class="fas fa-check text-success me-2"></i> Full forum access</li>
+                <li><i class="fas fa-check text-success me-2"></i> 15% discount on courses</li>
+                <li><i class="fas fa-check text-success me-2"></i> 1 career coaching session/month</li>
+                <li><i class="fas fa-check text-success me-2"></i> Resume review and feedback</li>
+                <li><i class="fas fa-check text-success me-2"></i> Access to exclusive webinars</li>
+              </ul>
+              <div class="d-grid mt-4">
+                <button class="btn btn-primary bouncy-button">Start Monthly</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-lg-4 mb-4 animate-fade-in fade-in-3">
+          <div class="subscription-card card h-100">
+            <div class="card-header">
+              <h3 class="mb-0">Semi-Free</h3>
+              <p class="mb-0">Basic access</p>
+            </div>
+            <div class="card-body">
+              <div class="text-center mb-4">
+                <span class="price">BWP 0</span>
+                <span class="period">/limited access</span>
+              </div>
+              <ul class="list-unstyled">
+                <li><i class="fas fa-check text-success me-2"></i> View job listings (limited)</li>
+                <li><i class="fas fa-check text-success me-2"></i> Read-only forum access</li>
+                <li><i class="fas fa-check text-success me-2"></i> Free motivational e-books</li>
+                <li><i class="fas fa-check text-success me-2"></i> Access to free resources</li>
+                <li class="text-muted"><i class="fas fa-times text-danger me-2"></i> Course discounts</li>
+                <li class="text-muted"><i class="fas fa-times text-danger me-2"></i> Career coaching</li>
+                <li class="text-muted"><i class="fas fa-times text-danger me-2"></i> Resume review</li>
+              </ul>
+              <div class="d-grid mt-4">
+                <button class="btn btn-outline-primary bouncy-button">Create Free Account</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="row justify-content-center mt-4">
+        <div class="col-lg-8 text-center animate-fade-in fade-in-4">
+          <div class="card bg-light border-0 p-4">
+            <h4>Need a custom solution?</h4>
+            <p>We offer corporate packages for organizations looking to support women returning to work.</p>
+            <a href="javascript:void(0)" class="btn btn-primary bouncy-button">Contact Us</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
         <!-- Discussion Forums Section -->
         <section id="forums" class="py-16 bg-white">
             <div class="container mx-auto px-4 md:px-6">
@@ -469,7 +1415,7 @@
                         <div class="flex items-center mb-4">
                             <img src="https://placehold.co/40x40/e0e0e0/505050?text=J" alt="Jennifer M" class="w-10 h-10 rounded-full mr-4">
                             <div>
-                                <h4 class="font-semibold text-gray-800">Jennifer Mojaj</h4>
+                                <h4 class="font-semibold text-gray-800">Jennifer Moji</h4>
                                 <p class="text-sm text-gray-500">1 day ago</p>
                             </div>
                         </div>
@@ -696,5 +1642,89 @@
             });
         });
     </script>
+      <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script id="app-script">
+    $(document).ready(function() {
+      // Smooth scrolling for anchor links
+      $('a[href^="#"]').on('click', function(event) {
+        var target = $(this.getAttribute('href'));
+        if(target.length) {
+          event.preventDefault();
+          $('html, body').animate({
+            scrollTop: target.offset().top - 80
+          }, 800);
+        }
+      });
+      
+      // Navbar active state
+      $(window).on('scroll', function() {
+        var scrollDistance = $(window).scrollTop();
+        
+        // Highlight active nav item
+        $('section').each(function(i) {
+          if ($(this).position().top <= scrollDistance + 100) {
+            $('.navbar-nav a.active').removeClass('active');
+            $('.navbar-nav a').eq(i).addClass('active');
+          }
+        });
+        
+        // Change navbar background on scroll
+        if (scrollDistance > 50) {
+          $('.navbar').addClass('navbar-sticky');
+        } else {
+          $('.navbar').removeClass('navbar-sticky');
+        }
+      });
+      
+      // Initialize Bootstrap tooltips
+      var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+      var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl)
+      });
+      
+      // Animation on scroll
+      function animateOnScroll() {
+        $('.animate-fade-in').each(function() {
+          var position = $(this).offset().top;
+          var scroll = $(window).scrollTop();
+          var windowHeight = $(window).height();
+          
+          if (scroll + windowHeight > position) {
+            $(this).css('opacity', '1');
+            $(this).css('transform', 'translateY(0)');
+          }
+        });
+      }
+      
+      $(window).on('scroll', animateOnScroll);
+      animateOnScroll(); // Run once on page load
+      
+      // Form submission handling
+      $('.apply-form').on('submit', function(e) {
+        e.preventDefault();
+        $(this).append('<div class="text-center mt-4"><div class="spinner-border text-primary loading-spinner" role="status"><span class="visually-hidden">Loading...</span></div><p class="mt-2">Submitting your application...</p></div>');
+        
+        setTimeout(function() {
+          $('.apply-form .spinner-border').parent().html('<div class="alert alert-success" role="alert"><i class="fas fa-check-circle me-2"></i> Your application has been submitted successfully! We\'ll be in touch soon.</div>');
+        }, 2000);
+      });
+      
+      $('.seminar-form').on('submit', function(e) {
+        e.preventDefault();
+        $(this).append('<div class="text-center mt-4"><div class="spinner-border text-primary loading-spinner" role="status"><span class="visually-hidden">Loading...</span></div><p class="mt-2">Submitting your proposal...</p></div>');
+        
+        setTimeout(function() {
+          $('.seminar-form .spinner-border').parent().html('<div class="alert alert-success" role="alert"><i class="fas fa-check-circle me-2"></i> Your seminar proposal has been submitted successfully! Our team will review it and contact you within 2-3 business days.</div>');
+        }, 2000);
+      });
+      
+      // Mobile nav menu collapse on click
+      $('.navbar-nav>li>a').on('click', function(){
+        $('.navbar-collapse').collapse('hide');
+      });
+    });
+  </script>
 </body>
 </html>
