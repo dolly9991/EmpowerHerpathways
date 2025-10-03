@@ -8,8 +8,10 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="icon" type="image/jpg" href="images/logo.jpg">
     <link rel="stylesheet" href="styles.css">
     <style>
@@ -107,10 +109,15 @@
                 <span class="text-2xl font-bold text-purple-800">EmpowerHer Pathways</span>
             </div>
             <nav class="hidden md:flex space-x-4">
-                <a href="#about" class="text-gray-600 hover:text-purple-700 font-medium">About</a>
-                <a href="#challenges" class="text-gray-600 hover:text-purple-700 font-medium">Challenges</a>
-                <a href="#solutions" class="text-gray-600 hover:text-purple-700 font-medium">Solutions</a>
-                <a href="#impact" class="text-gray-600 hover:text-purple-700 font-medium">Impact</a>
+                <a href="#about" class="text-gray-600 hover:text-purple-500 font-medium">Home</a>
+                <a href="#about" class="text-gray-600 hover:text-purple-500 font-medium">About</a>
+                <a href="#jobs" class="text-gray-600 hover:text-purple-500 font-medium">Jobs</a>
+                <a href="#forums" class="text-gray-600 hover:text-purple-500 font-medium">Forums</a>
+                <a href="#courses" class="text-gray-600 hover:text-purple-500 font-medium">Courses</a>
+                <a href="#apply" class="text-gray-600 hover:text-purple-500 font-medium">Apply</a>
+                <a href="#" class="text-gray-600 hover:text-purple-500 font-medium">Seminars</a>
+                <a href="#" class="text-gray-600 hover:text-purple-500 font-medium">FAQ</a>
+                <a href="#" class="text-gray-600 hover:text-purple-500 font-medium">Pricing</a>
             </nav>
             <!-- Mobile Menu Toggle -->
             <button id="mobile-menu-button" class="md:hidden text-gray-600 focus:outline-none">
@@ -122,10 +129,15 @@
         <!-- Mobile Menu -->
         <div id="mobile-menu" class="hidden md:hidden bg-white shadow-sm py-2">
             <nav class="flex flex-col items-center space-y-2">
-                <a href="#about" class="block text-gray-600 hover:text-purple-700 font-medium py-2">About</a>
-                <a href="#challenges" class="block text-gray-600 hover:text-purple-700 font-medium py-2">Challenges</a>
-                <a href="#solutions" class="block text-gray-600 hover:text-purple-700 font-medium py-2">Solutions</a>
-                <a href="#impact" class="block text-gray-600 hover:text-purple-700 font-medium py-2">Impact</a>
+              <a href="#about" class="block text-gray-600 hover:text-purple-500 font-medium py-2">Home</a>
+              <a href="#about" class="block text-gray-600 hover:text-purple-500 font-medium py-2">About</a>
+              <a href="#jobs" class="block text-gray-600 hover:text-purple-500 font-medium py-2">Jobs</a>
+              <a href="#forums" class="block text-gray-600 hover:text-purple-500 font-medium py-2">Forums</a>
+              <a href="#courses" class="block text-gray-600 hover:text-purple-500 font-medium py-2">Courses</a>
+              <a href="#apply" class="block text-gray-600 hover:text-purple-500 font-medium py-2">Apply</a>
+              <a href="#" class="block text-gray-600 hover:text-purple-500 font-medium py-2">Seminars</a>
+              <a href="#" class="block text-gray-600 hover:text-purple-500 font-medium py-2">FAQ</a>
+              <a href="#" class="block text-gray-600 hover:text-purple-500 font-medium py-2">Pricing</a>
             </nav>
         </div>
     </header>
@@ -140,8 +152,8 @@
                     We empower women to successfully return to the workforce and help employers access a vibrant, diverse talent pool.
                 </p>
                 <div class="flex flex-col md:flex-row justify-center items-center space-y-4 md:space-y-0 md:space-x-4">
-                    <button id="join-woman-btn" class="bg-transparent border border-white text-white font-semibold py-3 px-6 rounded-lg hover:bg-white hover:text-purple-700 transition-colors duration-300">
-                        Join as a Woman
+                    <button id="join-user-btn" class="bg-transparent border border-white text-white font-semibold py-3 px-6 rounded-lg hover:bg-white hover:text-purple-700 transition-colors duration-300">
+                        Join as a User
                     </button>
                     <button id="join-employer-btn"class="bg-transparent border border-white text-white font-semibold py-3 px-6 rounded-lg hover:bg-white hover:text-purple-700 transition-colors duration-300">
                         Join as an Employer
@@ -149,32 +161,48 @@
                 </div>
             </div>
             
-                        <!-- Sign Up Modal for Women -->
-            <div id="signup-modal-woman" class="modal-overlay hidden">
+            
+                <!-- Sign In Modal -->
+            <div id="signin-modal" class="modal-overlay hidden">
                 <div class="modal-container">
-                    <span class="modal-close-button" data-close="woman">&times;</span>
-                    <h2 class="text-2xl font-bold text-purple-700 mb-4">Sign Up as a Woman</h2>
-                    <!-- Woman Modal Form -->
-<form id="woman-signup-form">
-    <label class="block mb-2 font-medium text-gray-700">Name</label>
-    <input type="text" id="woman-name" class="w-full mb-4 px-3 py-2 border rounded-lg" required>
-    <label class="block mb-2 font-medium text-gray-700">Email</label>
-    <input type="email" id="woman-email" class="w-full mb-4 px-3 py-2 border rounded-lg" required>
-    <label class="block mb-2 font-medium text-gray-700">Password</label>
-    <input type="password" id="woman-password" class="w-full mb-4 px-3 py-2 border rounded-lg" required>
-    <button type="submit" class="w-full bg-purple-700 text-white py-2 rounded-lg font-semibold hover:bg-purple-800 transition">
-        Sign Up
-    </button>
-    <!-- Sign Up with Google Button -->
-    <button type="button" id="google-signup-woman" class="w-full mt-2 bg-white border border-gray-300 text-gray-800 py-2 rounded-lg font-semibold flex items-center justify-center hover:bg-gray-100 transition">
-        <i class="fab fa-google mr-2"></i> Sign Up with Google
-    </button>
-    <!-- Sign In Link -->
-    <p class="mt-4 text-center text-gray-600">
-        Already have an account?
-        <button type="button" id="open-signin-woman" class="text-purple-700 underline">Sign In</button>
-    </p>
-</form>
+                    <span id="close-signin-modal" class="modal-close-button">&times;</span>
+                    <h2 class="text-2xl font-bold text-purple-700 mb-4">Sign In</h2>
+                    <form id="signin-form">
+                        <label class="block mb-2 font-medium text-gray-700">Email</label>
+                        <input type="email" id="signin-email" class="w-full mb-4 px-3 py-2 border rounded-lg" required>
+                        <label class="block mb-2 font-medium text-gray-700">Password</label>
+                        <input type="password" id="signin-password" class="w-full mb-4 px-3 py-2 border rounded-lg" required>
+                        <button type="submit" class="w-full bg-purple-700 text-white py-2 rounded-lg font-semibold hover:bg-purple-800 transition">Sign In</button>
+                    </form>
+                </div>
+            </div>
+
+                        <!-- Sign Up Modal for Women -->
+            <div id="signup-modal-user" class="modal-overlay hidden">
+                <div class="modal-container">
+                    <span class="modal-close-button" data-close="user">&times;</span>
+                    <h2 class="text-2xl font-bold text-purple-700 mb-4">Sign Up as a User</h2>
+                    <!-- User Modal Form -->
+                    <form id="user-signup-form">
+                        <label class="block mb-2 font-medium text-gray-700">Name</label>
+                        <input type="text" id="user-name" class="w-full mb-4 px-3 py-2 border rounded-lg" required>
+                        <label class="block mb-2 font-medium text-gray-700">Email</label>
+                        <input type="email" id="user-email" class="w-full mb-4 px-3 py-2 border rounded-lg" required>
+                        <label class="block mb-2 font-medium text-gray-700">Password</label>
+                        <input type="password" id="user-password" class="w-full mb-4 px-3 py-2 border rounded-lg" required>
+                        <button type="submit" class="w-full bg-purple-700 text-white py-2 rounded-lg font-semibold hover:bg-purple-800 transition">
+                            Sign Up
+                        </button>
+                        <!-- Sign Up with Google Button -->
+                        <button type="button" id="google-signup-user" class="w-full mt-2 bg-white border border-gray-300 text-gray-800 py-2 rounded-lg font-semibold flex items-center justify-center hover:bg-gray-100 transition">
+                            <i class="fab fa-google mr-2"></i> Sign Up with Google
+                        </button>
+                        <!-- Sign In Link -->
+                        <p class="mt-4 text-center text-gray-600">
+                            Already have an account?
+                            <button type="button" id="open-signin-user" class="text-purple-700 underline">Sign In</button>
+                        </p>
+                    </form>
                 </div>
             </div>
             <!-- Sign Up Modal for Employers -->
@@ -183,27 +211,27 @@
                     <span class="modal-close-button" data-close="employer">&times;</span>
                     <h2 class="text-2xl font-bold text-purple-700 mb-4">Sign Up as an Employer</h2>
                     <!-- Employer Modal Form -->
-<form id="employer-signup-form">
-    <label class="block mb-2 font-medium text-gray-700">Company Name</label>
-    <input type="text" id="employer-name" class="w-full mb-4 px-3 py-2 border rounded-lg" required>
-    <label class="block mb-2 font-medium text-gray-700">Contact Email</label>
-    <input type="email" id="employer-email" class="w-full mb-4 px-3 py-2 border rounded-lg" required>
-    <label class="block mb-2 font-medium text-gray-700">Password</label>
-    <input type="password" id="employer-password" class="w-full mb-4 px-3 py-2 border rounded-lg" required>
-    <button type="submit" class="w-full bg-purple-700 text-white py-2 rounded-lg font-semibold hover:bg-purple-800 transition">
-        Sign Up
-    </button>
-    <!-- Sign Up with Google Button -->
-    <button type="button" id="google-signup-employer" class="w-full mt-2 bg-white border border-gray-300 text-gray-800 py-2 rounded-lg font-semibold flex items-center justify-center hover:bg-gray-100 transition">
-        <i class="fab fa-google mr-2"></i> Sign Up with Google
-    </button>
-    <!-- Sign In Link -->
-    <p class="mt-4 text-center text-gray-600">
-        Already have an account?
-        <button type="button" id="open-signin-employer" class="text-purple-700 underline">Sign In</button>
-    </p>
-</form>
-                </div>
+                    <form id="employer-signup-form">
+                        <label class="block mb-2 font-medium text-gray-700">Company Name</label>
+                        <input type="text" id="employer-name" class="w-full mb-4 px-3 py-2 border rounded-lg" required>
+                        <label class="block mb-2 font-medium text-gray-700">Contact Email</label>
+                        <input type="email" id="employer-email" class="w-full mb-4 px-3 py-2 border rounded-lg" required>
+                        <label class="block mb-2 font-medium text-gray-700">Password</label>
+                        <input type="password" id="employer-password" class="w-full mb-4 px-3 py-2 border rounded-lg" required>
+                        <button type="submit" class="w-full bg-purple-700 text-white py-2 rounded-lg font-semibold hover:bg-purple-800 transition">
+                            Sign Up
+                        </button>
+                        <!-- Sign Up with Google Button -->
+                        <button type="button" id="google-signup-employer" class="w-full mt-2 bg-white border border-gray-300 text-gray-800 py-2 rounded-lg font-semibold flex items-center justify-center hover:bg-gray-100 transition">
+                            <i class="fab fa-google mr-2"></i> Sign Up with Google
+                        </button>
+                        <!-- Sign In Link -->
+                        <p class="mt-4 text-center text-gray-600">
+                            Already have an account?
+                            <button type="button" id="open-signin-employer" class="text-purple-700 underline">Sign In</button>
+                        </p>
+                    </form>
+                                    </div>
             </div>
         </section>
 
@@ -291,7 +319,7 @@
                         <div class="tab-content" id="content-1">
                             <h3 class="text-2xl font-semibold mb-4 text-gray-800">Skills Re-Entry Workshops</h3>
                             <p class="text-gray-600 mb-4">
-                                Our workshops are designed to bridge the gap between a woman's previous skills and the current demands of the job market. We focus on in-demand technical and soft skills, ensuring our participants are ready to compete effectively.
+                                Our workshops are designed to bridge the gap between a user's previous skills and the current demands of the job market. We focus on in-demand technical and soft skills, ensuring our participants are ready to compete effectively.
                             </p>
                             <p class="text-gray-600">
                                 We cover everything from modern digital tools and data literacy to leadership and communication skills, providing a holistic and empowering learning experience.
@@ -388,7 +416,7 @@
                             </p>
                             <div class="flex justify-center md:justify-start space-x-4 mt-4">
                                 <a href="#" class="text-gray-500 hover:text-purple-600"><i class="fab fa-twitter"></i></a>
-                                <a href="www.linkedin.com/in/botho-neo-ba9085259" class="text-gray-500 hover:text-purple-600"><i class="fab fa-linkedin"></i></a>
+                                <a href="https://www.linkedin.com/in/botho-neo-ba9085259/" class="text-gray-500 hover:text-purple-600"><i class="fab fa-linkedin"></i></a>
                                 <a href="#" class="text-gray-500 hover:text-purple-600"><i class="fab fa-facebook"></i></a>
                             </div>
                         </div>
@@ -414,11 +442,17 @@
          <!-- Available Jobs Section -->
         <section id="jobs" class="py-16 bg-white">
             <div class="container mx-auto px-4 md:px-6">
-                <div class="flex justify-between items-center mb-12">
-                    <h2 class="text-3xl md:text-4xl font-bold text-purple-600">Available Jobs</h2>
-                    <div class="flex items-center space-x-4">
-                        <input type="text" placeholder="Search jobs..." class="px-4 py-2 border rounded-full focus:outline-none focus:border-purple-500">
-                        <button class="bg-purple-600 text-white font-semibold py-2 px-6 rounded-full hover:bg-purple-500 transition-colors duration-300">
+                <div class="flex flex-col md:flex-row md:justify-between items-start md:items-center mb-8 md:mb-12 space-y-4 md:space-y-0 p-4 bg-white shadow-lg rounded-xl">
+                    <h2 class="text-3xl md:text-4xl font-extrabold text-purple-700">Available Jobs</h2>
+                    <div class="flex items-center space-x-4 w-full md:w-auto">
+                        <input 
+                            type="text" 
+                            placeholder="Search jobs..." 
+                            class="w-full md:w-64 px-5 py-3 border-2 border-purple-200 rounded-full text-gray-700 placeholder-gray-400 
+                                  focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-200 shadow-inner"
+                        >
+                        <button class="flex-shrink-0 bg-purple-600 text-white font-semibold py-3 px-6 rounded-full shadow-md hover:bg-purple-700 
+                                      transition-colors duration-300 transform hover:scale-[1.02]">
                             Search
                         </button>
                     </div>
@@ -1132,84 +1166,18 @@
                 </div>
             </div>
         </section>
-    </main>
-<!-- Call to Action -->
-  <section class="py-5 bg-primary text-white">
-    <div class="container">
-      <div class="row align-items-center">
-        <div class="col-lg-8 animate-fade-in fade-in-1">
-          <h2>Ready to Restart Your Career Journey?</h2>
-          <p class="lead mb-0">Join thousands of women who have successfully returned to work with EmpowerHer Pathways.</p>
-        </div>
-        <div class="col-lg-4 text-lg-end mt-4 mt-lg-0 animate-fade-in fade-in-2">
-          <a href="#pricing" class="btn btn-light btn-lg bouncy-button">Get Started Now</a>
-        </div>
-      </div>
-    </div>
-  </section>
 
-  <!-- Footer -->
-  <footer>
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-4 mb-4">
-          <h5 class="mb-3">EmpowerHer Pathways</h5>
-          <p class="mb-3">Supporting women returning to work after career breaks through resources, community, and opportunities.</p>
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="container mx-auto px-4 md:px-6 text-center">
+          <p>&copy; 2025 EmpowerHer Pathways. All Rights Reserved.</p>
+
           <div class="social-icons">
             <a href="javascript:void(0)"><i class="fab fa-facebook-f"></i></a>
             <a href="javascript:void(0)"><i class="fab fa-twitter"></i></a>
             <a href="javascript:void(0)"><i class="fab fa-linkedin-in"></i></a>
             <a href="javascript:void(0)"><i class="fab fa-instagram"></i></a>
           </div>
-        </div>
-        
-        <div class="col-lg-2 col-md-4 col-6 mb-4 footer-links">
-          <h5>Navigation</h5>
-          <ul>
-            <li><a href="#home">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#jobs">Jobs</a></li>
-            <li><a href="#forums">Forums</a></li>
-            <li><a href="#courses">Courses</a></li>
-          </ul>
-        </div>
-        
-        <div class="col-lg-2 col-md-4 col-6 mb-4 footer-links">
-          <h5>Resources</h5>
-          <ul>
-            <li><a href="#books">Free E-Books</a></li>
-            <li><a href="#seminars">Seminars</a></li>
-            <li><a href="#faq">FAQ</a></li>
-            <li><a href="javascript:void(0)">Blog</a></li>
-            <li><a href="javascript:void(0)">Success Stories</a></li>
-          </ul>
-        </div>
-        
-        <div class="col-lg-2 col-md-4 col-6 mb-4 footer-links">
-          <h5>Legal</h5>
-          <ul>
-            <li><a href="javascript:void(0)">Privacy Policy</a></li>
-            <li><a href="javascript:void(0)">Terms of Service</a></li>
-            <li><a href="javascript:void(0)">Cookie Policy</a></li>
-            <li><a href="javascript:void(0)">Accessibility</a></li>
-          </ul>
-        </div>
-        
-        <div class="col-lg-2 col-md-4 col-6 mb-4 footer-links">
-          <h5>Contact</h5>
-          <ul>
-            <li><a href="javascript:void(0)">Support</a></li>
-            <li><a href="javascript:void(0)">Careers</a></li>
-            <li><a href="javascript:void(0)">Partnerships</a></li>
-            <li><a href="javascript:void(0)">Media Inquiries</a></li>
-          </ul>
-        </div>
-      </div>
-      
-    <!-- Footer -->
-    <footer class="bg-gray-800 text-white py-8">
-        <div class="container mx-auto px-4 md:px-6 text-center">
-            <p>&copy; 2025 EmpowerHer Pathways. All Rights Reserved.</p>
         </div>
     </footer>
 
@@ -1313,14 +1281,14 @@
         });
 
         // Modal functionality
-        const signupModalWoman = document.getElementById('signup-modal-woman');
+        const signupModalUser = document.getElementById('signup-modal-user');
         const signupModalEmployer = document.getElementById('signup-modal-employer');
-        const joinWomanBtn = document.getElementById('join-woman-btn');
+        const joinUserBtn = document.getElementById('join-user-btn');
         const joinEmployerBtn = document.getElementById('join-employer-btn');
         
         // Open correct modal
-        joinWomanBtn.addEventListener('click', () => {
-            signupModalWoman.classList.remove('hidden');
+        joinUserBtn.addEventListener('click', () => {
+            signupModalUser.classList.remove('hidden');
         });
         joinEmployerBtn.addEventListener('click', () => {
             signupModalEmployer.classList.remove('hidden');
@@ -1329,15 +1297,15 @@
         // Close modals
         document.querySelectorAll('.modal-close-button').forEach(btn => {
             btn.addEventListener('click', () => {
-                signupModalWoman.classList.add('hidden');
+                signupModalUser.classList.add('hidden');
                 signupModalEmployer.classList.add('hidden');
             });
         });
         
         // Optional: close modal when clicking outside the modal container
-        signupModalWoman.addEventListener('click', (e) => {
-            if (e.target === signupModalWoman) {
-                signupModalWoman.classList.add('hidden');
+        signupModalUser.addEventListener('click', (e) => {
+            if (e.target === signupModalUser) {
+                signupModalUser.classList.add('hidden');
             }
         });
         signupModalEmployer.addEventListener('click', (e) => {
@@ -1373,13 +1341,13 @@
         const provider = new GoogleAuthProvider();
         const db = getFirestore(app);
 
-        document.getElementById('google-signup-woman').addEventListener('click', async () => {
+        document.getElementById('google-signup-user').addEventListener('click', async () => {
             try {
                 const result = await signInWithPopup(auth, provider);
                 alert(`Signed up as: ${result.user.displayName}`);
-                signupModalWoman.classList.add('hidden');
-                // After Google sign-in in woman modal
-                window.location.href = 'dashboard-woman.html';
+                signupModalUser.classList.add('hidden');
+                // After Google sign-in in user modal
+                window.location.href = 'dashboard-user.html';
             } catch (error) {
                 alert('Google sign-in failed.');
             }
@@ -1397,20 +1365,20 @@
             }
         });
 
-        // Woman form sign up
-document.getElementById('woman-signup-form').addEventListener('submit', async function(e) {
+        // User form sign up
+document.getElementById('user-signup-form').addEventListener('submit', async function(e) {
     e.preventDefault();
-    const email = document.getElementById('woman-email').value;
-    const password = document.getElementById('woman-password').value;
+    const email = document.getElementById('user-email').value;
+    const password = document.getElementById('user-password').value;
     try {
         const userCredential = await createUserWithEmailAndPassword(auth, email, password);
         // Save role to Firestore
         await setDoc(doc(db, "users", userCredential.user.uid), {
-            role: "woman",
-            name: document.getElementById('woman-name').value,
+            role: "user",
+            name: document.getElementById('user-name').value,
             email: email
         });
-        window.location.href = 'dashboard-woman.html';
+        window.location.href = 'dashboard-user.html';
     } catch (error) {
         alert('Sign up failed: ' + error.message);
     }
@@ -1439,7 +1407,7 @@ document.getElementById('employer-signup-form').addEventListener('submit', async
         const closeSigninModal = document.getElementById('close-signin-modal');
 
         // Open sign in modal from either sign up modal
-        document.getElementById('open-signin-woman').addEventListener('click', () => {
+        document.getElementById('open-signin-user').addEventListener('click', () => {
             signinModal.classList.remove('hidden');
         });
         document.getElementById('open-signin-employer').addEventListener('click', () => {
@@ -1467,8 +1435,8 @@ document.getElementById('employer-signup-form').addEventListener('submit', async
                 const userDoc = await getDoc(doc(db, "users", userCredential.user.uid));
                 if (userDoc.exists()) {
                     const role = userDoc.data().role;
-                    if (role === "woman") {
-                        window.location.href = 'dashboard-woman.html';
+                    if (role === "user") {
+                        window.location.href = 'dashboard-user.html';
                     } else if (role === "employer") {
                         window.location.href = 'dashboard-employer.html';
                     } else {
@@ -1482,21 +1450,5 @@ document.getElementById('employer-signup-form').addEventListener('submit', async
             }
         });
     </script>
-
-    <!-- Sign In Modal -->
-<div id="signin-modal" class="modal-overlay hidden">
-    <div class="modal-container">
-        <span id="close-signin-modal" class="modal-close-button">&times;</span>
-        <h2 class="text-2xl font-bold text-purple-700 mb-4">Sign In</h2>
-        <form id="signin-form">
-            <label class="block mb-2 font-medium text-gray-700">Email</label>
-            <input type="email" id="signin-email" class="w-full mb-4 px-3 py-2 border rounded-lg" required>
-            <label class="block mb-2 font-medium text-gray-700">Password</label>
-            <input type="password" id="signin-password" class="w-full mb-4 px-3 py-2 border rounded-lg" required>
-            <button type="submit" class="w-full bg-purple-700 text-white py-2 rounded-lg font-semibold hover:bg-purple-800 transition">Sign In</button>
-        </form>
-    </div>
-</div>
-
 </body>
 </html>
