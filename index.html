@@ -161,22 +161,6 @@
                 </div>
             </div>
             
-            
-                <!-- Sign In Modal -->
-            <div id="signin-modal" class="modal-overlay hidden">
-                <div class="modal-container">
-                    <span id="close-signin-modal" class="modal-close-button">&times;</span>
-                    <h2 class="text-2xl font-bold text-purple-700 mb-4">Sign In</h2>
-                    <form id="signin-form">
-                        <label class="block mb-2 font-medium text-gray-700">Email</label>
-                        <input type="email" id="signin-email" class="w-full mb-4 px-3 py-2 border rounded-lg" required>
-                        <label class="block mb-2 font-medium text-gray-700">Password</label>
-                        <input type="password" id="signin-password" class="w-full mb-4 px-3 py-2 border rounded-lg" required>
-                        <button type="submit" class="w-full bg-purple-700 text-white py-2 rounded-lg font-semibold hover:bg-purple-800 transition">Sign In</button>
-                    </form>
-                </div>
-            </div>
-
                         <!-- Sign Up Modal for Women -->
             <div id="signup-modal-user" class="modal-overlay hidden">
                 <div class="modal-container">
@@ -1150,7 +1134,7 @@
                         <img src="https://placehold.co/600x400/a17feb/FFFFFF?text=Project+Management" alt="Project Management Course" class="w-full h-48 object-cover">
                         <div class="p-6">
                             <h3 class="text-xl font-bold text-gray-800 mb-2">Project Management Fundamentals</h3>
-                            <p class="text-sm text-gray-600 mb-4">
+                                                                                  <p class="text-sm text-gray-600 mb-4">
                                 Gain the skills to manage projects efficiently, from initiation to closure.
                             </p>
                             <div class="flex justify-between items-center text-sm text-gray-500 mb-4">
@@ -1320,7 +1304,7 @@
         // Import the functions you need from the SDKs you need
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
         import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-analytics.js";
-        import { getAuth, signInWithPopup, GoogleAuthProvider, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+        import { getAuth, signInWithPopup, GoogleAuthProvider, createUserWithEmailAndPassword, signInWithEmailAndPassword, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
         import { getFirestore, setDoc, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
         // Your web app's Firebase configuration
@@ -1449,6 +1433,39 @@ document.getElementById('employer-signup-form').addEventListener('submit', async
                 alert('Sign in failed: ' + error.message);
             }
         });
+
+        document.getElementById('forgot-password-btn').addEventListener('click', async function() {
+    const email = document.getElementById('signin-email').value;
+    if (!email) {
+        alert('Please enter your email address above first.');
+        return;
+    }
+    try {
+        await sendPasswordResetEmail(auth, email);
+        alert('Password reset email sent! Please check your inbox.');
+    } catch (error) {
+        alert('Error sending password reset email: ' + error.message);
+    }
+});
     </script>
+
+    <!-- Sign In Modal -->
+<div id="signin-modal" class="modal-overlay hidden">
+    <div class="modal-container">
+        <span id="close-signin-modal" class="modal-close-button">&times;</span>
+        <h2 class="text-2xl font-bold text-purple-700 mb-4">Sign In</h2>
+        <form id="signin-form">
+            <label class="block mb-2 font-medium text-gray-700">Email</label>
+            <input type="email" id="signin-email" class="w-full mb-4 px-3 py-2 border rounded-lg" required>
+            <label class="block mb-2 font-medium text-gray-700">Password</label>
+            <input type="password" id="signin-password" class="w-full mb-4 px-3 py-2 border rounded-lg" required>
+            <button type="submit" class="w-full bg-purple-700 text-white py-2 rounded-lg font-semibold hover:bg-purple-800 transition">Sign In</button>
+            <p class="mt-4 text-center">
+        <button type="button" id="forgot-password-btn" class="text-purple-700 underline">Forgot Password?</button>
+    </p>
+        </form>
+    </div>
+</div>
+
 </body>
 </html>
