@@ -159,8 +159,41 @@ document.getElementById('forgot-password-btn').addEventListener('click', async f
 // =========================================================================
 
 document.addEventListener('DOMContentLoaded', function() {
+    // ------------------------------------------------------------------
+    // 1. Mobile Menu, Tabs, and Chart Logic (The code you originally showed me)
+    // ------------------------------------------------------------------
+
+    // Mobile menu functionality
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    if (mobileMenuButton && mobileMenu) {
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        // Hide mobile menu when a link is clicked
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+    }
+
+    // Solutions Tabbed Interface (and the rest of that section...)
+    const tabButtons = document.querySelectorAll('.tab-button');
+    // ... all your tab and chart initialization logic ...
+
+    // Chart.js initialization (make sure Chart.js CDN is loaded in HTML before this script)
+    // const ctx = document.getElementById('impactChart').getContext('2d');
+    // ... all your chart setup code ...
+
+
+    // ------------------------------------------------------------------
+    // 2. Password Toggle Fix (The code block you said wasn't working)
+    // ------------------------------------------------------------------
+
     // Show/hide password for user sign up
-    document.getElementById('toggle-user-password').addEventListener('click', function() {
+    document.getElementById('toggle-user-password')?.addEventListener('click', function() {
         const pwd = document.getElementById('user-password');
         if (pwd.type === 'password') {
             pwd.type = 'text';
@@ -171,7 +204,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    document.getElementById('toggle-user-confirm-password').addEventListener('click', function() {
+    document.getElementById('toggle-user-confirm-password')?.addEventListener('click', function() {
         const pwd = document.getElementById('user-confirm-password');
         if (pwd.type === 'password') {
             pwd.type = 'text';
@@ -183,7 +216,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Show/hide password for employer sign up
-    document.getElementById('toggle-employer-password').addEventListener('click', function() {
+    document.getElementById('toggle-employer-password')?.addEventListener('click', function() {
         const pwd = document.getElementById('employer-password');
         if (pwd.type === 'password') {
             pwd.type = 'text';
@@ -194,7 +227,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    document.getElementById('toggle-employer-confirm-password').addEventListener('click', function() {
+    document.getElementById('toggle-employer-confirm-password')?.addEventListener('click', function() {
         const pwd = document.getElementById('employer-confirm-password');
         if (pwd.type === 'password') {
             pwd.type = 'text';
@@ -204,7 +237,7 @@ document.addEventListener('DOMContentLoaded', function() {
             this.textContent = 'Show';
         }
     });
-    
+
 });
 
 function isValidPassword(password) {
