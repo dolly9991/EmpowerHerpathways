@@ -158,47 +158,53 @@ document.getElementById('forgot-password-btn').addEventListener('click', async f
 //    - This is the content of your original second <script> block
 // =========================================================================
 
-// Show/hide password for user sign up
-document.getElementById('toggle-user-password').addEventListener('click', function() {
-    const pwd = document.getElementById('user-password');
-    if (pwd.type === 'password') {
-        pwd.type = 'text';
-        this.textContent = 'Hide';
-    } else {
-        pwd.type = 'password';
-        this.textContent = 'Show';
-    }
-});
-document.getElementById('toggle-user-confirm-password').addEventListener('click', function() {
-    const pwd = document.getElementById('user-confirm-password');
-    if (pwd.type === 'password') {
-        pwd.type = 'text';
-        this.textContent = 'Hide';
-    } else {
-        pwd.type = 'password';
-        this.textContent = 'Show';
-    }
-});
-// Show/hide password for employer sign up
-document.getElementById('toggle-employer-password').addEventListener('click', function() {
-    const pwd = document.getElementById('employer-password');
-    if (pwd.type === 'password') {
-        pwd.type = 'text';
-        this.textContent = 'Hide';
-    } else {
-        pwd.type = 'password';
-        this.textContent = 'Show';
-    }
-});
-document.getElementById('toggle-employer-confirm-password').addEventListener('click', function() {
-    const pwd = document.getElementById('employer-confirm-password');
-    if (pwd.type === 'password') {
-        pwd.type = 'text';
-        this.textContent = 'Hide';
-    } else {
-        pwd.type = 'password';
-        this.textContent = 'Show';
-    }
+document.addEventListener('DOMContentLoaded', function() {
+    // Show/hide password for user sign up
+    document.getElementById('toggle-user-password').addEventListener('click', function() {
+        const pwd = document.getElementById('user-password');
+        if (pwd.type === 'password') {
+            pwd.type = 'text';
+            this.textContent = 'Hide';
+        } else {
+            pwd.type = 'password';
+            this.textContent = 'Show';
+        }
+    });
+
+    document.getElementById('toggle-user-confirm-password').addEventListener('click', function() {
+        const pwd = document.getElementById('user-confirm-password');
+        if (pwd.type === 'password') {
+            pwd.type = 'text';
+            this.textContent = 'Hide';
+        } else {
+            pwd.type = 'password';
+            this.textContent = 'Show';
+        }
+    });
+
+    // Show/hide password for employer sign up
+    document.getElementById('toggle-employer-password').addEventListener('click', function() {
+        const pwd = document.getElementById('employer-password');
+        if (pwd.type === 'password') {
+            pwd.type = 'text';
+            this.textContent = 'Hide';
+        } else {
+            pwd.type = 'password';
+            this.textContent = 'Show';
+        }
+    });
+
+    document.getElementById('toggle-employer-confirm-password').addEventListener('click', function() {
+        const pwd = document.getElementById('employer-confirm-password');
+        if (pwd.type === 'password') {
+            pwd.type = 'text';
+            this.textContent = 'Hide';
+        } else {
+            pwd.type = 'password';
+            this.textContent = 'Show';
+        }
+    });
+    
 });
 
 function isValidPassword(password) {
