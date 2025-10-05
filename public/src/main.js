@@ -1,70 +1,130 @@
 // =========================================================================
-// 1. IMPORTS
-//    - These import the already initialized services (auth, db) 
-//      and the specific functions (signInWithPopup, etc.) 
-//      from your new, separate config file (src/lib/firebase.js)
+// src/main.js (Firebase Auth & Form Logic)
 // =========================================================================
 
 import { 
     auth, 
     db, 
-    provider, // GoogleAuthProvider instance
+    provider, 
     signInWithPopup, 
     createUserWithEmailAndPassword, 
     signInWithEmailAndPassword, 
     setDoc, 
     doc, 
     getDoc,
-    sendPasswordResetEmail // Assuming you exported this function
-} from './lib/firebase.js'; // <-- IMPORTANT: Check this path!
+    sendPasswordResetEmail
+} from './lib/firebase.js'; 
 
-// =========================================================================
-// 2. FIREBASE AUTH & FIRESTORE LOGIC
-//    - This is the entire content of your original first <script type="module"> block, 
-//      minus the initialization (which is now in firebase.js)
-// =========================================================================
-
-// NOTE: The variables 'signupModalUser' and 'signupModalEmployer' are not defined 
-// in this code block, but are assumed to be defined elsewhere in your HTML or script.
+// --------------------------------------------------
+// 1. GLOBAL ELEMENT DEFINITIONS (Needed for Auth Logic)
+// --------------------------------------------------
 const signinModal = document.getElementById('signin-modal');
 const closeSigninModal = document.getElementById('close-signin-modal');
 
+// IMPORTANT: Define these missing variables here
+const signupModalUser = document.getElementById('signup-modal-user');
+const signupModalEmployer = document.getElementById('signup-modal-employer');
+
+// --------------------------------------------------
+// 2. PASSWORD UTILITIES (Toggles and Validation)
+// --------------------------------------------------
+
+function isValidPassword(password) {
+    return /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/.test(password);
+}
+
+// Password Toggle Listeners (FIXED: Runs immediately as part of the module)
+document.getElementById('toggle-user-password')?.addEventListener('click', function() {
+    const pwd = document.getElementById('user-password');
+    if (pwd.type === 'password') {
+        pwd.type = 'text';
+        this.textContent = 'Hide';
+    } else {
+        pwd.type = 'password';
+        this.textContent = 'Show';
+    }
+});
+
+document.getElementById('toggle-user-confirm-password')?.addEventListener('click', function() {
+    const pwd = document.getElementById('user-confirm-password');
+    if (pwd.type === 'password') {
+        pwd.type = 'text';
+        this.textContent = 'Hide';
+    } else {
+        pwd.type = 'password';
+        this.textContent = 'Show';
+    }
+});
+
+document.getElementById('toggle-employer-password')?.addEventListener('click', function() {
+    const pwd = document.getElementById('employer-password');
+    if (pwd.type === 'password') {
+        pwd.type = 'text';
+        this.textContent = 'Hide';
+    } else {
+        pwd.type = 'password';
+        this.textContent = 'Show';
+    }
+});
+
+document.getElementById('toggle-employer-confirm-password')?.addEventListener('click', function() {
+    const pwd = document.getElementById('employer-confirm-password');
+    if (pwd.type === 'password') {
+        pwd.type = 'text';
+        this.textContent = 'Hide';
+    } else {
+        pwd.type = 'password';
+        this.textContent = 'Show';
+    }
+});
+
+
+// --------------------------------------------------
+// 3. FIREBASE AUTHENTICATION LOGIC
+// --------------------------------------------------
+
+// Google Sign-Up for User
 document.getElementById('google-signup-user').addEventListener('click', async () => {
     try {
         const result = await signInWithPopup(auth, provider);
         alert(`Signed up as: ${result.user.displayName}`);
-        // Assuming signupModalUser is defined globally or imported
-        if (typeof signupModalUser !== 'undefined') {
-            signupModalUser.classList.add('hidden');
-        }
+        signupModalUser?.classList.add('hidden');
         window.location.href = 'dashboard-user.html';
     } catch (error) {
         alert('Google sign-in failed.');
     }
 });
 
+// Google Sign-Up for Employer
 document.getElementById('google-signup-employer').addEventListener('click', async () => {
     try {
         const result = await signInWithPopup(auth, provider);
         alert(`Signed up as: ${result.user.displayName}`);
-        // Assuming signupModalEmployer is defined globally or imported
-        if (typeof signupModalEmployer !== 'undefined') {
-            signupModalEmployer.classList.add('hidden');
-        }
+        signupModalEmployer?.classList.add('hidden');
         window.location.href = 'dashboard-employer.html';
     } catch (error) {
         alert('Google sign-in failed.');
     }
 });
 
-// User form sign up
+// Email/Password Sign-Up (User) with Validation
 document.getElementById('user-signup-form').addEventListener('submit', async function(e) {
     e.preventDefault();
-    const email = document.getElementById('user-email').value;
     const password = document.getElementById('user-password').value;
+    const confirm = document.getElementById('user-confirm-password').value;
+
+    if (password !== confirm) {
+        alert('Passwords do not match.');
+        return;
+    }
+    if (!isValidPassword(password)) {
+        alert('Password must be at least 8 characters and include uppercase, lowercase, number, and special character.');
+        return;
+    }
+
+    const email = document.getElementById('user-email').value;
     try {
         const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-        // Save role to Firestore
         await setDoc(doc(db, "users", userCredential.user.uid), {
             role: "user",
             name: document.getElementById('user-name').value,
@@ -76,14 +136,24 @@ document.getElementById('user-signup-form').addEventListener('submit', async fun
     }
 });
 
-// Employer form sign up
+// Email/Password Sign-Up (Employer) with Validation
 document.getElementById('employer-signup-form').addEventListener('submit', async function(e) {
     e.preventDefault();
-    const email = document.getElementById('employer-email').value;
     const password = document.getElementById('employer-password').value;
+    const confirm = document.getElementById('employer-confirm-password').value;
+
+    if (password !== confirm) {
+        alert('Passwords do not match.');
+        return;
+    }
+    if (!isValidPassword(password)) {
+        alert('Password must be at least 8 characters and include uppercase, lowercase, number, and special character.');
+        return;
+    }
+    
+    const email = document.getElementById('employer-email').value;
     try {
         const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-        // Save role to Firestore
         await setDoc(doc(db, "users", userCredential.user.uid), {
             role: "employer",
             name: document.getElementById('employer-name').value,
@@ -95,42 +165,18 @@ document.getElementById('employer-signup-form').addEventListener('submit', async
     }
 });
 
-// Open sign in modal from either sign up modal
-document.getElementById('open-signin-user').addEventListener('click', () => {
-    signinModal.classList.remove('hidden');
-});
-document.getElementById('open-signin-employer').addEventListener('click', () => {
-    signinModal.classList.remove('hidden');
-});
-
-// Close sign in modal
-closeSigninModal.addEventListener('click', () => {
-    signinModal.classList.add('hidden');
-});
-signinModal.addEventListener('click', (e) => {
-    if (e.target === signinModal) {
-        signinModal.classList.add('hidden');
-    }
-});
-
-// Handle sign in
+// Handle Sign In
 document.getElementById('signin-form').addEventListener('submit', async function(e) {
     e.preventDefault();
     const email = document.getElementById('signin-email').value;
     const password = document.getElementById('signin-password').value;
     try {
         const userCredential = await signInWithEmailAndPassword(auth, email, password);
-        // Get user role from Firestore
         const userDoc = await getDoc(doc(db, "users", userCredential.user.uid));
+        
         if (userDoc.exists()) {
             const role = userDoc.data().role;
-            if (role === "user") {
-                window.location.href = 'dashboard-user.html';
-            } else if (role === "employer") {
-                window.location.href = 'dashboard-employer.html';
-            } else {
-                alert('User role not set.');
-            }
+            window.location.href = role === "user" ? 'dashboard-user.html' : 'dashboard-employer.html';
         } else {
             alert('User profile not found.');
         }
@@ -139,140 +185,17 @@ document.getElementById('signin-form').addEventListener('submit', async function
     }
 });
 
+// Handle Forgot Password
 document.getElementById('forgot-password-btn').addEventListener('click', async function() {
-  const email = document.getElementById('signin-email').value;
-  if (!email) {
-      alert('Please enter your email address above first.');
-      return;
-  }
-  try {
-      await sendPasswordResetEmail(auth, email);
-      alert('Password reset email sent! Please check your inbox.');
-  } catch (error) {
-      alert('Error sending password reset email: ' + error.message);
-  }
-});
-
-// =========================================================================
-// 3. UI/VALIDATION LOGIC
-//    - This is the content of your original second <script> block
-// =========================================================================
-
-document.addEventListener('DOMContentLoaded', function() {
-    // ------------------------------------------------------------------
-    // 1. Mobile Menu, Tabs, and Chart Logic (The code you originally showed me)
-    // ------------------------------------------------------------------
-
-    // Mobile menu functionality
-    const mobileMenuButton = document.getElementById('mobile-menu-button');
-    const mobileMenu = document.getElementById('mobile-menu');
-
-    if (mobileMenuButton && mobileMenu) {
-        mobileMenuButton.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-        });
-        // Hide mobile menu when a link is clicked
-        mobileMenu.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenu.classList.add('hidden');
-            });
-        });
+    const email = document.getElementById('signin-email').value;
+    if (!email) {
+        alert('Please enter your email address above first.');
+        return;
     }
-
-    // Solutions Tabbed Interface (and the rest of that section...)
-    const tabButtons = document.querySelectorAll('.tab-button');
-    // ... all your tab and chart initialization logic ...
-
-    // Chart.js initialization (make sure Chart.js CDN is loaded in HTML before this script)
-    // const ctx = document.getElementById('impactChart').getContext('2d');
-    // ... all your chart setup code ...
-
-
-    // ------------------------------------------------------------------
-    // 2. Password Toggle Fix (The code block you said wasn't working)
-    // ------------------------------------------------------------------
-
-    // Show/hide password for user sign up
-    document.getElementById('toggle-user-password')?.addEventListener('click', function() {
-        const pwd = document.getElementById('user-password');
-        if (pwd.type === 'password') {
-            pwd.type = 'text';
-            this.textContent = 'Hide';
-        } else {
-            pwd.type = 'password';
-            this.textContent = 'Show';
-        }
-    });
-
-    document.getElementById('toggle-user-confirm-password')?.addEventListener('click', function() {
-        const pwd = document.getElementById('user-confirm-password');
-        if (pwd.type === 'password') {
-            pwd.type = 'text';
-            this.textContent = 'Hide';
-        } else {
-            pwd.type = 'password';
-            this.textContent = 'Show';
-        }
-    });
-
-    // Show/hide password for employer sign up
-    document.getElementById('toggle-employer-password')?.addEventListener('click', function() {
-        const pwd = document.getElementById('employer-password');
-        if (pwd.type === 'password') {
-            pwd.type = 'text';
-            this.textContent = 'Hide';
-        } else {
-            pwd.type = 'password';
-            this.textContent = 'Show';
-        }
-    });
-
-    document.getElementById('toggle-employer-confirm-password')?.addEventListener('click', function() {
-        const pwd = document.getElementById('employer-confirm-password');
-        if (pwd.type === 'password') {
-            pwd.type = 'text';
-            this.textContent = 'Hide';
-        } else {
-            pwd.type = 'password';
-            this.textContent = 'Show';
-        }
-    });
-
-});
-
-function isValidPassword(password) {
-    // Minimum 8 characters, at least one uppercase, one lowercase, one number, one special character
-    return /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/.test(password);
-}
-
-// Confirm password validation for user
-document.getElementById('user-signup-form').addEventListener('submit', function(e) {
-    const password = document.getElementById('user-password').value;
-    const confirm = document.getElementById('user-confirm-password').value;
-    if (password !== confirm) {
-        e.preventDefault();
-        alert('Passwords do not match.');
-        return false;
-    }
-    if (!isValidPassword(password)) {
-        e.preventDefault();
-        alert('Password must be at least 8 characters and include uppercase, lowercase, number, and special character.');
-        return false;
-    }
-});
-
-// Confirm password validation for employer
-document.getElementById('employer-signup-form').addEventListener('submit', function(e) {
-    const password = document.getElementById('employer-password').value;
-    const confirm = document.getElementById('employer-confirm-password').value;
-    if (password !== confirm) {
-        e.preventDefault();
-        alert('Passwords do not match.');
-        return false;
-    }
-    if (!isValidPassword(password)) {
-        e.preventDefault();
-        alert('Password must be at least 8 characters and include uppercase, lowercase, number, and special character.');
-        return false;
+    try {
+        await sendPasswordResetEmail(auth, email);
+        alert('Password reset email sent! Please check your inbox.');
+    } catch (error) {
+        alert('Error sending password reset email: ' + error.message);
     }
 });
