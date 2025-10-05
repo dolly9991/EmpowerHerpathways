@@ -8,10 +8,10 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">      
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="icon" type="image/jpg" href="images/logo.jpg">
     <link rel="stylesheet" href="styles.css">
     <style>
@@ -1290,12 +1290,371 @@
             </div>
         </div>
     </footer>
+    <!-- JavaScript for responsiveness, tabs, and chart -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile menu functionality
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+            // Hide mobile menu when a link is clicked
+            mobileMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                });
+            });
 
-<script type="module" src="src/main.js"></script> 
+            // Solutions Tabbed Interface
+            const tabButtons = document.querySelectorAll('.tab-button');
+            const tabContents = document.querySelectorAll('.tab-content');
 
-<script src="scripts.js"></script> 
+            tabButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    tabButtons.forEach(btn => {
+                        btn.classList.remove('active-tab');
+                        btn.classList.add('inactive-tab');
+                    });
+                    button.classList.remove('inactive-tab');
+                    button.classList.add('active-tab');
+
+                    tabContents.forEach(content => content.classList.add('hidden'));
+
+                    const tabIndex = Array.from(tabButtons).indexOf(button) + 1;
+                    const contentToShow = document.getElementById(`content-${tabIndex}`);
+                    contentToShow.classList.remove('hidden');
+                });
+            });
+
+            // Chart.js initialization
+            const ctx = document.getElementById('impactChart').getContext('2d');
+            const impactChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['For Women', 'For Employers', 'For Society'],
+                    datasets: [{
+                        label: 'Positive Impact',
+                        data: [100, 80, 95], // Placeholder data
+                        backgroundColor: [
+                            'rgba(126, 34, 206, 0.6)', // purple-600 with opacity
+                            'rgba(126, 34, 206, 0.6)', // purple-600 with opacity
+                            'rgba(126, 34, 206, 0.6)' // purple-600 with opacity
+                        ],
+                        borderColor: [
+                            'rgb(126, 34, 206)',
+                            'rgb(126, 34, 206)',
+                            'rgb(126, 34, 206)'
+                        ],
+                        borderWidth: 1,
+                        borderRadius: 10,
+                        barPercentage: 0.6,
+                        categoryPercentage: 0.7
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    let label = '';
+                                    if (context.label === 'For Women') {
+                                        label = 'Increased confidence, faster job search, higher success rates.';
+                                    } else if (context.label === 'For Employers') {
+                                        label = 'Access to diverse talent, enhanced DEI, higher retention.';
+                                    } else if (context.label === 'For Society') {
+                                        label = 'Closes gender pay gap, boosts economic empowerment.';
+                                    }
+                                    return label.split(', ');
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            beginAtZero: true,
+                            grid: { display: false },
+                            ticks: { display: false }
+                        },
+                        y: {
+                            grid: { display: false },
+                            ticks: { font: { size: 14 } }
+                        }
+                    }
+                }
+            });
+        });
+
+        // Modal functionality
+        const signupModalUser = document.getElementById('signup-modal-user');
+        const signupModalEmployer = document.getElementById('signup-modal-employer');
+        const joinUserBtn = document.getElementById('join-user-btn');
+        const joinEmployerBtn = document.getElementById('join-employer-btn');
+        
+        // Open correct modal
+        joinUserBtn.addEventListener('click', () => {
+            signupModalUser.classList.remove('hidden');
+        });
+        joinEmployerBtn.addEventListener('click', () => {
+            signupModalEmployer.classList.remove('hidden');
+        });
+        
+        // Close modals
+        document.querySelectorAll('.modal-close-button').forEach(btn => {
+            btn.addEventListener('click', () => {
+                signupModalUser.classList.add('hidden');
+                signupModalEmployer.classList.add('hidden');
+            });
+        });
+        
+        // Optional: close modal when clicking outside the modal container
+        signupModalUser.addEventListener('click', (e) => {
+            if (e.target === signupModalUser) {
+                signupModalUser.classList.add('hidden');
+            }
+        });
+        signupModalEmployer.addEventListener('click', (e) => {
+            if (e.target === signupModalEmployer) {
+                signupModalEmployer.classList.add('hidden');
+            }
+        });
+
+    </script>
+    
+    <!-- Firebase SDKs -->
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-analytics.js";
+        import { getAuth, signInWithPopup, GoogleAuthProvider, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+        import { getFirestore, setDoc, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+            authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
+            projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+            storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
+            messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+            appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
+            measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID
+          };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        const auth = getAuth(app);
+        const provider = new GoogleAuthProvider();
+        const db = getFirestore(app);
+
+        document.getElementById('google-signup-user').addEventListener('click', async () => {
+            try {
+                const result = await signInWithPopup(auth, provider);
+                alert(`Signed up as: ${result.user.displayName}`);
+                signupModalUser.classList.add('hidden');
+                // After Google sign-in in user modal
+                window.location.href = 'dashboard-user.html';
+            } catch (error) {
+                alert('Google sign-in failed.');
+            }
+        });
+
+        document.getElementById('google-signup-employer').addEventListener('click', async () => {
+            try {
+                const result = await signInWithPopup(auth, provider);
+                alert(`Signed up as: ${result.user.displayName}`);
+                signupModalEmployer.classList.add('hidden');
+                // After Google sign-in in employer modal
+                window.location.href = 'dashboard-employer.html';
+            } catch (error) {
+                alert('Google sign-in failed.');
+            }
+        });
+
+                // User form sign up
+        document.getElementById('user-signup-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const email = document.getElementById('user-email').value;
+            const password = document.getElementById('user-password').value;
+            try {
+                const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+                // Save role to Firestore
+                await setDoc(doc(db, "users", userCredential.user.uid), {
+                    role: "user",
+                    name: document.getElementById('user-name').value,
+                    email: email
+                });
+                window.location.href = 'dashboard-user.html';
+            } catch (error) {
+                alert('Sign up failed: ' + error.message);
+            }
+        });
+
+        // Employer form sign up
+        document.getElementById('employer-signup-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const email = document.getElementById('employer-email').value;
+            const password = document.getElementById('employer-password').value;
+            try {
+                const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+                // Save role to Firestore
+                await setDoc(doc(db, "users", userCredential.user.uid), {
+                    role: "employer",
+                    name: document.getElementById('employer-name').value,
+                    email: email
+                });
+                window.location.href = 'dashboard-employer.html';
+            } catch (error) {
+                alert('Sign up failed: ' + error.message);
+            }
+        });
+
+        const signinModal = document.getElementById('signin-modal');
+        const closeSigninModal = document.getElementById('close-signin-modal');
+
+        // Open sign in modal from either sign up modal
+        document.getElementById('open-signin-user').addEventListener('click', () => {
+            signinModal.classList.remove('hidden');
+        });
+        document.getElementById('open-signin-employer').addEventListener('click', () => {
+            signinModal.classList.remove('hidden');
+        });
+
+        // Close sign in modal
+        closeSigninModal.addEventListener('click', () => {
+            signinModal.classList.add('hidden');
+        });
+        signinModal.addEventListener('click', (e) => {
+            if (e.target === signinModal) {
+                signinModal.classList.add('hidden');
+            }
+        });
+
+        // Handle sign in
+        document.getElementById('signin-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const email = document.getElementById('signin-email').value;
+            const password = document.getElementById('signin-password').value;
+            try {
+                const userCredential = await signInWithEmailAndPassword(auth, email, password);
+                // Get user role from Firestore
+                const userDoc = await getDoc(doc(db, "users", userCredential.user.uid));
+                if (userDoc.exists()) {
+                    const role = userDoc.data().role;
+                    if (role === "user") {
+                        window.location.href = 'dashboard-user.html';
+                    } else if (role === "employer") {
+                        window.location.href = 'dashboard-employer.html';
+                    } else {
+                        alert('User role not set.');
+                    }
+                } else {
+                    alert('User profile not found.');
+                }
+            } catch (error) {
+                alert('Sign in failed: ' + error.message);
+            }
+        });
+
+        document.getElementById('forgot-password-btn').addEventListener('click', async function() {
+          const email = document.getElementById('signin-email').value;
+          if (!email) {
+              alert('Please enter your email address above first.');
+              return;
+          }
+          try {
+              await sendPasswordResetEmail(auth, email);
+              alert('Password reset email sent! Please check your inbox.');
+          } catch (error) {
+              alert('Error sending password reset email: ' + error.message);
+          }
+      });
+    </script>
+
+    <script>
+        // Show/hide password for user sign up
+    document.getElementById('toggle-user-password').addEventListener('click', function() {
+        const pwd = document.getElementById('user-password');
+        if (pwd.type === 'password') {
+            pwd.type = 'text';
+            this.textContent = 'Hide';
+        } else {
+            pwd.type = 'password';
+            this.textContent = 'Show';
+        }
+    });
+    document.getElementById('toggle-user-confirm-password').addEventListener('click', function() {
+        const pwd = document.getElementById('user-confirm-password');
+        if (pwd.type === 'password') {
+            pwd.type = 'text';
+            this.textContent = 'Hide';
+        } else {
+            pwd.type = 'password';
+            this.textContent = 'Show';
+        }
+    });
+    // Show/hide password for employer sign up
+    document.getElementById('toggle-employer-password').addEventListener('click', function() {
+        const pwd = document.getElementById('employer-password');
+        if (pwd.type === 'password') {
+            pwd.type = 'text';
+            this.textContent = 'Hide';
+        } else {
+            pwd.type = 'password';
+            this.textContent = 'Show';
+        }
+    });
+    document.getElementById('toggle-employer-confirm-password').addEventListener('click', function() {
+        const pwd = document.getElementById('employer-confirm-password');
+        if (pwd.type === 'password') {
+            pwd.type = 'text';
+            this.textContent = 'Hide';
+        } else {
+            pwd.type = 'password';
+            this.textContent = 'Show';
+        }
+    });
+    function isValidPassword(password) {
+        // Minimum 8 characters, at least one uppercase, one lowercase, one number, one special character
+        return /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/.test(password);
+    }
+
+    // Confirm password validation for user
+    document.getElementById('user-signup-form').addEventListener('submit', function(e) {
+        const password = document.getElementById('user-password').value;
+        const confirm = document.getElementById('user-confirm-password').value;
+        if (password !== confirm) {
+            e.preventDefault();
+            alert('Passwords do not match.');
+            return false;
+        }
+        if (!isValidPassword(password)) {
+            e.preventDefault();
+            alert('Password must be at least 8 characters and include uppercase, lowercase, number, and special character.');
+            return false;
+        }
+    });
+
+    // Confirm password validation for employer
+    document.getElementById('employer-signup-form').addEventListener('submit', function(e) {
+        const password = document.getElementById('employer-password').value;
+        const confirm = document.getElementById('employer-confirm-password').value;
+        if (password !== confirm) {
+            e.preventDefault();
+            alert('Passwords do not match.');
+            return false;
+        }
+        if (!isValidPassword(password)) {
+            e.preventDefault();
+            alert('Password must be at least 8 characters and include uppercase, lowercase, number, and special character.');
+            return false;
+        }
+    });
+    </script>
 
 </body>
 </html>
