@@ -1,89 +1,708 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Welcome to Firebase Hosting</title>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EmpowerHer Pathways - Redefining Career Re-Entry</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Removed chart.js as it is not currently used -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" type="image/jpg" href="images/logo.jpg">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-    <!-- update the version number as needed -->
-    <script defer src="/__/firebase/12.3.0/firebase-app-compat.js"></script>
-    <!-- include only the Firebase features as you need -->
-    <script defer src="/__/firebase/12.3.0/firebase-auth-compat.js"></script>
-    <script defer src="/__/firebase/12.3.0/firebase-database-compat.js"></script>
-    <script defer src="/__/firebase/12.3.0/firebase-firestore-compat.js"></script>
-    <script defer src="/__/firebase/12.3.0/firebase-functions-compat.js"></script>
-    <script defer src="/__/firebase/12.3.0/firebase-messaging-compat.js"></script>
-    <script defer src="/__/firebase/12.3.0/firebase-storage-compat.js"></script>
-    <script defer src="/__/firebase/12.3.0/firebase-analytics-compat.js"></script>
-    <script defer src="/__/firebase/12.3.0/firebase-remote-config-compat.js"></script>
-    <script defer src="/__/firebase/12.3.0/firebase-performance-compat.js"></script>
-    <!-- 
-      initialize the SDK after all desired features are loaded, set useEmulator to false
-      to avoid connecting the SDK to running emulators.
-    -->
-    <script defer src="/__/firebase/init.js?useEmulator=true"></script>
-
-    <style media="screen">
-      body { background: #ECEFF1; color: rgba(0,0,0,0.87); font-family: Roboto, Helvetica, Arial, sans-serif; margin: 0; padding: 0; }
-      #message { background: white; max-width: 360px; margin: 100px auto 16px; padding: 32px 24px; border-radius: 3px; }
-      #message h2 { color: #ffa100; font-weight: bold; font-size: 16px; margin: 0 0 8px; }
-      #message h1 { font-size: 22px; font-weight: 300; color: rgba(0,0,0,0.6); margin: 0 0 16px;}
-      #message p { line-height: 140%; margin: 16px 0 24px; font-size: 14px; }
-      #message a { display: block; text-align: center; background: #039be5; text-transform: uppercase; text-decoration: none; color: white; padding: 16px; border-radius: 4px; }
-      #message, #message a { box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); }
-      #load { color: rgba(0,0,0,0.4); text-align: center; font-size: 13px; }
-      @media (max-width: 600px) {
-        body, #message { margin-top: 0; background: white; box-shadow: none; }
-        body { border-top: 16px solid #ffa100; }
-      }
-    </style>
-  </head>
-  <body>
-    <div id="message">
-      <h2>Welcome</h2>
-      <h1>Firebase Hosting Setup Complete</h1>
-      <p>You're seeing this because you've successfully setup Firebase Hosting. Now it's time to go build something extraordinary!</p>
-      <a target="_blank" href="https://firebase.google.com/docs/hosting/">Open Hosting Documentation</a>
-    </div>
-    <p id="load">Firebase SDK Loading&hellip;</p>
-
+    <!-- Tailwind Config for Inter Font and Rounded Corners -->
     <script>
-      document.addEventListener('DOMContentLoaded', function() {
-        const loadEl = document.querySelector('#load');
-        // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
-        // // The Firebase SDK is initialized and available here!
-        //
-        // firebase.auth().onAuthStateChanged(user => { });
-        // firebase.database().ref('/path/to/ref').on('value', snapshot => { });
-        // firebase.firestore().doc('/foo/bar').get().then(() => { });
-        // firebase.functions().httpsCallable('yourFunction')().then(() => { });
-        // firebase.messaging().requestPermission().then(() => { });
-        // firebase.storage().ref('/path/to/ref').getDownloadURL().then(() => { });
-        // firebase.analytics(); // call to activate
-        // firebase.analytics().logEvent('tutorial_completed');
-        // firebase.performance(); // call to activate
-        //
-        // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
-
-        try {
-          let app = firebase.app();
-          let features = [
-            'auth', 
-            'database', 
-            'firestore',
-            'functions',
-            'messaging', 
-            'storage', 
-            'analytics', 
-            'remoteConfig',
-            'performance',
-          ].filter(feature => typeof app[feature] === 'function');
-          loadEl.textContent = `Firebase SDK loaded with ${features.join(', ')}`;
-        } catch (e) {
-          console.error(e);
-          loadEl.textContent = 'Error loading the Firebase SDK, check the console.';
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        montserrat: ['Montserrat', 'sans-serif'],
+                        poppins: ['Poppins', 'sans-serif']
+                    },
+                    colors: {
+                        'primary-blue': '#1e3a8a', // Darker Blue
+                        'secondary-pink': '#ec4899', // Bright Pink
+                        'bg-light': '#f9fafb',
+                    },
+                    borderRadius: {
+                        'xl': '1rem',
+                    }
+                }
+            }
         }
-      });
     </script>
-  </body>
+    <style>
+        /* Custom styles to ensure full-screen modal-like overlay */
+        #auth-overlay {
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 1000; /* High z-index to cover everything */
+            transition: opacity 0.3s ease;
+        }
+
+        /* Hide forms initially */
+        #signup-form, #signin-form, #user-info {
+            display: none;
+        }
+
+        /* Tabs styling */
+        .tab-btn {
+            cursor: pointer;
+            padding: 0.75rem 1.5rem;
+            font-weight: 500;
+            border-bottom: 3px solid transparent;
+            transition: border-color 0.15s ease;
+        }
+        .tab-btn.active {
+            border-color: #1e3a8a;
+            color: #1e3a8a;
+        }
+        
+        /* Custom Bouncing Button Effect */
+        .bouncy-button {
+            transition: transform 0.1s ease-in-out, box-shadow 0.1s ease-in-out;
+        }
+        .bouncy-button:active {
+            transform: translateY(2px) scale(0.98);
+            box-shadow: none;
+        }
+    </style>
+</head>
+<body class="font-sans antialiased text-gray-800">
+
+    <!-- AUTHENTICATION OVERLAY (Modal-like structure) -->
+    <div id="auth-overlay" class="fixed inset-0 flex items-center justify-center opacity-0 pointer-events-none">
+        <div class="bg-white rounded-xl shadow-2xl p-6 w-full max-w-sm mx-4 transform transition-transform duration-300 ease-out scale-95">
+            
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-2xl font-bold text-primary-blue">Authentication</h2>
+                <button id="close-auth-btn" class="text-gray-500 hover:text-gray-900 transition-colors">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+            
+            <!-- Message Display -->
+            <div id="auth-message" class="mb-4 p-3 rounded-lg text-sm hidden"></div>
+
+            <!-- Tabs -->
+            <div id="auth-tabs" class="flex border-b border-gray-200 mb-6">
+                <div id="tab-signin" class="tab-btn active" data-form="signin-form">Sign In</div>
+                <div id="tab-signup" class="tab-btn" data-form="signup-form">Sign Up</div>
+            </div>
+
+            <!-- Sign In Form -->
+            <form id="signin-form" class="space-y-4">
+                <input type="email" id="signin-email" placeholder="Email" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-secondary-pink focus:border-secondary-pink transition">
+                <input type="password" id="signin-password" placeholder="Password" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-secondary-pink focus:border-secondary-pink transition">
+                <button type="submit" class="w-full bg-primary-blue text-white py-3 rounded-lg font-semibold hover:bg-opacity-90 transition duration-150 shadow-md">
+                    Sign In
+                </button>
+            </form>
+
+            <!-- Sign Up Form -->
+            <form id="signup-form" class="space-y-4">
+                <input type="email" id="signup-email" placeholder="Email" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-secondary-pink focus:border-secondary-pink transition">
+                <input type="password" id="signup-password" placeholder="Password (min 6 characters)" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-secondary-pink focus:border-secondary-pink transition">
+                <button type="submit" class="w-full bg-secondary-pink text-white py-3 rounded-lg font-semibold hover:bg-opacity-90 transition duration-150 shadow-md">
+                    Sign Up
+                </button>
+            </form>
+
+            <!-- User Info (Logged In) -->
+            <div id="user-info" class="text-center space-y-4">
+                <div class="p-4 bg-bg-light rounded-lg">
+                    <p class="text-gray-600 mb-1">Logged in as:</p>
+                    <p id="user-email-display" class="font-bold text-primary-blue break-all"></p>
+                </div>
+                <button id="signout-btn" class="w-full bg-red-600 text-white py-3 rounded-lg font-semibold hover:bg-red-700 transition duration-150 shadow-md">
+                    Sign Out
+                </button>
+            </div>
+
+        </div>
+    </div>
+    <!-- END AUTHENTICATION OVERLAY -->
+
+
+    <!-- Navigation Header -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <nav class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <a href="#" class="flex items-center space-x-2">
+                <img src="images/logo.jpg" alt="EmpowerHer Logo" class="w-10 h-10 rounded-full">
+                <span class="text-xl font-bold font-montserrat text-gray-900">EmpowerHer Pathways</span>
+            </a>
+            <div class="hidden md:flex space-x-6 items-center">
+                <a href="#home" class="text-gray-600 hover:text-primary-blue transition">Home</a>
+                <a href="#about" class="text-gray-600 hover:text-primary-blue transition">About</a>
+                <a href="#seminars" class="text-gray-600 hover:text-primary-blue transition">Seminars</a>
+                <a href="#faq" class="text-gray-600 hover:text-primary-blue transition">FAQ</a>
+                <a href="#programs" class="text-gray-600 hover:text-primary-blue transition">Pricing</a>
+                <a href="#contact" class="text-gray-600 hover:text-primary-blue transition">Contact</a>
+                <!-- START: FIX APPLIED HERE - Added icon, updated classes, and wrapped text in a span for cleaner JS updates -->
+                <button id="auth-button" class="bg-secondary-pink text-white px-5 py-2.5 rounded-xl font-semibold text-sm hover:bg-opacity-90 transition shadow-lg flex items-center space-x-2 bouncy-button">
+                    <i class="fas fa-user-circle"></i>
+                    <span>Sign In / Profile</span>
+                </button>
+                <!-- END: FIX APPLIED HERE -->
+            </div>
+            <button id="mobile-menu-btn" class="md:hidden text-2xl text-primary-blue">
+                <i class="fas fa-bars"></i>
+            </button>
+        </nav>
+        <!-- Mobile Menu (Hidden by default) -->
+        <div id="mobile-menu" class="md:hidden absolute w-full bg-white shadow-lg p-4 transition-transform duration-300 transform -translate-y-full">
+            <div class="flex flex-col space-y-4">
+                <a href="#home" class="text-gray-600 hover:text-primary-blue transition">Home</a>
+                <a href="#about" class="text-gray-600 hover:text-primary-blue transition">About</a>
+                <a href="#seminars" class="text-gray-600 hover:text-primary-blue transition">Seminars</a>
+                <a href="#faq" class="text-gray-600 hover:text-primary-blue transition">FAQ</a>
+                <a href="#programs" class="text-gray-600 hover:text-primary-blue transition">Pricing</a>
+                <a href="#contact" class="text-gray-600 hover:text-primary-blue transition">Contact</a>
+                <!-- Minor adjustment: added py-1 for better visual separation in the list -->
+                <a href="#" id="auth-link-mobile" class="text-gray-600 hover:text-primary-blue transition font-semibold py-1">
+                    Login
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="bg-bg-light pt-20 pb-12 md:py-32">
+        <div class="container mx-auto px-4 flex flex-col md:flex-row items-center justify-between">
+            <div class="md:w-1/2 mb-8 md:mb-0">
+                <h1 class="text-5xl md:text-6xl font-extrabold text-gray-900 mb-4 leading-tight font-poppins">
+                    Re-Enter Your Career With <span class="text-secondary-pink">Confidence</span>
+                </h1>
+                <p class="text-xl text-gray-600 mb-8 max-w-lg">
+                    Specialized pathways and mentorship for women returning to the professional world after a career break.
+                </p>
+                <a href="#programs" class="inline-block bg-primary-blue text-white text-lg font-semibold px-8 py-3 rounded-xl hover:bg-opacity-90 transition duration-300 shadow-xl transform hover:scale-105">
+                    Explore Programs
+                </a>
+            </div>
+            <!-- UPDATED: Added max-w-lg to the image and flex justify-center to the container for better visual containment -->
+            <div class="md:w-1/2 flex justify-center">
+                <img src="https://placehold.co/600x400/1e3a8a/ffffff?text=EmpowerHer+Pathways" alt="Professional woman working on laptop" class="rounded-xl shadow-2xl object-cover w-full h-auto max-w-lg">
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-16 md:py-24 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center text-primary-blue mb-12 font-poppins">Our Mission</h2>
+            <div class="flex flex-col md:flex-row gap-8">
+                <div class="md:w-1/3 p-6 bg-bg-light rounded-xl shadow-lg hover:shadow-xl transition duration-300">
+                    <i class="fas fa-handshake text-4xl text-secondary-pink mb-4"></i>
+                    <h3 class="text-2xl font-semibold mb-3 text-gray-900">Mentorship</h3>
+                    <p class="text-gray-600">Connect with industry leaders who have successfully navigated career breaks.</p>
+                </div>
+                <div class="md:w-1/3 p-6 bg-bg-light rounded-xl shadow-lg hover:shadow-xl transition duration-300">
+                    <i class="fas fa-chalkboard-teacher text-4xl text-secondary-pink mb-4"></i>
+                    <h3 class="text-2xl font-semibold mb-3 text-gray-900">Skill Refresh</h3>
+                    <p class="text-gray-600">Up-to-date courses on the latest technologies and workplace best practices.</p>
+                </div>
+                <div class="md:w-1/3 p-6 bg-bg-light rounded-xl shadow-lg hover:shadow-xl transition duration-300">
+                    <i class="fas fa-briefcase text-4xl text-secondary-pink mb-4"></i>
+                    <h3 class="text-2xl font-semibold mb-3 text-gray-900">Job Placement</h3>
+                    <p class="text-gray-600">Direct partnerships with companies committed to return-to-work programs.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seminars Section -->
+    <section id="seminars" class="py-16 md:py-24 bg-bg-light">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center text-primary-blue mb-12 font-poppins">Upcoming Webinars & Seminars</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Seminar Card 1 -->
+                <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition duration-300">
+                    <i class="fas fa-calendar-alt text-secondary-pink text-3xl mb-4"></i>
+                    <h3 class="text-xl font-semibold mb-2 text-gray-900">The Modern Resume: AI Proofing</h3>
+                    <p class="text-gray-600 text-sm mb-4">Date: July 20th | Time: 10:00 AM EST</p>
+                    <p class="text-gray-700 mb-4">Learn how to optimize your resume and LinkedIn profile for modern applicant tracking systems.</p>
+                    <button class="w-full bg-secondary-pink text-white py-2 rounded-lg text-sm font-semibold hover:bg-opacity-80 transition">
+                        Register Now
+                    </button>
+                </div>
+                <!-- Seminar Card 2 -->
+                <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition duration-300">
+                    <i class="fas fa-microphone text-secondary-pink text-3xl mb-4"></i>
+                    <h3 class="text-xl font-semibold mb-2 text-gray-900">Interview Confidence Workshop</h3>
+                    <p class="text-gray-600 text-sm mb-4">Date: July 27th | Time: 2:00 PM EST</p>
+                    <p class="text-gray-700 mb-4">Techniques for handling tough interview questions and showcasing your transferable skills.</p>
+                    <button class="w-full bg-secondary-pink text-white py-2 rounded-lg text-sm font-semibold hover:bg-opacity-80 transition">
+                        Register Now
+                    </button>
+                </div>
+                <!-- Seminar Card 3 -->
+                <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition duration-300">
+                    <i class="fas fa-network-wired text-secondary-pink text-3xl mb-4"></i>
+                    <h3 class="text-xl font-semibold mb-2 text-gray-900">Digital Networking in 2024</h3>
+                    <p class="text-gray-600 text-sm mb-4">Date: August 3rd | Time: 1:00 PM EST</p>
+                    <p class="text-gray-700 mb-4">Strategies for building professional connections online without feeling awkward or intrusive.</p>
+                    <button class="w-full bg-primary-blue text-white py-2 rounded-lg text-sm font-semibold hover:bg-opacity-90 transition">
+                        View Past Sessions
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="py-16 md:py-24 bg-white">
+        <div class="container mx-auto px-4 max-w-4xl">
+            <h2 class="text-4xl font-bold text-center text-primary-blue mb-12 font-poppins">Frequently Asked Questions</h2>
+            <div class="space-y-4">
+                <!-- FAQ 1 -->
+                <details class="bg-bg-light p-5 rounded-xl shadow-md transition duration-300 open:bg-primary-blue open:text-white">
+                    <summary class="font-semibold text-lg cursor-pointer flex justify-between items-center text-gray-900 open:text-white transition duration-300">
+                        Is this program only for a specific industry?
+                        <i class="fas fa-chevron-down text-secondary-pink open:text-white"></i>
+                    </summary>
+                    <p class="mt-3 pt-3 border-t border-gray-300 text-gray-700 open:text-white">
+                        No, EmpowerHer Pathways is designed to be industry-agnostic. While we offer specialized courses, our core mentorship and career re-entry strategies are applicable to tech, finance, creative fields, and more.
+                    </p>
+                </details>
+
+                <!-- FAQ 2 -->
+                <details class="bg-bg-light p-5 rounded-xl shadow-md transition duration-300 open:bg-primary-blue open:text-white">
+                    <summary class="font-semibold text-lg cursor-pointer flex justify-between items-center text-gray-900">
+                        How long is the minimum career break required?
+                        <i class="fas fa-chevron-down text-secondary-pink"></i>
+                    </summary>
+                    <p class="mt-3 pt-3 border-t border-gray-300 text-gray-700">
+                        There is no minimum length. Our program is suitable for women who took a short sabbatical (6 months) or a longer break (several years). We focus on skill transfer and bridging the time gap.
+                    </p>
+                </details>
+
+                <!-- FAQ 3 -->
+                <details class="bg-bg-light p-5 rounded-xl shadow-md transition duration-300 open:bg-primary-blue open:text-white">
+                    <summary class="font-semibold text-lg cursor-pointer flex justify-between items-center text-gray-900">
+                        What is the difference between the Monthly and Annual plans?
+                        <i class="fas fa-chevron-down text-secondary-pink"></i>
+                    </summary>
+                    <p class="mt-3 pt-3 border-t border-gray-300 text-gray-700">
+                        The Monthly plan offers comprehensive support including one coaching session. The Annual plan provides significant savings, more coaching sessions, a dedicated mentor match, and deeper access to advanced resources.
+                    </p>
+                </details>
+            </div>
+        </div>
+    </section>
+
+    <!-- Programs/Pricing Section -->
+    <section id="programs" class="py-16 md:py-24 bg-primary-blue text-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center mb-16 font-poppins">Choose Your Pathway Subscription</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                
+                <!-- 1. Weekly Plan -->
+                <div class="relative bg-white text-gray-800 p-8 rounded-xl shadow-xl hover:shadow-2xl transition duration-300 transform hover:-translate-y-1 flex flex-col justify-between">
+                    <div class="text-center mb-6">
+                        <h3 class="text-2xl font-bold text-primary-blue mb-1">Weekly</h3>
+                        <p class="text-gray-500 text-sm">Trial access to core features</p>
+                        <div class="mt-4">
+                            <span class="text-4xl font-extrabold text-primary-blue">P150</span>
+                            <span class="text-gray-500">/week</span>
+                        </div>
+                    </div>
+                    
+                    <ul class="list-none space-y-3 mb-8">
+                        <li class="flex items-start"><i class="fas fa-check text-secondary-pink mr-3 mt-1"></i> Basic Job Match Algorithm</li>
+                        <li class="flex items-start"><i class="fas fa-check text-secondary-pink mr-3 mt-1"></i> Access to all recorded seminars</li>
+                        <li class="flex items-start"><i class="fas fa-check text-secondary-pink mr-3 mt-1"></i> 10% discount on advanced courses</li>
+                        <li class="flex items-start text-gray-400"><i class="fas fa-times mr-3 mt-1"></i> Career coaching sessions</li>
+                        <li class="flex items-start text-gray-400"><i class="fas fa-times mr-3 mt-1"></i> Resume review and feedback</li>
+                    </ul>
+                    
+                    <button class="w-full bg-primary-blue text-white text-lg font-semibold py-3 rounded-lg hover:bg-opacity-90 transition duration-150 shadow-md bouncy-button apply-btn">
+                        Start Weekly
+                    </button>
+                </div>
+
+                <!-- 2. Monthly Plan (Most Popular) -->
+                <div class="relative bg-white text-gray-800 p-8 rounded-xl shadow-2xl transition duration-300 transform hover:scale-[1.02] border-4 border-secondary-pink flex flex-col justify-between">
+                    
+                    <!-- Badge -->
+                    <span class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 px-4 py-1 text-sm font-bold text-white bg-secondary-pink rounded-full shadow-lg">Most Popular</span>
+
+                    <div class="text-center mb-6 pt-4">
+                        <h3 class="text-2xl font-bold text-primary-blue mb-1">Monthly</h3>
+                        <p class="text-gray-500 text-sm">Comprehensive career support</p>
+                        <div class="mt-4">
+                            <span class="text-5xl font-extrabold text-primary-blue">P400</span>
+                            <span class="text-gray-500">/month</span>
+                        </div>
+                    </div>
+                    
+                    <ul class="list-none space-y-3 mb-8">
+                        <li class="flex items-start"><i class="fas fa-check text-secondary-pink mr-3 mt-1"></i> All Weekly features</li>
+                        <li class="flex items-start"><i class="fas fa-check text-secondary-pink mr-3 mt-1"></i> **Priority job applications**</li>
+                        <li class="flex items-start"><i class="fas fa-check text-secondary-pink mr-3 mt-1"></i> Full forum access</li>
+                        <li class="flex items-start"><i class="fas fa-check text-secondary-pink mr-3 mt-1"></i> 15% discount on courses</li>
+                        <li class="flex items-start"><i class="fas fa-check text-secondary-pink mr-3 mt-1"></i> **1 career coaching session/month**</li>
+                        <li class="flex items-start"><i class="fas fa-check text-secondary-pink mr-3 mt-1"></i> Resume review and feedback</li>
+                        <li class="flex items-start"><i class="fas fa-check text-secondary-pink mr-3 mt-1"></i> Access to exclusive webinars</li>
+                    </ul>
+                    
+                    <button class="w-full bg-primary-blue text-white text-lg font-semibold py-3 rounded-lg hover:bg-opacity-90 transition duration-150 shadow-md bouncy-button apply-btn">
+                        Start Monthly
+                    </button>
+                </div>
+
+                <!-- 3. Annual Plan -->
+                <div class="relative bg-white text-gray-800 p-8 rounded-xl shadow-xl hover:shadow-2xl transition duration-300 transform hover:-translate-y-1 flex flex-col justify-between">
+                    <div class="text-center mb-6">
+                        <h3 class="text-2xl font-bold text-primary-blue mb-1">Annual</h3>
+                        <p class="text-gray-500 text-sm">The best value for committed users</p>
+                        <div class="mt-4">
+                            <span class="text-4xl font-extrabold text-primary-blue">P3,900</span>
+                            <span class="text-gray-500">/year</span>
+                        </div>
+                    </div>
+
+                    <ul class="list-none space-y-3 mb-8">
+                        <li class="flex items-start"><i class="fas fa-check text-secondary-pink mr-3 mt-1"></i> All Monthly features</li>
+                        <li class="flex items-start"><i class="fas fa-check text-secondary-pink mr-3 mt-1"></i> **Dedicated Mentor Match**</li>
+                        <li class="flex items-start"><i class="fas fa-check text-secondary-pink mr-3 mt-1"></i> 25% discount on courses</li>
+                        <li class="flex items-start"><i class="fas fa-check text-secondary-pink mr-3 mt-1"></i> **3 career coaching sessions/quarter**</li>
+                        <li class="flex items-start"><i class="fas fa-check text-secondary-pink mr-3 mt-1"></i> Advanced networking events</li>
+                        <li class="flex items-start"><i class="fas fa-check text-secondary-pink mr-3 mt-1"></i> Personalized job hunting plan</li>
+                    </ul>
+                    
+                    <button class="w-full bg-secondary-pink text-white text-lg font-semibold py-3 rounded-lg hover:bg-opacity-90 transition duration-150 shadow-md bouncy-button apply-btn">
+                        Start Annual
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Application Form (Simulated) -->
+    <section id="application" class="py-16 md:py-24 bg-bg-light">
+        <div class="container mx-auto px-4 max-w-3xl">
+            <h2 class="text-4xl font-bold text-center text-primary-blue mb-12 font-poppins">Quick Application</h2>
+            <div class="bg-white p-8 rounded-xl shadow-xl">
+                <form class="apply-form space-y-4">
+                    <input type="text" placeholder="Full Name" required class="w-full p-3 border border-gray-300 rounded-lg">
+                    <input type="email" placeholder="Email Address" required class="w-full p-3 border border-gray-300 rounded-lg">
+                    <textarea placeholder="Briefly describe your career break and return goals (max 150 words)" rows="3" required class="w-full p-3 border border-gray-300 rounded-lg"></textarea>
+                    <button type="submit" class="w-full bg-secondary-pink text-white py-3 rounded-lg font-semibold hover:bg-opacity-90 transition duration-150 shadow-md">
+                        Submit Application
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact" class="bg-gray-900 text-white py-10">
+        <div class="container mx-auto px-4 text-center">
+            <div class="flex justify-center space-x-6 mb-4">
+                <a href="#" class="text-gray-400 hover:text-secondary-pink transition"><i class="fab fa-linkedin-in text-xl"></i></a>
+                <a href="#" class="text-gray-400 hover:text-secondary-pink transition"><i class="fab fa-twitter text-xl"></i></a>
+                <a href="#" class="text-gray-400 hover:text-secondary-pink transition"><i class="fab fa-facebook-f text-xl"></i></a>
+            </div>
+            <p class="text-gray-500 text-sm">&copy; 2024 EmpowerHer Pathways. All rights reserved.</p>
+        </div>
+    </footer>
+
+
+    <script type="module">
+        // Firebase Imports
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+        import { getFirestore } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+        import { setLogLevel } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+        // Global Firebase Variables
+        let app, db, auth;
+        let userId = null;
+
+        // UI Elements
+        const authOverlay = document.getElementById('auth-overlay');
+        const authButton = document.getElementById('auth-button'); // Desktop button
+        const authLinkMobile = document.getElementById('auth-link-mobile'); // Mobile text link (new ID)
+        const closeAuthBtn = document.getElementById('close-auth-btn');
+        const authMessage = document.getElementById('auth-message');
+        const userInfoDiv = document.getElementById('user-info');
+        const userEmailDisplay = document.getElementById('user-email-display');
+        const signoutBtn = document.getElementById('signout-btn');
+        const signupForm = document.getElementById('signup-form');
+        const signinForm = document.getElementById('signin-form');
+        const tabSignIn = document.getElementById('tab-signin');
+        const tabSignUp = document.getElementById('tab-signup');
+        const forms = {
+            'signin-form': signinForm,
+            'signup-form': signupForm,
+        };
+
+        // --- Utility Functions ---
+
+        /**
+         * Displays a message in the auth modal.
+         * @param {string} message The message content.
+         * @param {string} type 'success' or 'error'.
+         */
+        function displayAuthMessage(message, type) {
+            authMessage.textContent = message;
+            authMessage.className = 'mb-4 p-3 rounded-lg text-sm transition';
+            authMessage.classList.add('block');
+            if (type === 'error') {
+                authMessage.classList.add('bg-red-100', 'text-red-800');
+            } else if (type === 'success') {
+                authMessage.classList.add('bg-green-100', 'text-green-800');
+            }
+            // Clear message after 5 seconds
+            setTimeout(() => {
+                authMessage.classList.remove('block');
+                authMessage.classList.add('hidden');
+            }, 5000);
+        }
+
+        /**
+         * Toggles the visibility of the authentication overlay.
+         * @param {boolean} show Whether to show or hide the overlay.
+         */
+        function toggleAuthOverlay(show) {
+            if (show) {
+                authOverlay.classList.remove('opacity-0', 'pointer-events-none');
+                authOverlay.querySelector('div').classList.remove('scale-95');
+                authOverlay.querySelector('div').classList.add('scale-100');
+            } else {
+                authOverlay.classList.add('opacity-0', 'pointer-events-none');
+                authOverlay.querySelector('div').classList.add('scale-95');
+                authOverlay.querySelector('div').classList.remove('scale-100');
+                // Hide any existing message when closing
+                authMessage.classList.add('hidden');
+            }
+        }
+
+        /**
+         * Switches the active form/tab in the auth modal.
+         * @param {string} formId The ID of the form to show ('signin-form' or 'signup-form').
+         */
+        function switchForm(formId) {
+            Object.keys(forms).forEach(key => {
+                forms[key].style.display = 'none';
+                document.getElementById('tab-' + key.replace('-form', '')).classList.remove('active');
+            });
+            forms[formId].style.display = 'block';
+            document.getElementById('tab-' + formId.replace('-form', '')).classList.add('active');
+            // Hide user info if switching to a form
+            userInfoDiv.style.display = 'none';
+        }
+
+
+        // --- Firebase Initialization and Auth Logic ---
+
+        async function initFirebase() {
+            try {
+                // Set Firestore log level for debugging
+                setLogLevel('Debug');
+                
+                // Use global variables provided by the environment
+                const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {};
+                const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
+
+                if (Object.keys(firebaseConfig).length === 0) {
+                    throw new Error("Firebase configuration not found. Check if __firebase_config is defined.");
+                }
+
+                // 1. Initialize Firebase App
+                app = initializeApp(firebaseConfig);
+                auth = getAuth(app);
+                db = getFirestore(app);
+
+                // 2. Initial Authentication (Custom Token or Anonymous)
+                if (initialAuthToken) {
+                    await signInWithCustomToken(auth, initialAuthToken);
+                } else {
+                    await signInAnonymously(auth);
+                }
+
+                console.log("Firebase initialized successfully.");
+
+            } catch (error) {
+                console.error("Error initializing Firebase:", error);
+                // displayAuthMessage(`Firebase initialization failed: ${error.message}`, 'error');
+            }
+        }
+
+
+        // --- Authentication Handlers ---
+
+        /**
+         * Handles user sign up with email and password.
+         * @param {Event} e 
+         */
+        async function handleSignUp(e) {
+            e.preventDefault();
+            const email = document.getElementById('signup-email').value;
+            const password = document.getElementById('signup-password').value;
+
+            try {
+                await createUserWithEmailAndPassword(auth, email, password);
+                displayAuthMessage("Sign Up successful! You are now logged in.", 'success');
+                // onAuthStateChanged will handle UI update
+            } catch (error) {
+                console.error("Sign Up Error:", error);
+                displayAuthMessage(`Sign Up failed: ${error.message}`, 'error');
+            }
+        }
+
+        /**
+         * Handles user sign in with email and password.
+         * @param {Event} e 
+         */
+        async function handleSignIn(e) {
+            e.preventDefault();
+            const email = document.getElementById('signin-email').value;
+            const password = document.getElementById('signin-password').value;
+
+            try {
+                await signInWithEmailAndPassword(auth, email, password);
+                displayAuthMessage("Sign In successful!", 'success');
+                // onAuthStateChanged will handle UI update
+            } catch (error) {
+                console.error("Sign In Error:", error);
+                displayAuthMessage(`Sign In failed: ${error.message}`, 'error');
+            }
+        }
+
+        /**
+         * Handles user sign out.
+         */
+        async function handleSignOut() {
+            try {
+                await signOut(auth);
+                displayAuthMessage("You have been signed out.", 'success');
+                // onAuthStateChanged will handle UI update
+            } catch (error) {
+                console.error("Sign Out Error:", error);
+                displayAuthMessage(`Sign Out failed: ${error.message}`, 'error');
+            }
+        }
+
+
+        // --- Event Listeners and Main Setup ---
+
+        document.addEventListener('DOMContentLoaded', () => {
+            initFirebase();
+
+            // 3. Auth State Observer
+            onAuthStateChanged(auth, (user) => {
+                if (user) {
+                    // User is signed in.
+                    userId = user.uid;
+                    
+                    // Show Profile View in Auth Modal
+                    signinForm.style.display = 'none';
+                    signupForm.style.display = 'none';
+                    tabSignIn.style.display = 'none';
+                    tabSignUp.style.display = 'none';
+                    userInfoDiv.style.display = 'block';
+                    userEmailDisplay.textContent = user.email || "Anonymous User";
+
+                    // START: FIX APPLIED HERE - Target the span element for text update
+                    // Update Auth element texts
+                    authButton.querySelector('span').textContent = 'Profile';
+                    authLinkMobile.textContent = 'Profile'; // Update mobile link
+                    authLinkMobile.classList.add('text-secondary-pink'); // Highlight mobile link
+                    authLinkMobile.classList.remove('text-gray-600'); 
+                    // END: FIX APPLIED HERE
+
+                    // Close modal after successful sign in/up
+                    setTimeout(() => toggleAuthOverlay(false), 1500);
+
+                } else {
+                    // User is signed out.
+                    userId = null;
+                    
+                    // Show Sign In tab by default
+                    tabSignIn.style.display = 'block';
+                    tabSignUp.style.display = 'block';
+                    switchForm('signin-form'); // Default to Sign In
+                    
+                    // START: FIX APPLIED HERE - Target the span element for text update
+                    // Update Auth element texts
+                    authButton.querySelector('span').textContent = 'Sign In / Profile';
+                    authLinkMobile.textContent = 'Login'; // Update mobile link
+                    authLinkMobile.classList.add('text-gray-600'); // Reset mobile link color
+                    authLinkMobile.classList.remove('text-secondary-pink');
+                    // END: FIX APPLIED HERE
+                }
+            });
+
+            // Auth UI Event Listeners
+            authButton.addEventListener('click', () => toggleAuthOverlay(true));
+            // Mobile Auth Link Listener
+            authLinkMobile.addEventListener('click', (e) => {
+                e.preventDefault();
+                // Also hide mobile menu if open
+                document.getElementById('mobile-menu').classList.add('-translate-y-full');
+                toggleAuthOverlay(true);
+            });
+            closeAuthBtn.addEventListener('click', () => toggleAuthOverlay(false));
+
+            // Tab switching
+            tabSignIn.addEventListener('click', () => switchForm('signin-form'));
+            tabSignUp.addEventListener('click', () => switchForm('signup-form'));
+
+            // Form Submissions
+            signupForm.addEventListener('submit', handleSignUp);
+            signinForm.addEventListener('submit', handleSignIn);
+            signoutBtn.addEventListener('click', handleSignOut);
+
+
+            // Existing site functionality: Mobile menu and form submission simulations
+
+            // Mobile menu toggle
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('-translate-y-full');
+            });
+
+            // Mobile nav menu collapse on click
+            document.querySelectorAll('#mobile-menu a').forEach(item => {
+                // Only collapse if it's not the Login/Profile link, as that handles its own closure via the modal
+                if (item.id !== 'auth-link-mobile') {
+                    item.addEventListener('click', () => {
+                        mobileMenu.classList.add('-translate-y-full');
+                    });
+                }
+            });
+
+            // Application submission handling (simulated)
+            document.querySelectorAll('.apply-form').forEach(form => {
+                form.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    // Prevent multiple submissions
+                    if(this.dataset.submitting === 'true') return;
+                    this.dataset.submitting = 'true';
+
+                    const spinnerHtml = `<div class="text-center mt-4" data-message-box><div class="spinner-border text-primary-blue loading-spinner" role="status"><span class="visually-hidden">Loading...</span></div><p class="mt-2 text-primary-blue">Submitting your application...</p></div>`;
+                    this.insertAdjacentHTML('beforeend', spinnerHtml);
+
+                    setTimeout(() => {
+                        this.querySelector('[data-message-box]').innerHTML = `<div class="p-3 bg-green-100 text-green-800 rounded-lg" role="alert"><i class="fas fa-check-circle me-2"></i> Your application has been submitted successfully! We'll be in touch soon.</div>`;
+                        this.dataset.submitting = 'false';
+                    }, 2000);
+                });
+            });
+
+        });
+
+    </script>
+</body>
 </html>
