@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EmpowerHer Pathways - Redefining Career Re-Entry</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" type="image/jpg" href="images/logo.jpg">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-gray-50 text-gray-900 leading-normal tracking-wide">
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="container mx-auto px-4 md:px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <img src="images/logo.jpg" alt="EmpowerHer Logo" class="w-10 h-10 rounded-full">
+                <span class="text-2xl font-bold text-purple-600">EmpowerHer Pathways</span>
+            </div>
+            <nav class="hidden md:flex space-x-4 items-center">
+                <a href="#home" class="text-gray-600 hover:text-purple-500 font-medium">Home</a>
+                <a href="#about" class="text-gray-600 hover:text-purple-500 font-medium">About</a>
+                <a href="#jobs" class="text-gray-600 hover:text-purple-500 font-medium">Jobs</a>
+                <a href="#forums" class="text-gray-600 hover:text-purple-500 font-medium">Forums</a>
+                <a href="#courses" class="text-gray-600 hover:text-purple-500 font-medium">Courses</a>
+                <a href="#seminars" class="text-gray-600 hover:text-purple-500 font-medium">Seminars</a>
+                <a href="#faq" class="text-gray-600 hover:text-purple-500 font-medium">FAQ</a>
+                <a href="#pricing" class="text-gray-600 hover:text-purple-500 font-medium">Pricing</a>
+                <a href="#" class="bg-purple-600 text-white font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-purple-700 transition-colors duration-300" data-bs-toggle="modal" data-bs-target="#loginModal">
+                    Login
+                </a>
+                </nav>
+            <button id="mobile-menu-button" class="md:hidden text-gray-600 focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                </svg>
+            </button>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden bg-white shadow-sm py-2">
+            <nav class="flex flex-col items-center space-y-2">
+                <a href="#home" class="block text-gray-600 hover:text-purple-500 font-medium py-2">Home</a>
+                <a href="#about" class="block text-gray-600 hover:text-purple-500 font-medium py-2">About</a>
+                <a href="#jobs" class="block text-gray-600 hover:text-purple-500 font-medium py-2">Jobs</a>
+                <a href="#forums" class="block text-gray-600 hover:text-purple-500 font-medium py-2">Forums</a>
+                <a href="#courses" class="block text-gray-600 hover:text-purple-500 font-medium py-2">Courses</a>
+                <a href="#apply" class="block text-gray-600 hover:text-purple-500 font-medium py-2">Apply</a>
+                <a href="#seminars" class="block text-gray-600 hover:text-purple-500 font-medium py-2">Seminars</a>
+                <a href="#faq" class="block text-gray-600 hover:text-purple-500 font-medium py-2">FAQ</a>
+                <a href="#pricing" class="block text-gray-600 hover:text-purple-500 font-medium py-2">Pricing</a>
+                <a href="#" class="block bg-purple-600 text-white font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-purple-700 transition-colors duration-300 w-4/5 text-center" data-bs-toggle="modal" data-bs-target="#loginModal">
+                    Login
+                </a>
+                </nav>
+        </div>
+
+    </header>
+
+    <main>
+        <section id="home" class="py-20 text-center text-white hero-background">
+            <div class="container mx-auto px-4 md:px-6 relative z-10">
+                <h1 class="text-4xl md:text-6xl font-extrabold leading-tight mb-4">Relaunch Your Career with Confidence</h1>
+                <p class="text-lg md:text-xl mb-8 font-light max-w-2xl mx-auto">
+                    EmpowerHer Pathways helps women to successfully return to the workforce and help employers access a vibrant, diverse talent pool.
+                </p>
+                <div class="flex flex-col md:flex-row justify-center items-center space-y-4 md:space-y-0 md:space-x-4">
+                    <button class="bg-white text-purple-600 font-semibold py-3 px-6 rounded-lg shadow-md hover:bg-gray-100 transition-colors duration-300">
+                        Learn More
+                    </button>
+                    <button class="bg-transparent border border-white text-white font-semibold py-3 px-6 rounded-lg hover:bg-white hover:text-purple-600 transition-colors duration-300">
+                        Find Jobs
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="py-16 bg-white">
+            <div class="container mx-auto px-4 md:px-6">
+                <h2 class="text-3xl md:text-4xl font-bold text-center text-purple-600 mb-12">Our Mission</h2>
+                <div class="flex flex-col md:flex-row items-center md:space-x-12">
+                    <div class="md:w-1/2 flex justify-center">
+                        <img src="https://tse2.mm.bing.net/th/id/OIP.LWH2s4st_aE4XgIfiyXM1gHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Empowering Women">
+                    </div>
+                    <div class="md:w-1/2">
+                        <h3 class="text-2xl font-semibold mb-4 text-gray-800">Empowering Women Returning to Work</h3>
+                        <p class="text-gray-600 mb-6">
+                            EmpowerHer Pathways is dedicated to empowering women to overcome the unique challenges of re-entering the workforce. We provide tailored resources, a supportive community, and practical tools to help them rediscover their potential and secure fulfilling careers.
+                        </p>
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 text-center">
+                            <div class="flex flex-col items-center">
+                                <i class="fas fa-users text-4xl text-purple-600 mb-2"></i>
+                                <h4 class="font-semibold text-gray-800">Community</h4>
+                                <p class="text-sm text-gray-500">A supportive network of peers and mentors.</p>
+                            </div>
+                            <div class="flex flex-col items-center">
+                                <i class="fas fa-tools text-4xl text-purple-600 mb-2"></i>
+                                <h4 class="font-semibold text-gray-800">Skills</h4>
+                                <p class="text-sm text-gray-500">Access to up-to-date and relevant job skills.</p>
+                            </div>
+                            <div class="flex flex-col items-center">
+                                <i class="fas fa-briefcase text-4xl text-purple-600 mb-2"></i>
+                                <h4 class="font-semibold text-gray-800">Jobs</h4>
+                                <p class="text-sm text-gray-500">Curated opportunities that value diverse experiences.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="challenges" class="py-16 bg-gray-50">
+            <div class="container mx-auto px-4 md:px-6">
+                <h2 class="text-3xl md:text-4xl font-bold text-center text-purple-600 mb-12">The Challenges We Face</h2>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="relative w-full h-80">
+                        <div class="challenge-card absolute w-full h-full cursor-pointer" onclick="this.classList.toggle('is-flipped');">
+                            <div class="front bg-white">
+                                <img src="https://www.blossom-kc.com/app/uploads/2024/03/identify-skills-gaps.jpg" alt="Skills Gap Icon" class="w-16 h-16 mb-4">
+                                <h3 class="text-2xl font-semibold mb-2 text-center text-gray-800">Skills Gap</h3>
+                                <p class="text-center text-gray-600">
+                                    Women returning after a career break often find their skills are no longer up-to-date with current industry standards.
+                                </p>
+                            </div>
+                            <div class="back text-white bg-purple-500">
+                                <p class="text-center font-medium">
+                                    Lack of access to professional development and training opportunities can make it difficult to re-enter the workforce.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="relative w-full h-80">
+                        <div class="challenge-card absolute w-full h-full cursor-pointer" onclick="this.classList.toggle('is-flipped');">
+                            <div class="front bg-white">
+                                <img src="https://th.bing.com/th/id/R.7527c5b7b37aeb6214b8ee3809efdfef?rik=ItavW8%2bV1lv7KA&pid=ImgRaw&r=0&sres=1&sresct=1" alt="Bias & Stereotypes Icon" class="w-16 h-16 mb-4">
+                                <h3 class="text-2xl font-semibold mb-2 text-center text-gray-800">Bias & Stereotypes</h3>
+                                <p class="text-center text-gray-600">
+                                    Recruitment processes often hold unconscious biases against candidates with career gaps on their resumes.
+                                </p>
+                            </div>
+                            <div class="back text-white bg-purple-500">
+                                <p class="text-center font-medium">
+                                    These biases can lead to women being overlooked for roles they are perfectly qualified for, based on outdated perceptions.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="relative w-full h-80">
+                        <div class="challenge-card absolute w-full h-full cursor-pointer" onclick="this.classList.toggle('is-flipped');">
+                            <div class="front bg-white">
+                                <img src="https://media.licdn.com/dms/image/D5612AQE9PBWSQ7YHBw/article-cover_image-shrink_720_1280/0/1663453513445?e=2147483647&v=beta&t=QjIDRR7JkTCPqpeHsJzWOyP4C4x1aYlVJn6wpvr3ydA" width="300px" height="200px" alt="Lack of Support Icon" class="w-16 h-16 mb-4">
+                                <h3 class="text-2xl font-semibold mb-2 text-center text-gray-800">Lack of Support</h3>
+                                <p class="text-center text-gray-600">
+                                    Many women lack the necessary support systems, such as mentorship and networking, to navigate their career return.
+                                </p>
+                            </div>
+                            <div class="back text-white bg-purple-500">
+                                <p class="text-center font-medium">
+                                    This isolation can hinder their job search and make it difficult to reintegrate into a professional environment.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="impact" class="py-16 bg-white">
+            <div class="container mx-auto px-4 md:px-6">
+                <h2 class="text-3xl md:text-4xl font-bold text-center text-purple-600 mb-12">Our Impact</h2>
+                <div class="flex flex-col md:flex-row items-center space-y-8 md:space-y-0 md:space-x-12">
+                    <div class="md:w-1/2 flex justify-center">
+                        <div class="chart-container w-full h-96">
+                            <canvas id="impactChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="md:w-1/2">
+                        <p class="text-gray-600 text-lg">
+                            EmpowerHer Pathways creates a ripple effect, positively impacting individuals, businesses, and society as a whole.
+                        </p>
+                        <ul class="list-none mt-4 space-y-4">
+                            <li class="flex items-start">
+                                <svg class="h-6 w-6 text-purple-600 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586l-1.293-1.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                </svg>
+                                <div>
+                                    <h4 class="font-semibold text-gray-800">For Women:</h4>
+                                    <p class="text-gray-600">Increased confidence, faster job search, higher success rates.</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="h-6 w-6 text-purple-600 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586l-1.293-1.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                </svg>
+                                <div>
+                                    <h4 class="font-semibold text-gray-800">For Employers:</h4>
+                                    <p class="text-gray-600">Access to diverse talent, enhanced DEI, higher retention.</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="h-6 w-6 text-purple-600 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586l-1.293-1.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                </svg>
+                                <div>
+                                    <h4 class="font-semibold text-gray-800">For Society:</h4>
+                                    <p class="text-gray-600">Closes gender pay gap, boosts economic empowerment.</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="jobs" class="py-16 bg-white">
+            <div class="container mx-auto px-4 md:px-6">
+                <div class="flex flex-col md:flex-row md:justify-between md:items-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-purple-600 mb-4 md:mb-0">
+                        Available Jobs
+                    </h2>
+                    <div class="flex flex-col sm:flex-row items-stretch sm:items-center space-y-3 sm:space-y-0 sm:space-x-4 w-full md:w-auto">
+                        <input  type="text" placeholder="Search jobs..." class="px-4 py-2 border rounded-full focus:outline-none focus:border-purple-500 w-full sm:w-60">
+                        <button class="bg-purple-600 text-white font-semibold py-2 px-6 rounded-full hover:bg-purple-500 transition-colors duration-300 w-full sm:w-auto">
+                            Search
+                        </button>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="bg-gray-50 rounded-lg shadow-lg p-6 border-l-4 border-purple-600">
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">Digital Marketing Specialist</h3>
+                        <p class="text-gray-600 mb-1">TechVision Inc.</p>
+                        <p class="text-gray-600 text-sm mb-4"><i class="fas fa-map-marker-alt text-purple-600"></i> Remote</p>
+                        <span class="inline-block bg-purple-200 text-purple-800 text-xs font-semibold px-2.5 py-0.5 rounded-full">Full-time</span>
+                        <p class="text-gray-500 text-sm mt-4">Join our marketing team to lead digital campaigns. Remote hours, perfect for returners.</p>
+                        <div class="mt-6">
+                            <a href="#apply" class="block w-full text-center bg-purple-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-purple-500 transition-colors duration-300">Apply Now</a>
+                        </div>
+                    </div>
+                    <div class="bg-gray-50 rounded-lg shadow-lg p-6 border-l-4 border-purple-600">
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">Project Coordinator</h3>
+                        <p class="text-gray-600 mb-1">InnovateCo</p>
+                        <p class="text-gray-600 text-sm mb-4"><i class="fas fa-map-marker-alt text-purple-600"></i> Gaborone</p>
+                        <span class="inline-block bg-purple-200 text-purple-800 text-xs font-semibold px-2.5 py-0.5 rounded-full">Part-time</span>
+                        <p class="text-gray-500 text-sm mt-4">Coordinate our logistics with a collaborative, fast-paced team. A great return-to-work opportunity.</p>
+                        <div class="mt-6">
+                            <a href="#apply" class="block w-full text-center bg-purple-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-purple-500 transition-colors duration-300">Apply Now</a>
+                        </div>
+                    </div>
+                    <div class="bg-gray-50 rounded-lg shadow-lg p-6 border-l-4 border-purple-600">
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">Human Resources Manager</h3>
+                        <p class="text-gray-600 mb-1">Global Solutions</p>
+                        <p class="text-gray-600 text-sm mb-4"><i class="fas fa-map-marker-alt text-purple-600"></i> Kasane</p>
+                        <span class="inline-block bg-purple-200 text-purple-800 text-xs font-semibold px-2.5 py-0.5 rounded-full">Full-time</span>
+                        <p class="text-gray-500 text-sm mt-4">We're looking for an HR Manager with flexible working options to enhance our workplace culture.</p>
+                        <div class="mt-6">
+                            <a href="#apply" class="block w-full text-center bg-purple-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-purple-500 transition-colors duration-300">Apply Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="apply" class="py-16 bg-gray-50">
+            <div class="container mx-auto px-4 md:px-6">
+                <h2 class="text-3xl md:text-4xl font-bold text-center text-purple-600 mb-12">Apply Now</h2>
+                <p class="text-center text-gray-600 mb-8 max-w-2xl mx-auto">
+                    Ready to take the next step in your career journey? Submit your application below.
+                </p>
+                <div class="max-w-3xl mx-auto bg-white rounded-lg shadow-lg p-8">
+                    <form action="#" method="POST">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                            <div>
+                                <label for="first_name" class="block text-sm font-medium text-gray-700">First Name</label>
+                                <input type="text" name="first_name" id="first_name" autocomplete="given-name" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-purple-500 focus:ring focus:ring-purple-200 focus:ring-opacity-50">
+                            </div>
+                            <div>
+                                <label for="last_name" class="block text-sm font-medium text-gray-700">Last Name</label>
+                                <input type="text" name="last_name" id="last_name" autocomplete="family-name" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-purple-500 focus:ring focus:ring-purple-200 focus:ring-opacity-50">
+                            </div>
+                            <div class="md:col-span-2">
+                                <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+                                <input type="email" name="email" id="email" autocomplete="email" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-purple-500 focus:ring focus:ring-purple-200 focus:ring-opacity-50">
+                            </div>
+                            <div class="md:col-span-2">
+                                <label for="phone" class="block text-sm font-medium text-gray-700">Phone Number</label>
+                                <input type="tel" name="phone" id="phone" autocomplete="tel" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-purple-500 focus:ring focus:ring-purple-200 focus:ring-opacity-50">
+                            </div>
+                            <div class="md:col-span-2">
+                                <label for="position" class="block text-sm font-medium text-gray-700">Position You're Applying For</label>
+                                <select id="position" name="position" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-purple-500 focus:ring focus:ring-purple-200 focus:ring-opacity-50">
+                                    <option value="">Select a position</option>
+                                    <option value="digital_marketing_specialist">Digital Marketing Specialist</option>
+                                    <option value="project_coordinator">Project Coordinator</option>
+                                    <option value="hr_manager">Human Resources Manager</option>
+                                </select>
+                            </div>
+                            <div class="md:col-span-2">
+                                <label for="years_of_experience" class="block text-sm font-medium text-gray-700">Years of Experience</label>
+                                <input type="number" name="years_of_experience" id="years_of_experience" required min="0" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-purple-500 focus:ring focus:ring-purple-200 focus:ring-opacity-50">
+                            </div>
+                            <div class="md:col-span-2">
+                                <label for="career_break_duration" class="block text-sm font-medium text-gray-700">Career Break Duration (If applicable)</label>
+                                <select id="career_break_duration" name="career_break_duration" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-purple-500 focus:ring focus:ring-purple-200 focus:ring-opacity-50">
+                                    <option value="">Select duration</option>
+                                    <option value="1">Less than 1 year</option>
+                                    <option value="1_3">1-3 years</option>
+                                    <option value="3_5">3-5 years</option>
+                                    <option value="5_plus">5+ years</option>
+                                </select>
+                            </div>
+                            <div class="md:col-span-2">
+                                <label for="cover_letter" class="block text-sm font-medium text-gray-700">Cover Letter</label>
+                                <textarea id="cover_letter" name="cover_letter" rows="4" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-purple-500 focus:ring focus:ring-purple-200 focus:ring-opacity-50"></textarea>
+                                <p class="mt-2 text-sm text-gray-500">Tell us about yourself and why you're interested in this position.</p>
+                            </div>
+                            <div class="md:col-span-2">
+                                <label for="resume" class="block text-sm font-medium text-gray-700">Upload Resume</label>
+                                <input type="file" id="resume" name="resume" class="mt-1 block w-full text-sm text-gray-500
+                                    file:mr-4 file:py-2 file:px-4
+                                    file:rounded-full file:border-0
+                                    file:text-sm file:font-semibold
+                                    file:bg-purple-50 file:text-purple-700
+                                    hover:file:bg-purple-100">
+                                <p class="mt-2 text-sm text-gray-500">PDF or Word document (max 5MB)</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center mb-6">
+                            <input id="terms_and_conditions" name="terms_and_conditions" type="checkbox" required class="h-4 w-4 text-purple-600 focus:ring-purple-500 border-gray-300 rounded">
+                            <label for="terms_and_conditions" class="ml-2 block text-sm text-gray-900">
+                                I agree to the <a href="#" class="text-purple-600 hover:text-purple-500">Terms and Conditions</a> and <a href="#" class="text-purple-600 hover:text-purple-500">Privacy Policy</a>.
+                            </label>
+                        </div>
+                        <div>
+                            <button type="submit" class="w-full py-3 px-6 rounded-lg bg-purple-600 text-white font-semibold shadow-md hover:bg-purple-500 transition-colors duration-300">
+                                Submit Application
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+ <section id="books" class="page-section bg-light-section">
+    <div class="container">
+      <div class="row mb-5">
+        <div class="col-md-12 text-center">
+          <h2 class="section-title animate-fade-in fade-in-1">Free Motivational Books</h2>
+          <p class="animate-fade-in fade-in-2">Download these resources to inspire and guide your career journey</p>
+        </div>
+      </div>
+      
+      <div class="row">
+        <div class="col-lg-3 col-md-6 mb-4 animate-fade-in fade-in-1">
+          <div class="book-card card text-center">
+            <img src="https://cdn.pixabay.com/photo/2016/09/12/08/22/breakfast-1663295_640.jpg" class="card-img-top" alt="Returning with Confidence">
+            <div class="card-body">
+              <h5 class="card-title">Returning with Confidence</h5>
+              <p class="card-text small">A guide to rebuilding your professional identity after a career break.</p>
+              <a href="javascript:void(0)" class="btn btn-primary bouncy-button">Download PDF</a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-lg-3 col-md-6 mb-4 animate-fade-in fade-in-2">
+          <div class="book-card card text-center">
+            <img src="https://cdn.pixabay.com/photo/2015/11/19/21/14/glasses-1052023_1280.jpg" class="card-img-top" alt="Your Career Comeback">
+            <div class="card-body">
+              <h5 class="card-title">Your Career Comeback</h5>
+              <p class="card-text small">Stories of successful women who relaunched their careers after breaks.</p>
+              <a href="javascript:void(0)" class="btn btn-primary bouncy-button">Download PDF</a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-lg-3 col-md-6 mb-4 animate-fade-in fade-in-3">
+          <div class="book-card card text-center">
+            <img src="https://cdn.pixabay.com/photo/2015/09/05/07/28/writing-923882_1280.jpg" class-img-top" alt="Resume Reinvention">
+            <div class="card-body">
+              <h5 class="card-title">Resume Reinvention</h5>
+              <p class="card-text small">Expert tips for crafting a compelling resume that addresses career gaps.</p>
+              <a href="javascript:void(0)" class="btn btn-primary bouncy-button">Download PDF</a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-lg-3 col-md-6 mb-4 animate-fade-in fade-in-4">
+          <div class="book-card card text-center">
+            <img src="https://cdn.pixabay.com/photo/2014/09/05/18/32/old-books-436498_1280.jpg" class="card-img-top" alt="Mindset Matters">
+            <div class="card-body">
+              <h5 class="card-title">Mindset Matters</h5>
+              <p class="card-text small">Developing the confidence and resilience needed to succeed in your career journey.</p>
+              <a href="javascript:void(0)" class="btn btn-primary bouncy-button">Download PDF</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="row mt-4">
+        <div class="col-lg-3 col-md-6 mb-4 animate-fade-in fade-in-1">
+          <div class="book-card card text-center">
+            <img src="https://cdn.pixabay.com/photo/2015/01/09/11/09/meeting-594091_1280.jpg" class="card-img-top" alt="Networking for Returners">
+            <div class="card-body">
+              <h5 class="card-title">Networking for Returners</h5>
+              <p class="card-text small">How to rebuild and leverage professional connections after a career break.</p>
+              <a href="javascript:void(0)" class="btn btn-primary bouncy-button">Download PDF</a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-lg-3 col-md-6 mb-4 animate-fade-in fade-in-2">
+          <div class="book-card card text-center">
+            <img src="https://cdn.pixabay.com/photo/2016/01/19/01/42/library-1147815_1280.jpg" class="card-img-top" alt="Skills That Never Expire">
+            <div class="card-body">
+              <h5 class="card-title">Skills That Never Expire</h5>
+              <p class="card-text small">Identifying and marketing your transferable skills to employers.</p>
+              <a href="javascript:void(0)" class="btn btn-primary bouncy-button">Download PDF</a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-lg-3 col-md-6 mb-4 animate-fade-in fade-in-3">
+          <div class="book-card card text-center">
+            <img src="https://cdn.pixabay.com/photo/2018/03/19/18/20/tea-time-3240766_1280.jpg" class="card-img-top" alt="Work-Life Integration">
+            <div class="card-body">
+              <h5 class="card-title">Work-Life Integration</h5>
+              <p class="card-text small">Strategies for balancing professional and personal responsibilities.</p>
+              <a href="javascript:void(0)" class="btn btn-primary bouncy-button">Download PDF</a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-lg-3 col-md-6 mb-4 animate-fade-in fade-in-4">
+          <div class="book-card card text-center">
+            <img src="https://cdn.pixabay.com/photo/2016/03/26/22/21/books-1281581_1280.jpg" class="card-img-top" alt="The Future of Work">
+            <div class="card-body">
+              <h5 class="card-title">The Future of Work</h5>
+              <p class="card-text small">Navigating flexible work arrangements, remote work, and emerging opportunities.</p>
+              <a href="javascript:void(0)" class="btn btn-primary bouncy-button">Download PDF</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="seminars" class="page-section">
+    <div class="container">
+      <div class="row justify-content-center mb-5">
+        <div class="col-lg-8 text-center">
+          <h2 class="section-title animate-fade-in fade-in-1">Host a Seminar</h2>
+          <p class="animate-fade-in fade-in-2">Are you an expert in your field? Share your knowledge with our community by hosting a paid seminar.</p>
+        </div>
+      </div>
+      
+      <div class="row">
+        <div class="col-lg-6 mb-4 animate-fade-in fade-in-1">
+          <h3 class="h4">Why Host a Seminar?</h3>
+          <ul class="list-group list-group-flush mb-4">
+            <li class="list-group-item border-0 ps-0">
+              <i class="fas fa-check-circle text-primary me-2"></i>
+              Connect with women returning to work in your industry
+            </li>
+            <li class="list-group-item border-0 ps-0">
+              <i class="fas fa-check-circle text-primary me-2"></i>
+              Establish yourself as a thought leader
+            </li>
+            <li class="list-group-item border-0 ps-0">
+              <i class="fas fa-check-circle text-primary me-2"></i>
+              Generate income while helping others
+            </li>
+            <li class="list-group-item border-0 ps-0">
+              <i class="fas fa-check-circle text-primary me-2"></i>
+              Access our platform's growing community
+            </li>
+            <li class="list-group-item border-0 ps-0">
+              <i class="fas fa-check-circle text-primary me-2"></i>
+              We handle marketing and technical aspects
+            </li>
+          </ul>
+          
+          <h3 class="h4">Popular Seminar Topics</h3>
+          <div class="row">
+            <div class="col-md-6">
+              <ul class="list-unstyled">
+                <li class="mb-2"><i class="fas fa-arrow-right text-primary me-2"></i> Resume Crafting</li>
+                <li class="mb-2"><i class="fas fa-arrow-right text-primary me-2"></i> LinkedIn Optimization</li>
+                <li class="mb-2"><i class="fas fa-arrow-right text-primary me-2"></i> Interview Techniques</li>
+              </ul>
+            </div>
+            <div class="col-md-6">
+              <ul class="list-unstyled">
+                <li class="mb-2"><i class="fas fa-arrow-right text-primary me-2"></i> Industry Updates</li>
+                <li class="mb-2"><i class="fas fa-arrow-right text-primary me-2"></i> Confidence Building</li>
+                <li class="mb-2"><i class="fas fa-arrow-right text-primary me-2"></i> Networking Strategies</li>
+              </ul>
+            </div>
+          </div>
+          
+          <div class="card bg-light border-0 mt-4">
+            <div class="card-body">
+              <h4 class="h5">Upcoming Featured Seminar</h4>
+              <h5 class="h6 text-primary">"Negotiating Your Worth After a Career Break"</h5>
+              <p class="mb-1">By: Maria Keneilwe, Career Coach</p>
+              <p class="mb-1">Date: June 15, 2025</p>
+              <p>Price: P200.00</p>
+              <button class="btn btn-primary bouncy-button">Register Now</button>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-lg-6 animate-fade-in fade-in-2">
+          <div class="card shadow border-0">
+            <div class="card-body p-4 p-md-5">
+              <h4 class="mb-4">Submit Your Seminar Proposal</h4>
+              <form class="seminar-form">
+                <div class="mb-3">
+                  <label for="seminarTitle" class="form-label">Seminar Title</label>
+                  <input type="text" class="form-control" id="seminarTitle" required>
+                </div>
+                <div class="row">
+                  <div class="col-md-6 mb-3">
+                    <label for="fullName" class="form-label">Your Full Name</label>
+                    <input type="text" class="form-control" id="fullName" required>
+                  </div>
+                  <div class="col-md-6 mb-3">
+                    <label for="emailAddress" class="form-label">Email Address</label>
+                    <input type="email" class="form-control" id="emailAddress" required>
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <label for="profession" class="form-label">Professional Title</label>
+                  <input type="text" class="form-control" id="profession" placeholder="e.g., Career Coach, HR Director, etc." required>
+                </div>
+                <div class="row">
+                  <div class="col-md-6 mb-3">
+                    <label for="seminarDate" class="form-label">Proposed Date</label>
+                    <input type="date" class="form-control" id="seminarDate" required>
+                  </div>
+                  <div class="col-md-6 mb-3">
+                    <label for="seminarDuration" class="form-label">Duration (hours)</label>
+                    <input type="number" class="form-control" id="seminarDuration" min="1" max="4" required>
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <label for="seminarDescription" class="form-label">Seminar Description</label>
+                  <textarea class="form-control" id="seminarDescription" rows="4" required></textarea>
+                </div>
+                <div class="row">
+                  <div class="col-md-6 mb-3">
+                    <label for="participantLimit" class="form-label">Maximum Participants</label>
+                    <input type="number" class="form-control" id="participantLimit" min="10" max="100">
+                  </div>
+                  <div class="col-md-6 mb-3">
+                    <label for="price" class="form-label">Price ($)</label>
+                    <input type="number" class="form-control" id="price" min="0" required>
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <label for="seminarCV" class="form-label">Upload Your CV/Resume</label>
+                  <input type="file" class="form-control" id="seminarCV">
+                </div>
+                <div class="form-check mb-4">
+                  <input class="form-check-input" type="checkbox" id="seminarTerms" required>
+                  <label class="form-check-label" for="seminarTerms"> I understand that EmpowerHer Pathways will take a 15% fee from seminar registrations </label>
+                </div>
+                <div class="d-grid">
+                  <button class="btn btn-primary btn-lg bouncy-button" type="submit">Submit Proposal</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq" class="page-section bg-light-section">
+    <div class="container">
+      <div class="row justify-content-center mb-5">
+        <div class="col-lg-8 text-center">
+          <h2 class="section-title animate-fade-in fade-in-1">Frequently Asked Questions</h2>
+          <p class="animate-fade-in fade-in-2">Find answers to common questions about returning to work and using our platform</p>
+        </div>
+      </div>
+      <div class="row justify-content-center">
+        <div class="col-lg-10 animate-fade-in fade-in-3">
+          <div class="accordion" id="faqAccordion">
+            <div class="accordion-item border mb-3 shadow-sm">
+              <h2 class="accordion-header">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1"> How do I explain a career gap on my resume? </button>
+              </h2>
+              <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                  <p>Focus on being honest while highlighting the skills and experiences you gained during your career break. Include volunteer work, freelancing, courses, or community involvement. Create a "Career Break" section that briefly explains the reason and emphasizes your continued professional development. Our free downloadable guide "Resume Reinvention" provides detailed strategies.</p>
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item border mb-3 shadow-sm">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2"> What is a returnship program? </button>
+              </h2>
+              <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                  <p>A returnship is a professional internship designed specifically for individuals returning to work after a career break. These programs typically last 3-6 months and provide training, mentorship, and hands-on experience to help participants update their skills and transition back to the workforce. Many returnships lead to permanent positions.</p>
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item border mb-3 shadow-sm">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3"> How do I choose which courses to take? </button>
+              </h2>
+              <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                  <p>Consider your career goals and the industry you're targeting. Look at job descriptions in your field to identify required skills, then select courses that address any gaps. Our platform offers skills assessments to help identify areas for development. Start with one course and build from there. Remember, our course instructors are available in the forums to answer questions about specific offerings.</p>
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item border mb-3 shadow-sm">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4"> What subscription plan is right for me? </button>
+              </h2>
+              <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                  <p>We offer three plans: Basic (free, job board access, forum participation), Pro (access to all courses, 1:1 mentorship sessions, exclusive seminars), and Employer (for businesses posting jobs and accessing talent tools). The best plan depends on your current needs and goals.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="pricing" class="page-section">
+    <div class="container">
+      <div class="row justify-content-center mb-5">
+        <div class="col-lg-8 text-center">
+          <h2 class="section-title animate-fade-in fade-in-1">Choose Your Pathway</h2>
+          <p class="animate-fade-in fade-in-2">Simple, transparent pricing for every stage of your career journey</p>
+        </div>
+      </div>
+      <div class="row justify-content-center">
+        <div class="col-lg-4 col-md-6 mb-4 animate-fade-in fade-in-1">
+          <div class="card pricing-card text-center border-2 shadow-lg">
+            <div class="card-body p-5">
+              <h4 class="card-title text-uppercase fw-bold text-primary">Basic</h4>
+              <h6 class="card-price h1 fw-bold">$0<span class="fs-6 fw-normal">/ month</span></h6>
+              <ul class="list-unstyled my-4">
+                <li><i class="fas fa-check text-primary me-2"></i> Access to Job Board</li>
+                <li><i class="fas fa-check text-primary me-2"></i> Forums & Community Support</li>
+                <li><i class="fas fa-check text-primary me-2"></i> Download Free E-Books</li>
+                <li class="text-muted"><i class="fas fa-times text-danger me-2"></i> All Courses Access</li>
+                <li class="text-muted"><i class="fas fa-times text-danger me-2"></i> 1:1 Mentorship</li>
+              </ul>
+              <a href="#" class="btn btn-outline-primary btn-lg">Start Free</a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-lg-4 col-md-6 mb-4 animate-fade-in fade-in-2">
+          <div class="card pricing-card text-center border-purple-600 border-3 shadow-lg pt-4">
+            <div class="badge bg-purple-600 text-white p-2 position-absolute top-0 start-50 translate-middle rounded-pill" style="width: 50%;">Most Popular</div>
+            <div class="card-body p-5">
+              <h4 class="card-title text-uppercase fw-bold text-white bg-purple-600 p-2 rounded-3">Pro</h4>
+              <h6 class="card-price h1 fw-bold">$29<span class="fs-6 fw-normal">/ month</span></h6>
+              <ul class="list-unstyled my-4">
+                <li><i class="fas fa-check text-primary me-2"></i> **Everything in Basic**</li>
+                <li><i class="fas fa-check text-primary me-2"></i> **Unlimited Course Access**</li>
+                <li><i class="fas fa-check text-primary me-2"></i> Exclusive Seminars & Workshops</li>
+                <li><i class="fas fa-check text-primary me-2"></i> 1:1 Mentorship Sessions (2/mo)</li>
+                <li><i class="fas fa-check text-primary me-2"></i> Resume Review Service</li>
+              </ul>
+              <a href="#" class="btn bg-purple-600 text-white btn-lg hover:bg-purple-700">Choose Pro</a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-lg-4 col-md-6 mb-4 animate-fade-in fade-in-3">
+          <div class="card pricing-card text-center border-2 shadow-lg">
+            <div class="card-body p-5">
+              <h4 class="card-title text-uppercase fw-bold text-primary">Employer</h4>
+              <h6 class="card-price h1 fw-bold">$99<span class="fs-6 fw-normal">/ month</span></h6>
+              <ul class="list-unstyled my-4">
+                <li><i class="fas fa-check text-primary me-2"></i> **Unlimited Job Postings**</li>
+                <li><i class="fas fa-check text-primary me-2"></i> Access to Returner Talent Pool</li>
+                <li><i class="fas fa-check text-primary me-2"></i> DEI Consulting Resources</li>
+                <li><i class="fas fa-check text-primary me-2"></i> Analytics Dashboard</li>
+                <li><i class="fas fa-check text-primary me-2"></i> Featured Listing Priority</li>
+              </ul>
+              <a href="#" class="btn btn-outline-primary btn-lg">Contact Sales</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+    </main>
+
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="container mx-auto px-4 md:px-6 text-center">
+            <div class="flex flex-wrap justify-center space-x-6 mb-4">
+                <a href="#about" class="hover:text-purple-400">About Us</a>
+                <a href="#jobs" class="hover:text-purple-400">Careers</a>
+                <a href="#forums" class="hover:text-purple-400">Support</a>
+                <a href="#pricing" class="hover:text-purple-400">Pricing</a>
+                <a href="#faq" class="hover:text-purple-400">FAQ</a>
+            </div>
+            <div class="flex justify-center space-x-6 mb-4">
+                <a href="#" class="text-gray-400 hover:text-purple-400"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="text-gray-400 hover:text-purple-400"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="text-gray-400 hover:text-purple-400"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#" class="text-gray-400 hover:text-purple-400"><i class="fab fa-instagram"></i></a>
+            </div>
+            <p class="text-gray-400 text-sm">© 2024 EmpowerHer Pathways. All rights reserved.</p>
+        </div>
+    </footer>
+
+<div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-purple-600 text-white">
+                <h5 class="modal-title font-bold" id="loginModalLabel">Welcome Back!</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body p-5">
+                <form>
+                    <div class="mb-4">
+                        <label for="loginEmail" class="form-label text-gray-700 font-medium">Email Address</label>
+                        <input type="email" class="form-control rounded-md border-gray-300 shadow-sm focus:border-purple-500 focus:ring focus:ring-purple-200 focus:ring-opacity-50" id="loginEmail" required>
+                    </div>
+                    <div class="mb-4">
+                        <label for="loginPassword" class="form-label text-gray-700 font-medium">Password</label>
+                        <input type="password" class="form-control rounded-md border-gray-300 shadow-sm focus:border-purple-500 focus:ring focus:ring-purple-200 focus:ring-opacity-50" id="loginPassword" required>
+                    </div>
+                    <div class="mb-4 form-check">
+                        <input type="checkbox" class="form-check-input h-4 w-4 text-purple-600 focus:ring-purple-500 border-gray-300 rounded" id="rememberMe">
+                        <label class="form-check-label text-sm text-gray-700" for="rememberMe">Remember me</label>
+                    </div>
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn bg-purple-600 text-white font-semibold py-2 rounded-lg hover:bg-purple-700 transition-colors duration-300 border-0">
+                            Log In
+                        </button>
+                    </div>
+                    <p class="text-center mt-3 text-sm">
+                        <a href="#" class="text-purple-600 hover:text-purple-500">Forgot Password?</a>
+                        |
+                        <a href="#" class="text-purple-600 hover:text-purple-500">Create an Account</a>
+                    </p>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      // ... existing Chart.js and other scripts ...
+      const ctx = document.getElementById('impactChart').getContext('2d');
+      const impactChart = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+          labels: ['Job Placement', 'Skill Improvement', 'Career Confidence'],
+          datasets: [{
+            label: 'Our Success Rate',
+            data: [75, 85, 90], // Placeholder data
+            backgroundColor: [
+              'rgba(147, 51, 234, 0.8)', // Purple-600 equivalent
+              'rgba(192, 132, 252, 0.8)', // Purple-400 equivalent
+              'rgba(124, 58, 237, 0.8)' // Violet-600 equivalent
+            ],
+            borderColor: [
+              '#ffffff',
+              '#ffffff',
+              '#ffffff'
+            ],
+            borderWidth: 2
+          }]
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            legend: {
+              position: 'top',
+            },
+            title: {
+              display: true,
+              text: 'Key Success Metrics'
+            }
+          }
+        }
+      });
+
+      // Mobile Menu Toggle Logic (using Tailwind classes)
+      document.getElementById('mobile-menu-button').addEventListener('click', function() {
+          const menu = document.getElementById('mobile-menu');
+          menu.classList.toggle('hidden');
+      });
+
+      // Form submission handling for apply form
+      $('.apply-form').on('submit', function(e) {
+        e.preventDefault();
+        $(this).append('<div class="text-center mt-4"><div class="spinner-border text-primary loading-spinner" role="status"><span class="visually-hidden">Loading...</span></div><p class="mt-2">Submitting your application...</p></div>');
+        
+        setTimeout(function() {
+          $('.apply-form .spinner-border').parent().html('<div class="alert alert-success" role="alert"><i class="fas fa-check-circle me-2"></i> Your application has been submitted successfully! We\'ll be in touch soon.</div>');
+        }, 2000);
+      });
+      
+      $('.seminar-form').on('submit', function(e) {
+        e.preventDefault();
+        $(this).append('<div class="text-center mt-4"><div class="spinner-border text-primary loading-spinner" role="status"><span class="visually-hidden">Loading...</span></div><p class="mt-2">Submitting your proposal...</p></div>');
+        
+        setTimeout(function() {
+          $('.seminar-form .spinner-border').parent().html('<div class="alert alert-success" role="alert"><i class="fas fa-check-circle me-2"></i> Your seminar proposal has been submitted successfully! Our team will review it and contact you within 2-3 business days.</div>');
+        }, 2000);
+      });
+      
+      // Mobile nav menu collapse on click
+      $('.navbar-nav>li>a').on('click', function(){
+          $('.navbar-collapse').collapse('hide');
+      });
+    </script>
+    <script src="scripts.js"></script>
+</body>
+</html>
