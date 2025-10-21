@@ -1134,13 +1134,79 @@
                           <p class="text-center mt-3 text-sm">
                               <a href="#" class="text-purple-600 hover:text-purple-500">Forgot Password?</a>
                               |
-                              <a href="#" class="text-purple-600 hover:text-purple-500">Create an Account</a>
-                          </p>
+                              <a href="#" class="text-purple-600 hover:text-purple-500" data-bs-toggle="modal" data-bs-target="#signupModal" data-bs-dismiss="modal">Create an Account</a>                          </p>
                       </form>
                   </div>
               </div>
           </div>
         </div>
+        <div class="modal fade" id="signupModal" tabindex="-1" aria-labelledby="signupModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content">
+                  <div class="modal-header bg-purple-600 text-white">
+                      <h5 class="modal-title font-bold" id="signupModalLabel">Join EmpowerHer Pathways</h5>
+                      <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body p-5">
+                    <div id="signupStatus">
+                        </div>
+                    <form id="signupForm">
+                        <div class="mb-4 flex space-x-4">
+                            <div class="w-1/2">
+                                <label for="signupFirstName" class="form-label text-gray-700 font-medium">First Name</label>
+                                <input type="text" class="form-control rounded-md border-gray-300 shadow-sm focus:border-purple-500 focus:ring focus:ring-purple-200 focus:ring-opacity-50" id="signupFirstName" required>
+                            </div>
+                            <div class="w-1/2">
+                                <label for="signupLastName" class="form-label text-gray-700 font-medium">Last Name</label>
+                                <input type="text" class="form-control rounded-md border-gray-300 shadow-sm focus:border-purple-500 focus:ring focus:ring-purple-200 focus:ring-opacity-50" id="signupLastName" required>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label for="signupEmail" class="form-label text-gray-700 font-medium">Email Address</label>
+                            <input type="email" class="form-control rounded-md border-gray-300 shadow-sm focus:border-purple-500 focus:ring focus:ring-purple-200 focus:ring-opacity-50" id="signupEmail" required>
+                        </div>
+                        <div class="mb-4">
+                            <label for="signupPassword" class="form-label text-gray-700 font-medium">Password</label>
+                            <input type="password" class="form-control rounded-md border-gray-300 shadow-sm focus:border-purple-500 focus:ring focus:ring-purple-200 focus:ring-opacity-50" id="signupPassword" required minlength="6">
+                            <small class="text-gray-500">Must be at least 6 characters.</small>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="accountType" class="form-label text-gray-700 font-medium">I am a...</label>
+                            <select class="form-select rounded-md border-gray-300 shadow-sm focus:border-purple-500 focus:ring focus:ring-purple-200 focus:ring-opacity-50" id="accountType" required>
+                                <option value="" disabled selected>Choose one</option>
+                                <option value="Client">Client (Woman seeking job/training)</option>
+                                <option value="Business">Business (Employer/Partner)</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="fieldOfInterest" class="form-label text-gray-700 font-medium">Primary Field of Interest</label>
+                            <select class="form-select rounded-md border-gray-300 shadow-sm focus:border-purple-500 focus:ring focus:ring-purple-200 focus:ring-opacity-50" id="fieldOfInterest" required>
+                                <option value="" disabled selected>Select your target career area</option>
+                                <option value="Tech">Technology / IT</option>
+                                <option value="Finance">Finance / Accounting</option>
+                                <option value="Marketing">Marketing / Sales</option>
+                                <option value="Healthcare">Healthcare / Pharma</option>
+                                <option value="Other">Other / Unsure</option>
+                            </select>
+                        </div>
+
+                        <div class="d-grid gap-2 mt-5">
+                            <button type="submit" class="btn bg-purple-600 text-white font-semibold py-2 rounded-lg hover:bg-purple-700 transition-colors duration-300 border-0">
+                                Create My Account
+                            </button>
+                        </div>
+                        
+                        <p class="text-center mt-3 text-sm">
+                            <a href="#" class="text-purple-600 hover:text-purple-500" data-bs-toggle="modal" data-bs-target="#loginModal" data-bs-dismiss="modal">I already have an account</a>
+                        </p>
+                    </form>
+                </div>
+              </div>
+          </div>
+      </div>
     </main>
 
   <!-- Footer -->
@@ -1318,6 +1384,6 @@
       });
     });
   </script>
-  
+      <script src="scripts.js"></script>
 </body>
 </html>
