@@ -53,7 +53,7 @@ $('#signupForm').on('submit', function(e) {
     }
 
     // Show loading spinner
-    $('#signupStatus').html('<div class="text-center mt-2 submission-status"><div class="spinner-border text-purple-600" role="status"><span class="visually-hidden">Loading...</span></div><p class="mt-2 text-purple-600">Creating account...</p></div>');
+    $('#signupStatus').html('<div class="text-center mt-2 submission-status"><div class="spinner-border text-purple-600" role="status"><span class="visually-hidden">Loading...</span></span></div><p class="mt-2 text-purple-600">Creating account...</p></div>');
 
     auth.createUserWithEmailAndPassword(email, password)
         .then((userCredential) => {
@@ -102,13 +102,13 @@ $('#loginForm').on('submit', function(e) {
     e.preventDefault();
 
     $('#loginStatus').html(''); 
-
+    
+    // --- CRITICAL FIX: Ensure these variables are declared inside the function ---
     const email = $('#loginEmail').val();
     const password = $('#loginPassword').val();
-    const rememberMe = $('#rememberMe').prop('checked'); // Get the state of the "Remember Me" checkbox
+    const rememberMe = $('#rememberMe').prop('checked');
     
     // Set persistence (session or local)
-    // 'local' keeps the user logged in indefinitely, 'session' only until the browser window is closed.
     const persistence = rememberMe ? firebase.auth.Auth.Persistence.LOCAL : firebase.auth.Auth.Persistence.SESSION;
 
     // Show loading spinner
@@ -116,24 +116,24 @@ $('#loginForm').on('submit', function(e) {
 
     auth.setPersistence(persistence)
         .then(() => {
-            // 1. Sign in with Email and Password
+            // 1. Authenticate user with Email and Password
             return auth.signInWithEmailAndPassword(email, password);
         })
         .then((userCredential) => {
             const user = userCredential.user;
             
-            // 2. Fetch the user's account type from Firestore
+            // 2. Fetch the user's account type from Firestore (the server)
             return db.collection("users").doc(user.uid).get();
         })
         .then((doc) => {
             if (doc.exists) {
-                const accountType = doc.data().accountType;
+                const accountType = doc.data().accountType; // Get the registered account type
 
-                // Success: Close modal and redirect
+                // Success: Close modal and redirect to the specific dashboard
                 closeModal('loginModal');
-                redirectToDashboard(accountType);
+                redirectToDashboard(accountType); 
             } else {
-                // If profile data is missing, prompt user to contact support
+                 // Profile data not found error
                 $('#loginStatus').html('<div class="alert alert-warning mt-2" role="alert"><i class="fas fa-exclamation-circle me-2"></i> Profile data not found. Please contact support.</div>');
                 // Force logout since auth succeeded but profile failed
                 auth.signOut();
@@ -156,4 +156,3 @@ $('#loginForm').on('submit', function(e) {
             console.error("Login Error:", error);
         });
 });
-
