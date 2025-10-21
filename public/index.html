@@ -1113,7 +1113,11 @@
                       <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body p-5">
-                      <form>
+                      <!-- status messages inserted by scripts.js -->
+                      <div id="loginStatus"></div>
+
+                      <!-- add id so scripts.js can bind the submit handler -->
+                      <form id="loginForm">
                           <div class="mb-4">
                               <label for="loginEmail" class="form-label text-gray-700 font-medium">Email Address</label>
                               <input type="email" class="form-control rounded-md border-gray-300 shadow-sm focus:border-purple-500 focus:ring focus:ring-purple-200 focus:ring-opacity-50" id="loginEmail" required>
@@ -1134,7 +1138,8 @@
                           <p class="text-center mt-3 text-sm">
                               <a href="#" class="text-purple-600 hover:text-purple-500">Forgot Password?</a>
                               |
-                              <a href="#" class="text-purple-600 hover:text-purple-500" data-bs-toggle="modal" data-bs-target="#signupModal" data-bs-dismiss="modal">Create an Account</a>                          </p>
+                              <a href="#" class="text-purple-600 hover:text-purple-500" data-bs-toggle="modal" data-bs-target="#signupModal" data-bs-dismiss="modal">Create an Account</a>
+                          </p>
                       </form>
                   </div>
               </div>
