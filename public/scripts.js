@@ -20,7 +20,16 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 
-// Firebase Sign-Up Logic (Create Account and Save Profile Data)
+// Function to close the Bootstrap modal
+function closeModal(modalId) {
+    const modalElement = document.getElementById(modalId);
+    const modal = bootstrap.Modal.getInstance(modalElement) || new bootstrap.Modal(modalElement);
+    modal.hide();
+}
+
+// -------------------------------------------------------------
+// Firebase Sign-Up Logic (with Password Confirmation and Redirection)
+// -------------------------------------------------------------
 $('#signupForm').on('submit', function(e) {
     e.preventDefault();
 
@@ -29,41 +38,56 @@ $('#signupForm').on('submit', function(e) {
 
     const email = $('#signupEmail').val();
     const password = $('#signupPassword').val();
+    const passwordConfirm = $('#signupPasswordConfirm').val(); // NEW: Confirmation field
+    
     const firstName = $('#signupFirstName').val();
     const lastName = $('#signupLastName').val();
-    // NEW: Retrieve the account type value
     const accountType = $('#accountType').val(); 
     const fieldOfInterest = $('#fieldOfInterest').val();
+
+    // 🛑 STEP 1: Check if passwords match
+    if (password !== passwordConfirm) {
+        $('#signupStatus').html('<div class="alert alert-danger mt-2">Sign-up Failed: Passwords do not match.</div>');
+        console.error("Sign-up Error: Passwords do not match.");
+        return; // Stop execution
+    }
 
     // 1. Create User in Firebase Authentication
     auth.createUserWithEmailAndPassword(email, password)
         .then((userCredential) => {
             const user = userCredential.user;
             
-            // 2. Save Additional Info to Firestore
-            // Use the Firebase User UID as the document ID for easy lookup
+            // 2. Save Additional Info to Firestore (Profile Data)
             return db.collection("users").doc(user.uid).set({
                 firstName: firstName,
                 lastName: lastName,
                 email: email,
-                accountType: accountType, // NEW: Saved to the user profile
+                accountType: accountType,
                 fieldOfInterest: fieldOfInterest,
                 createdAt: firebase.firestore.FieldValue.serverTimestamp()
             });
         })
         .then(() => {
-            // Success: Close modal and show success message
-            console.log("User created and profile saved successfully.");
+            // Success: Close modal, show success message, and redirect
+            console.log("User created, profile saved, and ready for redirection.");
             
-            // Close the sign-up modal
-            const modalElement = document.getElementById('signupModal');
-            const modal = bootstrap.Modal.getInstance(modalElement) || new bootstrap.Modal(modalElement);
-            modal.hide();
+            closeModal('signupModal');
             
-            alert('Welcome to EmpowerHer Pathways! Your account is ready.');
-            
-            // Update the navigation bar (e.g., change 'Login' to 'Logout')
-            $('#login-trigger').html('Logout');
+            // 🛑 STEP 3: Conditional Redirection based on Account Type
+            let redirectUrl;
+            if (accountType === 'Client') {
+                // Placeholder URL for Client Dashboard (change this later)
+                redirectUrl = '/client-dashboard.html'; 
+            } else if (accountType === 'Business') {
+                // Placeholder URL for Business Dashboard (change this later)
+                redirectUrl = '/business-dashboard.html';
+            } else {
+                // Fallback for safety
+                redirectUrl = '/index.html';
+            }
+
+            // Perform the redirect
+            window.location.href = redirectUrl;
 
         })
         .catch((error) => {
