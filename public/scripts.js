@@ -1,84 +1,15 @@
-
-// Function to close the Bootstrap modal
+// Utility function to close the Bootstrap modal
 function closeModal(modalId) {
     const modalElement = document.getElementById(modalId);
-    const modal = bootstrap.Modal.getInstance(modalElement) || new bootstrap.Modal(modalElement);
-    if (modal) {
+    // CRITICAL FIX: Check if the modal element exists and try to get the instance.
+    // We use the Bootstrap 5 Modal API correctly to retrieve the instance and hide it.
+    if (modalElement) {
+        const modal = bootstrap.Modal.getInstance(modalElement);
+        if (modal) {
             modal.hide();
         }
     }
-
-// -------------------------------------------------------------
-// Firebase Sign-Up Logic (with Password Confirmation and Redirection)
-// -------------------------------------------------------------
-$('#signupForm').on('submit', function(e) {
-    e.preventDefault();
-
-    // Clear previous status messages
-    $('#signupStatus').html(''); 
-
-    const email = $('#signupEmail').val();
-    const password = $('#signupPassword').val();
-    const passwordConfirm = $('#signupPasswordConfirm').val(); // NEW: Confirmation field
-    
-    const firstName = $('#signupFirstName').val();
-    const lastName = $('#signupLastName').val();
-    const accountType = $('#accountType').val(); 
-    const fieldOfInterest = $('#fieldOfInterest').val();
-
-    //  STEP 1: Check if passwords match
-    if (password !== passwordConfirm) {
-        $('#signupStatus').html('<div class="alert alert-danger mt-2">Sign-up Failed: Passwords do not match.</div>');
-        console.error("Sign-up Error: Passwords do not match.");
-        return; // Stop execution
-    }
-
-    // 1. Create User in Firebase Authentication
-    auth.createUserWithEmailAndPassword(email, password)
-        .then((userCredential) => {
-            const user = userCredential.user;
-            
-            // 2. Save Additional Info to Firestore (Profile Data)
-            return db.collection("users").doc(user.uid).set({
-                firstName: firstName,
-                lastName: lastName,
-                email: email,
-                accountType: accountType,
-                fieldOfInterest: fieldOfInterest,
-                createdAt: firebase.firestore.FieldValue.serverTimestamp()
-            });
-        })
-        .then(() => {
-            // Success: Close modal, show success message, and redirect
-            console.log("User created, profile saved, and ready for redirection.");
-            
-            closeModal('signupModal');
-            
-            //  STEP 3: Conditional Redirection based on Account Type
-            let redirectUrl;
-            if (accountType === 'Client') {
-                // Placeholder URL for Client Dashboard (change this later)
-                redirectUrl = '/client-dashboard.html'; 
-            } else if (accountType === 'Business') {
-                // Placeholder URL for Business Dashboard (change this later)
-                redirectUrl = '/business-dashboard.html';
-            } else {
-                // Fallback for safety
-                redirectUrl = '/index.html';
-            }
-
-            // Perform the redirect
-            window.location.href = redirectUrl;
-
-        })
-        .catch((error) => {
-            // Error handling
-            const errorMessage = error.message.replace('Firebase: Error (auth/', '').replace(').', '');
-            $('#signupStatus').html(`<div class="alert alert-danger mt-2">Sign-up Failed: ${errorMessage}</div>`);
-            console.error("Sign-up Error:", error);
-        });
-});
-
+}
 
 // -------------------------------------------------------------
 // USER REDIRECTION HELPER
@@ -97,6 +28,72 @@ function redirectToDashboard(accountType) {
     // Perform the redirection
     window.location.href = redirectUrl;
 }
+
+// -------------------------------------------------------------
+// FIREBASE SIGN-UP LOGIC (Uses ID: signupForm)
+// -------------------------------------------------------------
+$('#signupForm').on('submit', function(e) {
+    e.preventDefault();
+
+    $('#signupStatus').html(''); 
+
+    const email = $('#signupEmail').val();
+    const password = $('#signupPassword').val();
+    const passwordConfirm = $('#signupPasswordConfirm').val(); 
+    
+    const firstName = $('#signupFirstName').val();
+    const lastName = $('#signupLastName').val();
+    const accountType = $('#accountType').val(); 
+    const fieldOfInterest = $('#fieldOfInterest').val();
+
+    if (password !== passwordConfirm) {
+        $('#signupStatus').html('<div class="alert alert-danger mt-2" role="alert"><i class="fas fa-times-circle me-2"></i> Sign-up Failed: Passwords do not match.</div>');
+        console.error("Sign-up Error: Passwords do not match.");
+        return; 
+    }
+
+    // Show loading spinner
+    $('#signupStatus').html('<div class="text-center mt-2 submission-status"><div class="spinner-border text-purple-600" role="status"><span class="visually-hidden">Loading...</span></div><p class="mt-2 text-purple-600">Creating account...</p></div>');
+
+    auth.createUserWithEmailAndPassword(email, password)
+        .then((userCredential) => {
+            const user = userCredential.user;
+            
+            // Save profile data to Firestore
+            return db.collection("users").doc(user.uid).set({
+                firstName: firstName,
+                lastName: lastName,
+                email: email,
+                accountType: accountType,
+                fieldOfInterest: fieldOfInterest,
+                createdAt: firebase.firestore.FieldValue.serverTimestamp()
+            });
+        })
+        .then(() => {
+            // Success: Close modal and redirect
+            closeModal('signupModal');
+            redirectToDashboard(accountType);
+        })
+        .catch((error) => {
+            // Error handling
+            const code = error.code;
+            let errorMessage = error.message;
+
+            if (code === 'auth/email-already-in-use') {
+                errorMessage = 'This email address is already in use.';
+            } else if (code === 'auth/weak-password') {
+                errorMessage = 'Password should be at least 6 characters.';
+            } else if (code === 'auth/network-request-failed') {
+                errorMessage = 'Network error. Please check your connection.';
+            } else {
+                // General error display
+                errorMessage = errorMessage.replace('Firebase: Error (auth/', '').replace(').', '');
+            }
+
+            $('#signupStatus').html(`<div class="alert alert-danger mt-2" role="alert"><i class="fas fa-exclamation-triangle me-2"></i> Sign-up Failed: ${errorMessage}</div>`);
+            console.error("Sign-up Error:", error);
+        });
+});
 
 // -------------------------------------------------------------
 // FIREBASE LOGIN LOGIC (Uses ID: loginForm)
@@ -159,3 +156,4 @@ $('#loginForm').on('submit', function(e) {
             console.error("Login Error:", error);
         });
 });
+
