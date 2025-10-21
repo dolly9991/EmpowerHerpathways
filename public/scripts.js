@@ -3,8 +3,10 @@
 function closeModal(modalId) {
     const modalElement = document.getElementById(modalId);
     const modal = bootstrap.Modal.getInstance(modalElement) || new bootstrap.Modal(modalElement);
-    modal.hide();
-}
+    if (modal) {
+            modal.hide();
+        }
+    }
 
 // -------------------------------------------------------------
 // Firebase Sign-Up Logic (with Password Confirmation and Redirection)
@@ -24,7 +26,7 @@ $('#signupForm').on('submit', function(e) {
     const accountType = $('#accountType').val(); 
     const fieldOfInterest = $('#fieldOfInterest').val();
 
-    // 🛑 STEP 1: Check if passwords match
+    //  STEP 1: Check if passwords match
     if (password !== passwordConfirm) {
         $('#signupStatus').html('<div class="alert alert-danger mt-2">Sign-up Failed: Passwords do not match.</div>');
         console.error("Sign-up Error: Passwords do not match.");
@@ -52,7 +54,7 @@ $('#signupForm').on('submit', function(e) {
             
             closeModal('signupModal');
             
-            // 🛑 STEP 3: Conditional Redirection based on Account Type
+            //  STEP 3: Conditional Redirection based on Account Type
             let redirectUrl;
             if (accountType === 'Client') {
                 // Placeholder URL for Client Dashboard (change this later)
