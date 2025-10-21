@@ -76,3 +76,84 @@ $('#signupForm').on('submit', function(e) {
             console.error("Sign-up Error:", error);
         });
 });
+
+
+// -------------------------------------------------------------
+// USER REDIRECTION HELPER
+// -------------------------------------------------------------
+function redirectToDashboard(accountType) {
+    let redirectUrl;
+    // Determine the correct dashboard based on the user's stored account type
+    if (accountType === 'Client') {
+        redirectUrl = '/client-dashboard.html'; 
+    } else if (accountType === 'Business') {
+        redirectUrl = '/business-dashboard.html';
+    } else {
+        // Fallback for safety if accountType is missing or invalid
+        redirectUrl = '/index.html';
+    }
+    // Perform the redirection
+    window.location.href = redirectUrl;
+}
+
+// -------------------------------------------------------------
+// FIREBASE LOGIN LOGIC (Uses ID: loginForm)
+// -------------------------------------------------------------
+$('#loginForm').on('submit', function(e) {
+    e.preventDefault();
+
+    $('#loginStatus').html(''); 
+
+    const email = $('#loginEmail').val();
+    const password = $('#loginPassword').val();
+    const rememberMe = $('#rememberMe').prop('checked'); // Get the state of the "Remember Me" checkbox
+    
+    // Set persistence (session or local)
+    // 'local' keeps the user logged in indefinitely, 'session' only until the browser window is closed.
+    const persistence = rememberMe ? firebase.auth.Auth.Persistence.LOCAL : firebase.auth.Auth.Persistence.SESSION;
+
+    // Show loading spinner
+    $('#loginStatus').html('<div class="text-center mt-2 submission-status"><div class="spinner-border text-purple-600" role="status"><span class="visually-hidden">Loading...</span></div><p class="mt-2 text-purple-600">Logging in...</p></div>');
+
+    auth.setPersistence(persistence)
+        .then(() => {
+            // 1. Sign in with Email and Password
+            return auth.signInWithEmailAndPassword(email, password);
+        })
+        .then((userCredential) => {
+            const user = userCredential.user;
+            
+            // 2. Fetch the user's account type from Firestore
+            return db.collection("users").doc(user.uid).get();
+        })
+        .then((doc) => {
+            if (doc.exists) {
+                const accountType = doc.data().accountType;
+
+                // Success: Close modal and redirect
+                closeModal('loginModal');
+                redirectToDashboard(accountType);
+            } else {
+                // If profile data is missing, prompt user to contact support
+                $('#loginStatus').html('<div class="alert alert-warning mt-2" role="alert"><i class="fas fa-exclamation-circle me-2"></i> Profile data not found. Please contact support.</div>');
+                // Force logout since auth succeeded but profile failed
+                auth.signOut();
+            }
+        })
+        .catch((error) => {
+            // Error handling for login
+            const code = error.code;
+            let errorMessage = error.message;
+
+            if (code === 'auth/user-not-found' || code === 'auth/wrong-password') {
+                errorMessage = 'Invalid email or password.';
+            } else if (code === 'auth/invalid-email') {
+                errorMessage = 'The email address format is invalid.';
+            } else {
+                errorMessage = errorMessage.replace('Firebase: Error (auth/', '').replace(').', '');
+            }
+
+            $('#loginStatus').html(`<div class="alert alert-danger mt-2" role="alert"><i class="fas fa-exclamation-triangle me-2"></i> Login Failed: ${errorMessage}</div>`);
+            console.error("Login Error:", error);
+        });
+});
