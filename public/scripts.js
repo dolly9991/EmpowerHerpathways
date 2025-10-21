@@ -1,24 +1,3 @@
-// Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const firebaseConfig = {
-  apiKey: "AIzaSyDVhG_WF_zFprs_ouXweTPib9LJ9j72_5A",
-  authDomain: "empowerherpathways-bw.firebaseapp.com",
-  projectId: "empowerherpathways-bw",
-  storageBucket: "empowerherpathways-bw.firebasestorage.app",
-  messagingSenderId: "595741770949",
-  appId: "1:595741770949:web:47863c0802b6184d6a5cac",
-  measurementId: "G-G5EJDZ7Z3N"
-};
-
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
 
 // Function to close the Bootstrap modal
 function closeModal(modalId) {
