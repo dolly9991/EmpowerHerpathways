@@ -1,243 +1,105 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Client Dashboard — EmpowerHer Pathways</title>
-
-  <!-- Styling (reuses project styles) -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
-
-  <style>
-    /* small dashboard-specific tweaks */
-    .dashboard-hero { background: linear-gradient(135deg,#f3e8ff 0,#efe1ff 100%); padding: 3rem 0; }
-    .card-job { cursor: pointer; transition: transform .15s ease; }
-    .card-job:hover { transform: translateY(-4px); }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard - EmpowerHer Pathways</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/jpg" href="images/logo.jpg">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .modal-container {
+            background-color: #f3f4f6;
+            color: #1f2937;
+            padding: 2rem;
+            border-radius: 1rem;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            position: relative;
+            animation: fadeInScale 0.3s ease-out;
+        }
+        .modal-close-button {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            cursor: pointer;
+            color: #6b7280;
+            transition: color 0.2s;
+        }
+        .modal-close-button:hover {
+            color: #ef4444;
+        }
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+    </style>
 </head>
-<body class="bg-gray-50">
-
-  <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
-    <div class="container">
-      <a class="navbar-brand d-flex align-items-center" href="/">
-        <img src="images/logo.jpg" alt="logo" width="36" height="36" class="rounded-circle me-2">
-        <span class="fw-bold">EmpowerHer</span>
-      </a>
-      <div class="d-flex ms-auto">
-        <button id="signOutBtn" class="btn btn-outline-secondary me-2">Sign out</button>
-        <a href="index.html" class="btn btn-primary">Home</a>
-      </div>
-    </div>
-  </nav>
-
-  <header class="dashboard-hero text-center">
-    <div class="container">
-      <h1 id="welcomeHeading" class="display-6 mb-2">Welcome</h1>
-      <p id="welcomeSub" class="text-muted mb-0">Loading your dashboard...</p>
-    </div>
-  </header>
-
-  <main class="container my-5">
-    <div class="row g-4">
-      <div class="col-lg-8">
-        <section class="mb-4">
-          <div class="d-flex justify-content-between align-items-center mb-3">
-            <h4 class="mb-0">Recommended Jobs</h4>
-            <a id="browseJobs" class="btn btn-sm btn-outline-primary" href="index.html#jobs">Browse all jobs</a>
-          </div>
-
-          <div id="jobsList" class="row g-3">
-            <!-- JS will inject recommended jobs (fallback placeholders shown) -->
-            <div class="col-12">
-              <div class="card card-job p-3">
-                <div class="d-flex justify-content-between">
-                  <div>
-                    <h5 class="mb-1">Loading jobs...</h5>
-                    <p class="mb-0 text-muted small">Please wait while we fetch recommendations.</p>
-                  </div>
-                  <div class="text-end">
-                    <span class="badge bg-primary">—</span>
-                  </div>
-                </div>
-              </div>
+<body class="bg-gray-50 text-gray-900 leading-normal tracking-wide">
+    <!-- Header -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="container mx-auto px-4 md:px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <img src="images/logo.jpg" alt="EmpowerHer Logo" class="w-10 h-10 rounded-full">
+                <span class="text-2xl font-bold text-purple-800">EmpowerHer Pathways</span>
             </div>
-          </div>
-        </section>
-
-        <section>
-          <h5 class="mb-3">Your Applications</h5>
-          <div id="applicationsList">
-            <p class="text-muted">No applications yet. Apply to jobs from the job board.</p>
-          </div>
-        </section>
-      </div>
-
-      <aside class="col-lg-4">
-        <div class="card p-3 mb-3">
-          <h6 class="mb-2">Profile</h6>
-          <div id="profileInfo">
-            <p class="text-muted mb-1">Loading profile…</p>
-          </div>
+            <button id="logout-btn" class="bg-purple-700 text-white px-4 py-2 rounded-lg font-semibold hover:bg-purple-800 transition">
+                Logout
+            </button>
         </div>
+    </header>
 
-        <div class="card p-3">
-          <h6 class="mb-2">Quick Actions</h6>
-          <div class="d-grid gap-2">
-            <button id="editProfile" class="btn btn-outline-secondary btn-sm">Edit Profile</button>
-            <button id="myApplications" class="btn btn-outline-primary btn-sm">My Applications</button>
-          </div>
-        </div>
-      </aside>
-    </div>
-  </main>
-
-  <footer class="bg-white mt-5 py-4 border-top">
-    <div class="container text-center text-muted small">
-      © 2025 EmpowerHer Pathways
-    </div>
-  </footer>
-
-  <!-- Firebase (compat) + Bootstrap -->
-  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-
-  <script>
-    // Use same Firebase config as index.html
-    const firebaseConfig = {
-      apiKey: "AIzaSyDVhG_WF_zFprs_ouXweTPib9j9j72_5A",
-      authDomain: "empowerherpathways-bw.firebaseapp.com",
-      projectId: "empowerherpathways-bw",
-      storageBucket: "empowerherpathways-bw.firebasestorage.app",
-      messagingSenderId: "595741770949",
-      appId: "1:595741770949:web:47863c0802b6184d6a5cac",
-      measurementId: "G-G5EJDZ7Z3N"
-    };
-
-    if (!firebase.apps.length) {
-      firebase.initializeApp(firebaseConfig);
-    }
-    const auth = firebase.auth();
-    const db = firebase.firestore();
-
-    // Redirect to login if unauthenticated, otherwise load profile & recommendations
-    auth.onAuthStateChanged(async (user) => {
-      if (!user) {
-        // Not logged in -> go to landing page
-        window.location.href = 'index.html';
-        return;
-      }
-
-      const uid = user.uid;
-      // show basic welcome
-      document.getElementById('welcomeHeading').textContent = `Welcome back, ${user.displayName || user.email.split('@')[0]}`;
-
-      // fetch user profile from Firestore (if present)
-      try {
-        const doc = await db.collection('users').doc(uid).get();
-        if (doc.exists) {
-          const data = doc.data();
-          const profileHtml = `
-            <p class="mb-1"><strong>${(data.firstName||'')} ${(data.lastName||'')}</strong></p>
-            <p class="mb-1 text-muted small">${data.email || user.email}</p>
-            <p class="mb-0"><span class="badge bg-secondary">${data.accountType || 'Client'}</span> <span class="text-muted small ms-2">${data.fieldOfInterest || ''}</span></p>
-          `;
-          document.getElementById('profileInfo').innerHTML = profileHtml;
-          document.getElementById('welcomeSub').textContent = `Recommended roles in ${data.fieldOfInterest || 'your area'}.`;
-        } else {
-          document.getElementById('profileInfo').innerHTML = `<p class="text-muted">No profile found. <button id="completeProfile" class="btn btn-sm btn-link p-0">Complete profile</button></p>`;
-        }
-      } catch (err) {
-        console.error('Profile load error', err);
-        document.getElementById('profileInfo').innerHTML = `<p class="text-danger small">Could not load profile.</p>`;
-      }
-
-      // Load simple job recommendations (example: query jobs collection by fieldOfInterest)
-      try {
-        const userDoc = await db.collection('users').doc(uid).get();
-        const interest = userDoc.exists ? (userDoc.data().fieldOfInterest || '') : '';
-        let jobsQuery = db.collection('jobs').limit(6);
-        if (interest) jobsQuery = db.collection('jobs').where('field','==', interest).limit(6);
-
-        const jobsSnap = await jobsQuery.get();
-        const jobsListEl = document.getElementById('jobsList');
-        jobsListEl.innerHTML = '';
-
-        if (jobsSnap.empty) {
-          // fallback placeholder cards
-          const fallbackHtml = [
-            {title:'Digital Marketing Specialist', company:'TechVision Inc.', location:'Remote'},
-            {title:'Project Coordinator', company:'InnovateCo', location:'Gaborone'},
-            {title:'Human Resources Manager', company:'Global Solutions', location:'Kasane'}
-          ].map(job => `
-            <div class="col-12 mb-2">
-              <div class="card card-job p-3">
-                <div class="d-flex justify-content-between align-items-start">
-                  <div>
-                    <h6 class="mb-1">${job.title}</h6>
-                    <p class="mb-0 small text-muted">${job.company} • ${job.location}</p>
-                  </div>
-                  <div>
-                    <a class="btn btn-sm btn-primary" href="index.html#jobs" role="button">View</a>
-                  </div>
-                </div>
-              </div>
+    <!-- Dashboard Main Content -->
+    <main class="container mx-auto px-4 py-12">
+        <h1 class="text-3xl font-bold text-purple-700 mb-6">Welcome to Your Dashboard</h1>
+        <div class="grid md:grid-cols-2 gap-8">
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <h2 class="text-xl font-semibold text-gray-800 mb-4">Upcoming Workshops</h2>
+                <ul class="list-disc pl-5 text-gray-600">
+                    <li>Digital Skills Bootcamp - Sept 20</li>
+                    <li>Leadership Essentials - Oct 5</li>
+                    <li>Communication Mastery - Oct 18</li>
+                </ul>
             </div>
-          `).join('');
-          jobsListEl.innerHTML = fallbackHtml;
-        } else {
-          jobsSnap.forEach(doc => {
-            const j = doc.data();
-            const card = document.createElement('div');
-            card.className = 'col-12';
-            card.innerHTML = `
-              <div class="card card-job p-3">
-                <div class="d-flex justify-content-between align-items-start">
-                  <div>
-                    <h6 class="mb-1">${j.title || 'Untitled Role'}</h6>
-                    <p class="mb-0 small text-muted">${j.company || ''} • ${j.location || ''}</p>
-                  </div>
-                  <div>
-                    <button class="btn btn-sm btn-primary btn-apply" data-job-id="${doc.id}">Apply</button>
-                  </div>
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <h2 class="text-xl font-semibold text-gray-800 mb-4">Mentorship & Networking</h2>
+                <ul class="list-disc pl-5 text-gray-600">
+                    <li>Connect with mentors in your field</li>
+                    <li>Join monthly networking events</li>
+                </ul>
+            </div>
+        </div>
+        <div class="mt-12 bg-white rounded-lg shadow-lg p-6">
+            <h2 class="text-xl font-semibold text-gray-800 mb-4">Your Progress</h2>
+            <p class="text-gray-600 mb-4">Track your completed workshops and mentorship sessions.</p>
+            <div class="flex space-x-4">
+                <div class="flex-1 bg-gray-100 rounded-lg p-4 text-center">
+                    <span class="text-2xl font-bold text-purple-700">2</span>
+                    <p class="text-gray-600">Workshops Completed</p>
                 </div>
-              </div>
-            `;
-            jobsListEl.appendChild(card);
-          });
-        }
-      } catch (err) {
-        console.error('Jobs load error', err);
-      }
-    });
+                <div class="flex-1 bg-gray-100 rounded-lg p-4 text-center">
+                    <span class="text-2xl font-bold text-purple-700">1</span>
+                    <p class="text-gray-600">Mentorship Sessions</p>
+                </div>
+            </div>
+        </div>
+    </main>
 
-    // Sign out
-    document.getElementById('signOutBtn').addEventListener('click', () => {
-      auth.signOut().then(() => {
-        window.location.href = 'index.html';
-      }).catch(err => {
-        console.error('Sign out error', err);
-      });
-    });
-
-    // Delegated click handler for Apply buttons
-    document.addEventListener('click', (e) => {
-      if (e.target && e.target.matches('.btn-apply')) {
-        const jobId = e.target.getAttribute('data-job-id');
-        // simple behavior: redirect to job on index page with anchor, or open modal
-        // here we open the landing page and show jobs section — project index already prompts login for apply links
-        window.location.href = `index.html#jobs`;
-      }
-    });
-
-    // Quick actions
-    document.getElementById('editProfile').addEventListener('click', () => {
-      window.location.href = 'index.html#apply';
-    });
-    document.getElementById('myApplications').addEventListener('click', () => {
-      window.location.href = 'index.html#jobs';
-    });
-  </script>
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8 fixed bottom-0 left-0 w-full">
+        <div class="container mx-auto px-4 md:px-6 text-center">
+            <p>&copy; 2025 EmpowerHer Pathways. All Rights Reserved.</p>
+        </div>
+    </footer>
+    <script type="module" src="dashboard.js"></script>
+</body>
 </html>
