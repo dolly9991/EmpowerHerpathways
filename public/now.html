@@ -1113,11 +1113,7 @@
                       <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body p-5">
-                      <!-- status messages inserted by scripts.js -->
-                      <div id="loginStatus"></div>
-
-                      <!-- add id so scripts.js can bind the submit handler -->
-                      <form id="loginForm">
+                      <form>
                           <div class="mb-4">
                               <label for="loginEmail" class="form-label text-gray-700 font-medium">Email Address</label>
                               <input type="email" class="form-control rounded-md border-gray-300 shadow-sm focus:border-purple-500 focus:ring focus:ring-purple-200 focus:ring-opacity-50" id="loginEmail" required>
@@ -1138,8 +1134,7 @@
                           <p class="text-center mt-3 text-sm">
                               <a href="#" class="text-purple-600 hover:text-purple-500">Forgot Password?</a>
                               |
-                              <a href="#" class="text-purple-600 hover:text-purple-500" data-bs-toggle="modal" data-bs-target="#signupModal" data-bs-dismiss="modal">Create an Account</a>
-                          </p>
+                              <a href="#" class="text-purple-600 hover:text-purple-500" data-bs-toggle="modal" data-bs-target="#signupModal" data-bs-dismiss="modal">Create an Account</a>                          </p>
                       </form>
                   </div>
               </div>
@@ -1149,7 +1144,7 @@
           <div class="modal-dialog modal-dialog-centered">
               <div class="modal-content">
                   <div class="modal-header bg-purple-600 text-white">
-                      <h5 class="modal-title font-bold" id="signupModalLabel">Create Your Account</h5>
+                      <h5 class="modal-title font-bold" id="signupModalLabel">Join EmpowerHer Pathways</h5>
                       <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body p-5">
@@ -1175,10 +1170,6 @@
                             <label for="signupPassword" class="form-label text-gray-700 font-medium">Password</label>
                             <input type="password" class="form-control rounded-md border-gray-300 shadow-sm focus:border-purple-500 focus:ring focus:ring-purple-200 focus:ring-opacity-50" id="signupPassword" required minlength="6">
                             <small class="text-gray-500">Must be at least 6 characters.</small>
-                        </div>
-                        <div class="mb-4">
-                            <label for="signupPasswordConfirm" class="form-label text-gray-700 font-medium">Confirm Password</label>
-                            <input type="password" class="form-control rounded-md border-gray-300 shadow-sm focus:border-purple-500 focus:ring focus:ring-purple-200 focus:ring-opacity-50" id="signupPasswordConfirm" required minlength="6">
                         </div>
 
                         <div class="mb-4">
@@ -1393,33 +1384,6 @@
       });
     });
   </script>
-  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
-    <!-- Note: analytics is skipped here for simplicity but can be added if needed -->
-
-    <script>
-        // STEP 2: Your web app's Firebase configuration
-        const firebaseConfig = {
-            apiKey: "AIzaSyDVhG_WF_zFprs_ouXweTPib9LJ9j72_5A",
-            authDomain: "empowerherpathways-bw.firebaseapp.com",
-            projectId: "empowerherpathways-bw",
-            storageBucket: "empowerherpathways-bw.firebasestorage.app",
-            messagingSenderId: "595741770949",
-            appId: "1:595741770949:web:47863c0802b6184d6a5cac",
-            measurementId: "G-G5EJDZ7Z3N"
-        };
-
-        // STEP 3: Initialize Firebase and create global 'auth' and 'db' objects
-        const app = firebase.initializeApp(firebaseConfig);
-        const auth = firebase.auth();
-        const db = firebase.firestore(); 
-        
-        console.log("Firebase initialized successfully.");
-
-        // Optional: Ensure Firestore settings are correct
-        // db.settings({ timestampsInSnapshots: true }); 
-    </script>
       <script src="scripts.js"></script>
 </body>
 </html>
