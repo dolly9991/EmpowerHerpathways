@@ -7,19 +7,35 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
-    <link rel="icon" type="image/jpg" href="images/logo.jpg">
     <style>
         body { font-family: 'Inter', sans-serif; }
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+            background-color: rgba(0, 0, 0, 0.6);
+            display: flex; justify-content: center; align-items: center;
+            z-index: 60; /* Above header */
+            opacity: 0;
+            transition: opacity 0.3s ease-out;
+            pointer-events: none;
+        }
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
         .modal-container {
             background-color: #f3f4f6;
             color: #1f2937;
             padding: 2rem;
             border-radius: 1rem;
             width: 90%;
-            max-width: 500px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            max-width: 700px; /* Wider for profile form */
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
             position: relative;
-            animation: fadeInScale 0.3s ease-out;
+            transform: scale(0.95);
+            transition: transform 0.3s ease-out;
+        }
+        .modal-overlay.active .modal-container {
+            transform: scale(1);
         }
         .modal-close-button {
             position: absolute;
@@ -32,74 +48,581 @@
         .modal-close-button:hover {
             color: #ef4444;
         }
-        @keyframes fadeInScale {
-            from {
-                opacity: 0;
-                transform: scale(0.95);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
+        .loading-overlay {
+            position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+            background-color: rgba(255, 255, 255, 0.8);
+            display: flex; justify-content: center; align-items: center;
+            z-index: 100;
+        }
+        .pathway-card {
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .pathway-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 15px rgba(126, 34, 206, 0.1);
         }
     </style>
 </head>
-<body class="bg-gray-50 text-gray-900 leading-normal tracking-wide">
+<body class="bg-gray-50 text-gray-900 leading-normal tracking-wide min-h-screen pb-24">
+    
+    <!-- Firebase Imports and Setup -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, doc, setDoc, getDoc, onSnapshot, collection, query, where, updateDoc, deleteDoc, getDocs } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+        import { setLogLevel } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+        
+        // Firestore Debug Logging (Mandatory)
+        setLogLevel('Debug');
+
+        // Global variables provided by the canvas environment
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+        const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : null;
+        const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
+
+        let app, db, auth;
+        let userId = null;
+        let isAuthReady = false;
+
+        // UI Elements
+        const loadingOverlay = document.getElementById('loading-overlay');
+        const welcomeMessage = document.getElementById('welcome-message');
+        const userIdDisplay = document.getElementById('user-id-display');
+        const skillInput = document.getElementById('skill-input');
+        const skillsList = document.getElementById('skills-list');
+        const pathwayContainer = document.getElementById('pathway-container');
+        const jobMatchesList = document.getElementById('job-matches-list');
+        const capstoneStatusDiv = document.getElementById('capstone-status');
+        const capstoneStatusBadge = document.getElementById('capstone-status-badge');
+        const profileModal = document.getElementById('profile-modal-overlay');
+
+        // Profile Form Elements
+        const fullNameInput = document.getElementById('profile-full-name');
+        const emailInput = document.getElementById('profile-email');
+        const locationInput = document.getElementById('profile-location');
+        const bioInput = document.getElementById('profile-bio');
+        const desiredRoleInput = document.getElementById('profile-desired-role');
+
+        // Initial Data Structure (to be populated from Firestore)
+        let userData = {
+            fullName: 'EmpowerHer User',
+            email: '',
+            location: 'Gaborone',
+            bio: 'Tell us about your career history and aspirations...',
+            desiredRole: '',
+            skills: [],
+            selectedPathway: null,
+            capstoneStatus: 'Not Started', // Not Started, In Progress, Submitted, Certified
+            jobMatches: [],
+        };
+
+        // --- Utility Functions ---
+
+        const setLoading = (isLoading) => {
+            loadingOverlay.style.display = isLoading ? 'flex' : 'none';
+        };
+
+        const displayMessage = (type, message) => {
+            console.log(`[${type.toUpperCase()}] ${message}`);
+            // In a real app, this would show a toast/notification
+        };
+        
+        // --- Modal Functions ---
+        
+        window.openProfileModal = () => {
+            // Populate form with current data
+            fullNameInput.value = userData.fullName || '';
+            emailInput.value = userData.email || '';
+            locationInput.value = userData.location || 'Gaborone';
+            bioInput.value = userData.bio || '';
+            desiredRoleInput.value = userData.desiredRole || '';
+            
+            profileModal.classList.add('active');
+        };
+
+        window.closeProfileModal = () => {
+            profileModal.classList.remove('active');
+        };
+
+        window.saveProfile = () => {
+            // Update local userData object
+            userData.fullName = fullNameInput.value.trim();
+            userData.email = emailInput.value.trim();
+            userData.location = locationInput.value.trim();
+            userData.bio = bioInput.value.trim();
+            userData.desiredRole = desiredRoleInput.value.trim();
+
+            saveUserData();
+            closeProfileModal();
+            displayMessage('success', 'Profile updated successfully!');
+        };
+
+
+        // --- Firebase Core Functions ---
+
+        const initFirebase = async () => {
+            if (firebaseConfig) {
+                try {
+                    app = initializeApp(firebaseConfig);
+                    db = getFirestore(app);
+                    auth = getAuth(app);
+                    
+                    // 1. Sign in using custom token or anonymously
+                    await new Promise(resolve => {
+                        onAuthStateChanged(auth, async (user) => {
+                            if (user) {
+                                userId = user.uid;
+                                console.log("Authenticated user ID:", userId);
+                                resolve();
+                            } else {
+                                // If token is available, attempt sign-in, otherwise sign in anonymously
+                                try {
+                                    if (initialAuthToken) {
+                                        await signInWithCustomToken(auth, initialAuthToken);
+                                    } else {
+                                        await signInAnonymously(auth);
+                                    }
+                                } catch (error) {
+                                    console.error("Authentication failed:", error);
+                                }
+                            }
+                        });
+                    });
+
+                    isAuthReady = true;
+                    setLoading(false);
+                    // Start listening to data once auth is ready
+                    setupRealtimeListeners(); 
+                    
+                } catch (error) {
+                    console.error("Error initializing Firebase:", error);
+                    displayMessage('error', 'Failed to initialize the application.');
+                    setLoading(false);
+                }
+            } else {
+                console.warn("Firebase config not available. Running in read-only/simulated mode.");
+                isAuthReady = true;
+                userId = 'simulated-user';
+                setLoading(false);
+                // Setup simulated data for UI testing
+                userData.fullName = 'Botho-Neo';
+                userData.skills = ['Financial Modeling', 'Data Analysis', 'Project Management'];
+                userData.selectedPathway = { name: 'Senior Investment Analyst', relevance: 92, geometry: 'Gaborone (High Demand)' };
+                userData.jobMatches = [{ title: 'Financial Analyst, FNB', location: 'Gaborone', match: 95 }, { title: 'Junior Consultant, Deloitte', location: 'Francistown', match: 78 }];
+                updateUI();
+            }
+        };
+
+        // --- Firestore Data Operations ---
+
+        const getUserDocRef = () => {
+            // Private data storage path: /artifacts/{appId}/users/{userId}/userData/profile
+            return doc(db, 'artifacts', appId, 'users', userId, 'userData', 'profile');
+        };
+
+        const setupRealtimeListeners = () => {
+            if (!isAuthReady || !userId) return;
+
+            // Display user info
+            userIdDisplay.textContent = `User ID: ${userId.substring(0, 8)}...`;
+
+            // Listen to the user's main profile data
+            onSnapshot(getUserDocRef(), (docSnapshot) => {
+                if (docSnapshot.exists()) {
+                    const data = docSnapshot.data();
+                    
+                    // Merge fetched data with default structure
+                    userData = {
+                        ...userData, // Keep defaults if fields are missing
+                        ...data,
+                        skills: data.skills || [], // Ensure skills array is reset correctly
+                        jobMatches: data.jobMatches || [], // Ensure jobMatches array is reset correctly
+                    };
+
+                    updateUI();
+                } else {
+                    // Create initial profile if it doesn't exist
+                    saveUserData();
+                    updateUI();
+                }
+            }, (error) => {
+                console.error("Error fetching user data:", error);
+            });
+        };
+
+        const saveUserData = async () => {
+            if (!isAuthReady || !userId) return;
+            try {
+                // Prepare data structure for saving, ensuring only current fields are saved
+                const dataToSave = {
+                    fullName: userData.fullName,
+                    email: userData.email,
+                    location: userData.location,
+                    bio: userData.bio,
+                    desiredRole: userData.desiredRole,
+                    skills: userData.skills,
+                    selectedPathway: userData.selectedPathway,
+                    capstoneStatus: userData.capstoneStatus,
+                    jobMatches: userData.jobMatches,
+                };
+                await setDoc(getUserDocRef(), dataToSave, { merge: true });
+            } catch (error) {
+                console.error("Error saving user data:", error);
+                displayMessage('error', 'Failed to save data. Please check connection.');
+            }
+        };
+
+
+        // --- UI Rendering & Logic ---
+
+        const updateUI = () => {
+            // 1. Welcome Message
+            const displayName = userData.fullName && userData.fullName.trim() !== '' ? userData.fullName.trim() : `User ${userId.substring(0, 8)}...`;
+            welcomeMessage.textContent = `Welcome, ${displayName}`;
+
+            // 2. Skills List
+            skillsList.innerHTML = '';
+            if (userData.skills.length === 0) {
+                skillsList.innerHTML = '<p class="text-gray-500 text-sm italic">Add skills to start your analysis.</p>';
+            }
+            userData.skills.forEach(skill => {
+                const li = document.createElement('li');
+                li.className = 'flex items-center justify-between bg-purple-100 px-3 py-2 rounded-lg';
+                li.innerHTML = `
+                    <span class="text-sm font-medium text-purple-800">${skill}</span>
+                    <button onclick="removeSkill('${skill}')" class="text-purple-600 hover:text-red-500 transition"><i class="fas fa-times"></i></button>
+                `;
+                skillsList.appendChild(li);
+            });
+
+            // 3. Pathway Matching
+            pathwayContainer.innerHTML = '';
+            if (userData.selectedPathway) {
+                pathwayContainer.innerHTML = `
+                    <div class="pathway-card bg-purple-50 border-l-4 border-purple-600 p-4 rounded-lg shadow-sm">
+                        <p class="text-xs font-semibold uppercase text-purple-600">Your Matched Pathway</p>
+                        <h3 class="text-xl font-bold text-gray-800">${userData.selectedPathway.name}</h3>
+                        <p class="text-sm mt-2 text-gray-700">
+                            <i class="fas fa-chart-line mr-1 text-green-500"></i>
+                            Relevance Score: <span class="font-bold">${userData.selectedPathway.relevance}%</span>
+                        </p>
+                        <p class="text-sm text-gray-700">
+                            <i class="fas fa-map-marked-alt mr-1 text-purple-500"></i>
+                            Market Geometry: <span class="font-bold">${userData.selectedPathway.geometry}</span>
+                        </p>
+                    </div>
+                    <button onclick="simulateGapAnalysis()" class="mt-4 w-full bg-yellow-500 text-white py-2 rounded-lg font-semibold hover:bg-yellow-600 transition">
+                        <i class="fas fa-brain mr-2"></i> Run AI Gap Analysis
+                    </button>
+                `;
+            } else {
+                pathwayContainer.innerHTML = `
+                    <p class="text-center text-gray-500 italic">Define your skills and click 'Find Pathway' to see matches.</p>
+                `;
+            }
+
+            // 4. Capstone Status
+            let statusClass, statusText;
+            switch (userData.capstoneStatus) {
+                case 'Certified':
+                    statusClass = 'bg-green-100 text-green-800 border-green-500';
+                    statusText = 'Certified';
+                    break;
+                case 'Submitted':
+                    statusClass = 'bg-blue-100 text-blue-800 border-blue-500';
+                    statusText = 'Awaiting Audit';
+                    break;
+                case 'In Progress':
+                    statusClass = 'bg-yellow-100 text-yellow-800 border-yellow-500';
+                    statusText = 'In Progress';
+                    break;
+                case 'Not Started':
+                default:
+                    statusClass = 'bg-gray-100 text-gray-800 border-gray-500';
+                    statusText = 'Not Started';
+                    break;
+            }
+            capstoneStatusBadge.className = `inline-block border-l-4 font-bold px-3 py-1 rounded ${statusClass}`;
+            capstoneStatusBadge.textContent = statusText;
+
+            // 5. Job Matches
+            jobMatchesList.innerHTML = '';
+            if (userData.jobMatches.length === 0) {
+                jobMatchesList.innerHTML = '<p class="text-gray-500 text-sm italic">No current matches found for your pathway.</p>';
+            }
+            userData.jobMatches.forEach(job => {
+                const li = document.createElement('li');
+                li.className = 'flex items-center justify-between border-b py-3';
+                li.innerHTML = `
+                    <div>
+                        <p class="font-semibold text-gray-800">${job.title}</p>
+                        <p class="text-xs text-gray-500"><i class="fas fa-map-marker-alt mr-1"></i> ${job.location}</p>
+                    </div>
+                    <span class="text-sm font-bold text-purple-700">${job.match}% Match</span>
+                `;
+                jobMatchesList.appendChild(li);
+            });
+        };
+        
+        // --- Event Handlers & Simulated Actions ---
+        
+        window.addSkill = () => {
+            const skill = skillInput.value.trim();
+            if (skill && !userData.skills.includes(skill)) {
+                userData.skills.push(skill);
+                skillInput.value = '';
+                saveUserData();
+            }
+        };
+
+        window.removeSkill = (skill) => {
+            userData.skills = userData.skills.filter(s => s !== skill);
+            saveUserData();
+        };
+
+        window.findPathway = () => {
+            if (userData.skills.length < 3) {
+                displayMessage('warn', 'Please add at least three skills before finding a pathway.');
+                return;
+            }
+            
+            setLoading(true);
+            setTimeout(() => {
+                // Simulate AI/Geometry Match calculation
+                const score = 85 + Math.floor(Math.random() * 15);
+                const pathways = ['Senior Investment Analyst', 'Project Manager (Mining)', 'Financial Services Lead', 'Logistics Coordinator'];
+                const locations = ['Gaborone (High Demand)', 'Francistown (Moderate Demand)', 'Selebi-Phikwe (Niche Demand)'];
+                
+                userData.selectedPathway = {
+                    name: pathways[Math.floor(Math.random() * pathways.length)],
+                    relevance: score,
+                    geometry: locations[Math.floor(Math.random() * locations.length)],
+                };
+                
+                // Simulate job matches based on the new pathway
+                userData.jobMatches = [
+                    { title: 'Data Scientist, BPC', location: 'Gaborone', match: 95 },
+                    { title: 'Project Coordinator, Debswana', location: 'Orapa', match: 88 },
+                ];
+                
+                saveUserData();
+                setLoading(false);
+                displayMessage('success', 'New career pathway found based on skills and market geometry!');
+            }, 1500);
+        };
+        
+        window.simulateGapAnalysis = () => {
+             displayMessage('info', 'Running AI Gap Analysis... (Check console for simulated report)');
+             setLoading(true);
+             setTimeout(() => {
+                 setLoading(false);
+                 console.log("--- AI GAP ANALYSIS REPORT ---");
+                 console.log(`Pathway: ${userData.selectedPathway.name}`);
+                 console.log("Current Skills:", userData.skills.join(', '));
+                 console.log("\nSKILL GAPS IDENTIFIED:");
+                 console.log("- Need advanced M&A experience (Recommended Course: Financial Modeling Advanced)");
+                 console.log("- Soft Skill Gap: Leadership in Diverse Teams (Recommended Workshop: Leadership Essentials)");
+                 console.log("- Technical Gap: Proficiency in Python/R for Data (Recommended Capstone Project: Sector Analysis)");
+                 displayMessage('success', 'Gap analysis complete! See recommended next steps.');
+             }, 1000);
+        };
+        
+        window.simulateCapstoneUpdate = (status) => {
+            if (!['In Progress', 'Submitted', 'Certified'].includes(status)) return;
+            userData.capstoneStatus = status;
+            saveUserData();
+            displayMessage('info', `Capstone status updated to: ${status}`);
+        };
+
+        window.logout = () => {
+            if (auth) {
+                signOut(auth).then(() => {
+                    displayMessage('info', 'Logged out successfully.');
+                    // Reload or redirect to login page
+                    location.reload(); 
+                }).catch((error) => {
+                    console.error("Logout failed:", error);
+                });
+            } else {
+                // Simulated logout
+                location.reload(); 
+            }
+        };
+
+        // Initialize on load
+        window.onload = initFirebase;
+    </script>
+
+
+    <!-- Loading Overlay -->
+    <div id="loading-overlay" class="loading-overlay hidden">
+        <div class="flex flex-col items-center bg-white p-6 rounded-xl shadow-2xl">
+            <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-700"></div>
+            <p class="mt-4 text-lg font-medium text-purple-700">Loading Dashboard...</p>
+        </div>
+    </div>
+    
     <!-- Header -->
-    <header class="bg-white shadow-sm sticky top-0 z-50">
+    <header class="bg-white shadow-lg sticky top-0 z-50">
         <div class="container mx-auto px-4 md:px-6 py-4 flex justify-between items-center">
-            <div class="flex items-center space-x-2">
-                <img src="images/logo.jpg" alt="EmpowerHer Logo" class="w-10 h-10 rounded-full">
+            <div class="flex items-center space-x-3">
+                <!-- Inline SVG Logo Placeholder -->
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-purple-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
                 <span class="text-2xl font-bold text-purple-800">EmpowerHer Pathways</span>
             </div>
-            <button id="logout-btn" class="bg-purple-700 text-white px-4 py-2 rounded-lg font-semibold hover:bg-purple-800 transition">
-                Logout
-            </button>
+            <div class="flex items-center space-x-4">
+                <button onclick="openProfileModal()" class="bg-gray-100 text-purple-700 px-4 py-2 rounded-lg font-semibold hover:bg-gray-200 transition shadow-md">
+                    <i class="fas fa-user-circle mr-1"></i> My Profile
+                </button>
+                <button onclick="logout()" class="bg-purple-700 text-white px-4 py-2 rounded-lg font-semibold hover:bg-purple-800 transition shadow-md">
+                    <i class="fas fa-sign-out-alt mr-1"></i> Logout
+                </button>
+            </div>
         </div>
     </header>
 
     <!-- Dashboard Main Content -->
-    <main class="container mx-auto px-4 py-12">
-        <h1 class="text-3xl font-bold text-purple-700 mb-6">Welcome to Your Dashboard</h1>
-        <div class="grid md:grid-cols-2 gap-8">
-            <div class="bg-white rounded-lg shadow-lg p-6">
-                <h2 class="text-xl font-semibold text-gray-800 mb-4">Upcoming Workshops</h2>
-                <ul class="list-disc pl-5 text-gray-600">
-                    <li>Digital Skills Bootcamp - Sept 20</li>
-                    <li>Leadership Essentials - Oct 5</li>
-                    <li>Communication Mastery - Oct 18</li>
-                </ul>
-            </div>
-            <div class="bg-white rounded-lg shadow-lg p-6">
-                <h2 class="text-xl font-semibold text-gray-800 mb-4">Mentorship & Networking</h2>
-                <ul class="list-disc pl-5 text-gray-600">
-                    <li>Connect with mentors in your field</li>
-                    <li>Join monthly networking events</li>
-                </ul>
-            </div>
-        </div>
-        <div class="mt-12 bg-white rounded-lg shadow-lg p-6">
-            <h2 class="text-xl font-semibold text-gray-800 mb-4">Your Progress</h2>
-            <p class="text-gray-600 mb-4">Track your completed workshops and mentorship sessions.</p>
-            <div class="flex space-x-4">
-                <div class="flex-1 bg-gray-100 rounded-lg p-4 text-center">
-                    <span class="text-2xl font-bold text-purple-700">2</span>
-                    <p class="text-gray-600">Workshops Completed</p>
+    <main class="container mx-auto px-4 md:px-6 py-8">
+        <h1 id="welcome-message" class="text-3xl font-bold text-purple-700 mb-6">Welcome!</h1>
+        <p id="user-id-display" class="text-sm text-gray-500 mb-6"></p>
+        
+        <div class="grid lg:grid-cols-3 gap-8">
+            
+            <!-- 1. SKILL DEFINITION & DEVELOPMENT -->
+            <div class="lg:col-span-1 bg-white rounded-xl shadow-2xl p-6 h-full">
+                <h2 class="text-2xl font-bold text-gray-800 mb-4 flex items-center"><i class="fas fa-magic text-purple-500 mr-2"></i> Skill & Development Hub</h2>
+                
+                <!-- Skill Input -->
+                <div class="mb-6">
+                    <h3 class="text-lg font-semibold text-gray-700 mb-2">1. Define Your Current Skills</h3>
+                    <div class="flex space-x-2">
+                        <input id="skill-input" type="text" placeholder="e.g., Financial Modeling, Python" class="flex-grow border border-gray-300 p-2 rounded-lg focus:ring-purple-500 focus:border-purple-500">
+                        <button onclick="addSkill()" class="bg-purple-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-purple-700 transition"><i class="fas fa-plus"></i></button>
+                    </div>
                 </div>
-                <div class="flex-1 bg-gray-100 rounded-lg p-4 text-center">
-                    <span class="text-2xl font-bold text-purple-700">1</span>
-                    <p class="text-gray-600">Mentorship Sessions</p>
+
+                <!-- Skills List -->
+                <div class="mb-6">
+                    <h3 class="text-lg font-semibold text-gray-700 mb-2">Your Profiled Skills</h3>
+                    <ul id="skills-list" class="space-y-2 max-h-40 overflow-y-auto pr-2">
+                        <!-- Skills rendered here by JS -->
+                    </ul>
+                </div>
+                
+                <!-- Career Development Status -->
+                <h3 class="text-lg font-semibold text-gray-700 mb-2">Career Development Status</h3>
+                <div id="capstone-status" class="bg-gray-50 p-4 rounded-lg border">
+                    <p class="text-sm font-medium text-gray-600 mb-2">Capstone Project Status:</p>
+                    <span id="capstone-status-badge">Not Started</span>
+                    <div class="mt-3 flex flex-wrap gap-2">
+                        <button onclick="simulateCapstoneUpdate('In Progress')" class="text-xs bg-yellow-500 text-white px-3 py-1 rounded hover:bg-yellow-600 transition">Start/Update</button>
+                        <button onclick="simulateCapstoneUpdate('Submitted')" class="text-xs bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600 transition">Submit for Audit</button>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- 2. CAREER PATHWAY MATCHING & GEOMETRY -->
+            <div class="lg:col-span-1 bg-white rounded-xl shadow-2xl p-6 h-full">
+                <h2 class="text-2xl font-bold text-gray-800 mb-4 flex items-center"><i class="fas fa-route text-green-500 mr-2"></i> Pathway & Geometry Matching</h2>
+                
+                <h3 class="text-lg font-semibold text-gray-700 mb-2">2. Match to Market Geometry</h3>
+                <div class="space-y-4">
+                    <div id="pathway-container" class="min-h-[100px] flex flex-col justify-center items-center">
+                        <!-- Pathway card rendered here by JS -->
+                        <p class="text-center text-gray-500 italic">Define your skills and click 'Find Pathway' to see matches.</p>
+                    </div>
+                    
+                    <button onclick="findPathway()" class="w-full bg-green-600 text-white py-3 rounded-lg font-extrabold text-lg hover:bg-green-700 transition shadow-lg">
+                        <i class="fas fa-search-location mr-2"></i> Find Best Career Pathway
+                    </button>
+                    
+                    <p class="text-sm text-gray-600 mt-4 border-t pt-4">
+                        <span class="font-bold text-purple-600">Geometry Check:</span> Matches your skills to available, high-demand roles across Botswana's key economic sectors (Mining, Finance, Energy).
+                    </p>
                 </div>
             </div>
+
+            <!-- 3. JOB PLACEMENT & RELEVANCE -->
+            <div class="lg:col-span-1 bg-white rounded-xl shadow-2xl p-6 h-full">
+                <h2 class="text-2xl font-bold text-gray-800 mb-4 flex items-center"><i class="fas fa-briefcase text-blue-500 mr-2"></i> Live Job Matches</h2>
+                
+                <h3 class="text-lg font-semibold text-gray-700 mb-2">3. Verified Opportunities (Top Matches)</h3>
+                
+                <ul id="job-matches-list" class="divide-y divide-gray-200">
+                    <!-- Job matches rendered here by JS -->
+                </ul>
+
+                <div class="mt-6 pt-4 border-t">
+                    <h3 class="text-lg font-semibold text-gray-700 mb-2">Need Help?</h3>
+                    <p class="text-sm text-gray-600 mb-3">Our AI Mentor can help refine your skills or answer career questions.</p>
+                    <button class="w-full bg-blue-600 text-white py-2 rounded-lg font-semibold hover:bg-blue-700 transition">
+                        <i class="fas fa-comments mr-2"></i> Chat with EmpowerHer AI
+                    </button>
+                </div>
+            </div>
+
         </div>
     </main>
 
     <!-- Footer -->
-    <footer class="bg-gray-800 text-white py-8 fixed bottom-0 left-0 w-full">
-        <div class="container mx-auto px-4 md:px-6 text-center">
-            <p>&copy; 2025 EmpowerHer Pathways. All Rights Reserved.</p>
+    <footer class="bg-gray-800 text-white py-4 mt-8">
+        <div class="container mx-auto px-4 md:px-6 text-center text-sm">
+            <p>&copy; 2025 EmpowerHer Pathways. Acting as an HR Tool for the Future of Botswana Talent.</p>
         </div>
     </footer>
-    <script type="module" src="dashboard.js"></script>
+    
+    <!-- Profile Modal Structure -->
+    <div id="profile-modal-overlay" class="modal-overlay" onclick="if(event.target.id === 'profile-modal-overlay') closeProfileModal()">
+        <div class="modal-container">
+            <button class="modal-close-button" onclick="closeProfileModal()"><i class="fas fa-times text-2xl"></i></button>
+            <h2 class="text-2xl font-bold text-purple-700 mb-6">Edit Your Professional Profile</h2>
+            
+            <form id="profile-form" class="space-y-4">
+                <!-- Full Name -->
+                <div>
+                    <label for="profile-full-name" class="block text-sm font-medium text-gray-700">Full Name</label>
+                    <input type="text" id="profile-full-name" class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm p-3 focus:border-purple-500 focus:ring-purple-500" required>
+                </div>
+
+                <!-- Email & Location (Grid) -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label for="profile-email" class="block text-sm font-medium text-gray-700">Email Address (Optional)</label>
+                        <input type="email" id="profile-email" class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm p-3 focus:border-purple-500 focus:ring-purple-500">
+                    </div>
+                    <div>
+                        <label for="profile-location" class="block text-sm font-medium text-gray-700">Current Location</label>
+                        <select id="profile-location" class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm p-3 focus:border-purple-500 focus:ring-purple-500">
+                            <option value="Gaborone">Gaborone</option>
+                            <option value="Francistown">Francistown</option>
+                            <option value="Selebi-Phikwe">Selebi-Phikwe</option>
+                            <option value="Maun">Maun</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Desired Role -->
+                <div>
+                    <label for="profile-desired-role" class="block text-sm font-medium text-gray-700">Desired Career Focus (e.g., Senior Analyst, Project Lead)</label>
+                    <input type="text" id="profile-desired-role" class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm p-3 focus:border-purple-500 focus:ring-purple-500" placeholder="Helps our AI match you better">
+                </div>
+
+                <!-- Bio -->
+                <div>
+                    <label for="profile-bio" class="block text-sm font-medium text-gray-700">Professional Summary / Bio</label>
+                    <textarea id="profile-bio" rows="4" class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm p-3 focus:border-purple-500 focus:ring-purple-500" placeholder="A brief overview of your experience and where you want to go."></textarea>
+                </div>
+
+                <!-- Save Button -->
+                <button type="button" onclick="saveProfile()" class="w-full bg-purple-600 text-white py-3 rounded-lg font-semibold hover:bg-purple-700 transition shadow-lg mt-6">
+                    <i class="fas fa-save mr-2"></i> Save Profile & Update Dashboard
+                </button>
+            </form>
+        </div>
+    </div>
 </body>
 </html>

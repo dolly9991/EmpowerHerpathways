@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employer Dashboard - EmpowerHer Pathways</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body class="bg-gray-100 font-inter">
+
+<!-- LAYOUT -->
+<div class="flex h-screen">
+
+    <!-- SIDEBAR -->
+    <aside class="w-64 bg-white shadow-md p-6 space-y-6">
+        <div class="flex items-center space-x-3">
+            <img src="images/logo.jpg" class="w-12 h-12 rounded-full">
+            <h2 class="text-xl font-bold text-purple-600">Employer Hub</h2>
+        </div>
+
+        <nav class="space-y-4">
+            <a href="#" class="flex items-center space-x-3 text-purple-600 font-semibold">
+                <i class="fa fa-home"></i><span>Dashboard</span>
+            </a>
+            <a href="#" class="flex items-center space-x-3 text-gray-700 hover:text-purple-500">
+                <i class="fa fa-bullhorn"></i><span>Post a Job</span>
+            </a>
+            <a href="#" class="flex items-center space-x-3 text-gray-700 hover:text-purple-500">
+                <i class="fa fa-list"></i><span>Manage Jobs</span>
+            </a>
+            <a href="#" class="flex items-center space-x-3 text-gray-700 hover:text-purple-500">
+                <i class="fa fa-users"></i><span>Applicants</span>
+            </a>
+            <a href="#" class="flex items-center space-x-3 text-gray-700 hover:text-purple-500">
+                <i class="fa fa-chalkboard-teacher"></i><span>Seminars</span>
+            </a>
+            <a href="#" class="flex items-center space-x-3 text-gray-700 hover:text-purple-500">
+                <i class="fa fa-cog"></i><span>Settings</span>
+            </a>
+            <a href="#" class="flex items-center space-x-3 text-gray-700 hover:text-red-500 pt-10">
+                <i class="fa fa-sign-out"></i><span>Logout</span>
+            </a>
+        </nav>
+    </aside>
+
+    <!-- MAIN AREA -->
+    <main class="flex-1 p-8 overflow-y-auto">
+
+        <!-- HEADER -->
+        <div class="flex justify-between items-center mb-8">
+            <div>
+                <h1 class="text-3xl font-bold text-gray-800">Welcome, InnovateCo!</h1>
+                <p class="text-gray-600 text-sm">Here is your employer activity overview.</p>
+            </div>
+            <img src="https://placehold.co/50x50" class="w-12 h-12 rounded-full border">
+        </div>
+
+        <!-- KPI CARDS -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+            <div class="bg-white p-6 rounded-lg shadow flex items-center space-x-4">
+                <i class="fa fa-briefcase text-purple-600 text-3xl"></i>
+                <div>
+                    <h3 class="text-gray-600 text-sm">Active Job Posts</h3>
+                    <p class="text-2xl font-bold text-gray-800">3</p>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow flex items-center space-x-4">
+                <i class="fa fa-user-tie text-purple-600 text-3xl"></i>
+                <div>
+                    <h3 class="text-gray-600 text-sm">New Applicants</h3>
+                    <p class="text-2xl font-bold text-gray-800">18</p>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow flex items-center space-x-4">
+                <i class="fa fa-chart-line text-purple-600 text-3xl"></i>
+                <div>
+                    <h3 class="text-gray-600 text-sm">Interview Invites Sent</h3>
+                    <p class="text-2xl font-bold text-gray-800">5</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ANALYTICS AND NOTIFICATIONS -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-10">
+
+            <!-- Chart -->
+            <div class="bg-white col-span-2 p-6 rounded-lg shadow">
+                <h3 class="text-lg font-semibold mb-4 text-gray-800">Monthly Applicant Trends</h3>
+                <canvas id="employerChart" height="150"></canvas>
+            </div>
+
+            <!-- Notifications -->
+            <div class="bg-white p-6 rounded-lg shadow">
+                <h3 class="text-lg font-semibold mb-4 text-gray-800">Notifications</h3>
+                <ul class="space-y-4 text-sm">
+                    <li class="flex items-start space-x-3">
+                        <i class="fa fa-bell text-purple-500"></i>
+                        <span>New applicant for *Project Coordinator*.</span>
+                    </li>
+                    <li class="flex items-start space-x-3">
+                        <i class="fa fa-bell text-purple-500"></i>
+                        <span>*Digital Marketing Specialist* post is about to expire.</span>
+                    </li>
+                    <li class="flex items-start space-x-3">
+                        <i class="fa fa-bell text-purple-500"></i>
+                        <span>Your seminar proposal is under review.</span>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+
+        <!-- MANAGE JOBS -->
+        <div class="mb-10">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-2xl font-bold text-gray-800">Active Job Posts</h2>
+                <button class="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700">
+                    + Post New Job
+                </button>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow divide-y">
+                <div class="py-4 flex justify-between items-center">
+                    <div>
+                        <p class="font-semibold">Project Coordinator</p>
+                        <p class="text-sm text-gray-600">12 Applicants • Posted 2 weeks ago</p>
+                    </div>
+                    <button class="text-purple-600 hover:text-purple-800">Manage</button>
+                </div>
+
+                <div class="py-4 flex justify-between items-center">
+                    <div>
+                        <p class="font-semibold">HR Manager</p>
+                        <p class="text-sm text-gray-600">4 Applicants • Posted 1 week ago</p>
+                    </div>
+                    <button class="text-purple-600 hover:text-purple-800">Manage</button>
+                </div>
+
+                <div class="py-4 flex justify-between items-center">
+                    <div>
+                        <p class="font-semibold">Finance Assistant</p>
+                        <p class="text-sm text-gray-600">2 Applicants • Posted 3 days ago</p>
+                    </div>
+                    <button class="text-purple-600 hover:text-purple-800">Manage</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- APPLICANTS TABLE -->
+        <div class="mb-10">
+            <h2 class="text-2xl font-bold mb-4 text-gray-800">Recent Applicants</h2>
+
+            <div class="bg-white p-6 rounded-lg shadow overflow-x-auto">
+                <table class="min-w-full text-left">
+                    <thead>
+                        <tr class="border-b">
+                            <th class="py-3 text-gray-700">Applicant</th>
+                            <th class="py-3 text-gray-700">Position</th>
+                            <th class="py-3 text-gray-700">Experience</th>
+                            <th class="py-3 text-gray-700">Status</th>
+                            <th class="py-3"></th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-sm">
+                        <tr class="border-b">
+                            <td class="py-4">Neo Botho</td>
+                            <td>Project Coordinator</td>
+                            <td>3 years</td>
+                            <td><span class="text-yellow-600 font-semibold">Under Review</span></td>
+                            <td><button class="text-purple-600 hover:text-purple-800">View</button></td>
+                        </tr>
+                        <tr class="border-b">
+                            <td class="py-4">Sarah Mogomotsi</td>
+                            <td>Finance Assistant</td>
+                            <td>5 years</td>
+                            <td><span class="text-green-600 font-semibold">Interview Scheduled</span></td>
+                            <td><button class="text-purple-600 hover:text-purple-800">View</button></td>
+                        </tr>
+                        <tr>
+                            <td class="py-4">Jennifer Moji</td>
+                            <td>HR Manager</td>
+                            <td>8 years</td>
+                            <td><span class="text-red-600 font-semibold">Rejected</span></td>
+                            <td><button class="text-purple-600 hover:text-purple-800">View</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- SEMINARS -->
+        <div class="mb-10">
+            <h2 class="text-2xl font-bold mb-4 text-gray-800">Upcoming Seminars</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+                <div class="bg-white p-6 rounded-lg shadow">
+                    <h4 class="font-semibold">Creating Inclusive Workplaces</h4>
+                    <p class="text-gray-600 text-sm mb-2">June 10, 2025</p>
+                    <button class="text-purple-600 hover:text-purple-800">View Details</button>
+                </div>
+
+                <div class="bg-white p-6 rounded-lg shadow">
+                    <h4 class="font-semibold">Hiring Returners: Best Practices</h4>
+                    <p class="text-gray-600 text-sm mb-2">June 25, 2025</p>
+                    <button class="text-purple-600 hover:text-purple-800">View Details</button>
+                </div>
+
+            </div>
+        </div>
+
+    </main>
+</div>
+
+<script>
+var ctx = document.getElementById('employerChart');
+new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
+        datasets: [{
+            label: "Applicants",
+            data: [10, 14, 8, 20, 16, 25],
+            borderWidth: 1,
+        }]
+    }
+});
+</script>
+
+</body>
+</html>
