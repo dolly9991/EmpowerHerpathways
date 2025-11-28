@@ -74,7 +74,6 @@
         #hero {
             background: linear-gradient(135deg, rgba(13, 17, 23, 1) 0%, rgba(22, 27, 34, 1) 100%);
             /* Using a placeholder for visual depth, replace with a subtle pattern or image if possible */
-            background-image: url("https://placehold.co/1920x1080/0d1117/00bcd4?text=EMPOWERHER+PATHWAYS");
             background-size: cover;
             background-position: center;
         }
@@ -91,12 +90,17 @@
                 
                 <!-- Desktop Navigation -->
                 <nav class="hidden md:flex space-x-6">
-                    <a href="#problem" class="nav-link">Problem</a>
-                    <a href="#solution" class="nav-link">Solution</a>
-                    <a href="#market" class="nav-link">Market</a>
-                    <a href="#traction" class="nav-link">Traction</a>
-                    <a href="#team" class="nav-link">Team</a>
-                    <a href="#ask" class="nav-link font-bold text-white">The Ask</a>
+                    <a href="#context" class="nav-link font-bold text-white">0.</a>
+                    <a href="#problem" class="nav-link font-bold text-white">1.</a>
+                    <a href="#solution" class="nav-link font-bold text-white">2.</a>
+                    <a href="#competition" class="nav-link font-bold text-white">3.</a>
+                    <a href="#traction" class="nav-link font-bold text-white">4.</a>
+                    <a href="#market" class="nav-link font-bold text-white">5.</a>
+                    <a href="#financials" class="nav-link font-bold text-white">6.</a>
+                    <a href="#ask" class="nav-link font-bold text-white">7.</a>
+                    <a href="#next-steps" class="nav-link font-bold text-white">8.</a>
+                    <a href="#team" class="nav-link font-bold text-white">9.</a>
+                    <a href="#contact" class="nav-link font-bold text-white">10.</a>
                 </nav>
 
                 <!-- Mobile Menu Button -->
@@ -109,12 +113,17 @@
         <!-- Mobile Menu Dropdown -->
         <div id="mobile-menu" class="hidden md:hidden bg-black/90 pb-3">
             <a href="#problem" class="block px-4 py-2 text-sm nav-link">Problem</a>
+            <a href="#context" class="block px-4 py-2 text-sm nav-link">context</a>
             <a href="#solution" class="block px-4 py-2 text-sm nav-link">Solution</a>
-            <a href="#market" class="block px-4 py-2 text-sm nav-link">Market</a>
+            <a href="#competition" class="block px-4 py-2 text-sm nav-link">competition</a>
             <a href="#traction" class="block px-4 py-2 text-sm nav-link">Traction</a>
+            <a href="#market" class="block px-4 py-2 text-sm nav-link">Market</a>
+            <a href="#financials" class="block px-4 py-2 text-sm nav-link">financials</a>
+            <a href="#ask" class="block px-4 py-2 text-sm nav-link">Ask</a>
+            <a href="#next-steps" class="block px-4 py-2 text-sm font-bold text-white">next</a>
             <a href="#team" class="block px-4 py-2 text-sm nav-link">Team</a>
-            <a href="#ask" class="block px-4 py-2 text-sm font-bold text-white">The Ask</a>
-        </div>
+            <a href="#contact" class="block px-4 py-2 text-sm font-bold text-white">contact</a>
+        </div></div>
     </header>
 
     <!-- 1. Hero / Title Slide -->
@@ -135,7 +144,38 @@
         </div>
     </section>
 
-    <!-- 2. Problem Slide -->
+    <!-- 2: Context / The Paradox Slide-->
+        <section id="context" class="py-20 bg-gray-900/50">
+                    <div class="max-w-5xl mx-auto pitch-card">
+
+            <h2 class="text-5xl font-bold mb-12 text-center text-white" style="color: var(--primary-color);">
+                Botswana's Employment Paradox
+            </h2>
+            <div class="max-w-6xl mx-auto grid md:grid-cols-3 gap-8 text-center">
+                
+                <div class="problem-stat-box p-6 rounded-xl shadow-2xl">
+                    <p class="text-6xl font-extrabold ai-gradient" style="color: var(--primary-color);">+12.5%</p>
+                    <p class="text-lg mt-2 text-gray-300">Growth in Unemployed Population (to 275,160)</p>
+                </div>
+                
+                <div class="problem-stat-box p-6 rounded-xl shadow-2xl">
+                    <p class="text-6xl font-extrabold ai-gradient" style="color: var(--primary-color);">+0.5%</p>
+                    <p class="text-lg mt-2 text-gray-300">Growth in Employed Population (to 788,616)</p>
+                </div>
+
+                <div class="problem-stat-box p-6 rounded-xl shadow-2xl">
+                    <p class="text-6xl font-extrabold text-red-400">26.7%</p>
+                    <p class="text-lg mt-2 text-gray-300">Female Unemployment Rate (Higher than national average)</p>
+                </div>
+            </div>
+            <p class="text-xl text-center text-gray-400 mt-12 max-w-4xl">
+                Companies overpay for ex-pat talent while our skilled, local professionals (especially women) are locked out.
+            </p>
+            <p class="text-sm text-gray-500 mt-4">Source: Statistics Botswana, Q3 2023, <b>UNDP Indicators</b></p>
+                    </div>
+        </section>
+
+    <!-- 3. Problem Slide -->
     <section id="problem" class="py-20 bg-gray-900/50">
         <div class="max-w-5xl mx-auto pitch-card">
             <h2 class="pitch-title"><i class="fas fa-exclamation-triangle mr-3"></i> The Problem: High Risk, Low Visibility</h2>
@@ -163,97 +203,63 @@
         </div>
     </section>
 
-    <!-- 3. Solution Slide -->
+    <!-- 4. Solution Slide -->
     <section id="solution" class="py-20 bg-gray-900">
         <div class="max-w-5xl mx-auto pitch-card">
             <h2 class="pitch-title"><i class="fas fa-shield-alt mr-3"></i> The Solution: Verified Placements (Our Moat)</h2>
-            <p class="pitch-subtitle mb-6 text-center text-xl">
-                We are a <b>talent de-risking engine</b> built on a proprietary, three-stage vetting platform.
-            </p>
+            <div class="max-w-6xl mx-auto grid lg:grid-cols-4 md:grid-cols-2 gap-8 text-center">  
+                <div class="p-6 rounded-xl bg-gray-800 shadow-2xl transition duration-300 hover:bg-cyan-900/40">
+                    <div class="text-5xl ai-gradient mb-4"><i class="fas fa-microchip" style="color: var(--primary-color);"></i></div>
+                    <h3 class="text-xl font-semibold mb-2 text-white">1. AI Talent Vault & Tracking</h3>
+                    <p class="text-gray-400 text-sm">We track the professional's pre-break information and manage their profile during the career break, allowing for <b>immediate onboarding after graduation</b> or break.</p>
+                </div>
+                
+                <div class="p-6 rounded-xl bg-gray-800 shadow-2xl transition duration-300 hover:bg-cyan-900/40">
+                    <div class="text-5xl ai-gradient mb-4"><i class="fas fa-brain" style="color: var(--primary-color);"></i></div>
+                    <h3 class="text-xl font-semibold mb-2 text-white">2. Psychometric Profiling & Skills Matching</h3>
+                    <p class="text-gray-400 text-sm">AI defines current skills, provides <b>psychometric tests for best placement</b>, and matches them to personalized career paths.</p>
+                </div>
+                
+                <div class="p-6 rounded-xl bg-gray-800 shadow-2xl transition duration-300 hover:bg-cyan-900/40">
+                    <div class="text-5xl ai-gradient mb-4"><i class="fas fa-clipboard-check" style="color: var(--primary-color);"></i></div>
+                    <h3 class="text-xl font-semibold mb-2 text-white">3. Verification: Audited Capstone</h3>
+                    <p class="text-gray-400 text-sm">Users complete a real-world project, audited by senior professionals, providing <b>verifiable proof of skill</b>.</p>
+                </div>
 
-            <div class="grid md:grid-cols-3 gap-6 mt-8 text-center">
-                <div class="p-6 bg-gray-800 rounded-xl shadow-lg border border-gray-700">
-                    <i class="fas fa-cogs text-4xl mb-3" style="color: var(--primary-color);"></i>
-                    <h4 class="font-bold text-xl mb-2">1. Skill Audit & Matching</h4>
-                    <p class="text-sm">AI defines current skills and matches them to high-demand career paths using market data.</p>
-                </div>
-                <div class="p-6 bg-gray-800 rounded-xl shadow-lg border border-gray-700">
-                    <i class="fas fa-check-circle text-4xl mb-3" style="color: var(--primary-color);"></i>
-                    <h4 class="font-bold text-xl mb-2">2. Verification: Audited Capstone</h4>
-                    <p class="text-sm">Users complete real-world projects, which are <b>audited by a network of senior professionals</b>, providing verifiable proof of skill.</p>
-                </div>
-                <div class="p-6 bg-gray-800 rounded-xl shadow-lg border border-gray-700">
-                    <i class="fas fa-id-card-alt text-4xl mb-3" style="color: var(--primary-color);"></i>
-                    <h4 class="font-bold text-xl mb-2">3. Verified Placement Profile</h4>
-                    <p class="text-sm">The client receives a <b>tamper-proof digital record</b>—a guaranteed profile that meets specific technical and compliance requirements.</p>
+                <div class="p-6 rounded-xl bg-gray-800 shadow-2xl transition duration-300 hover:bg-cyan-900/40">
+                    <div class="text-5xl ai-gradient mb-4"><i class="fas fa-user-tie" style="color: var(--primary-color);"></i></div>
+                    <h3 class="text-xl font-semibold mb-2 text-white">4. Placement & Development</h3>
+                    <p class="text-gray-400 text-sm">We actively place certified talent, turning the D&I mandate into a high-value talent solution.</p>
                 </div>
             </div>
             <p class="mt-8 text-center text-xl font-semibold text-green-400">
-                The result: Clients hire with a <b>zero-risk guarantee</b> that transforms D&I compliance from a liability into a high-value talent acquisition strategy.
+                The result: Clients hire with a <b>zero-risk guarantee</b> that transforms Diversity and Inclusion (D&I) compliance from a liability into a high-value talent acquisition strategy.
             </p>
         </div>
     </section>
     
-    <!-- 4. Market & Value Proposition (Updated with TAM, SAM, SOM) -->
-    <section id="market" class="py-20 bg-gray-900/50">
+    <!-- 5. Competition & Technology Moat -->
+    <section id="competition" class="py-20 bg-gray-900/50">
         <div class="max-w-5xl mx-auto pitch-card">
-            <h2 class="pitch-title"><i class="fas fa-chart-area mr-3"></i> Market Sizing: Focus on Immediate Value</h2>
-            <p class="pitch-subtitle mb-6 text-center text-xl">
-                Our market strategy is laser-focused on the high-value, compliance-driven enterprise segment.
-            </p>
-
+            <h2 class="pitch-title"><i class="fas fa-cubes mr-3"></i> Competitive Moat</h2>
             <div class="grid md:grid-cols-3 gap-6 mt-8 text-center">
-                
-                <!-- TAM -->
-                <div class="p-6 bg-gray-800 rounded-xl shadow-lg border-b-4 border-red-500">
-                    <h4 class="font-extrabold text-2xl text-red-400 mb-2">TAM</h4>
-                    <p class="text-sm italic mb-3">Total Addressable Market</p>
-                    <p class="font-bold text-xl">All African Enterprises</p>
-                    <p class="text-md mt-1">Total revenue opportunity if 100% of companies adopted our solution.</p>
+                <div class="p-4 bg-gray-800 rounded-xl">
+                    <h4 class="font-bold text-xl mb-2 text-red-400">Traditional Recruitment</h4>
+                    <p class="text-sm">High fees, zero verification, slow process, no compliance guarantee.</p>
                 </div>
-                
-                <!-- SAM -->
-                <div class="p-6 bg-gray-800 rounded-xl shadow-lg border-b-4 border-yellow-500">
-                    <h4 class="font-extrabold text-2xl text-yellow-400 mb-2">SAM</h4>
-                    <p class="text-sm italic mb-3">Serviceable Addressable Market</p>
-                    <p class="font-bold text-xl">Botswana Large Enterprises (~150)</p>
-                    <p class="text-md mt-1">Focus on Finance, Mining, and Telco with strong HRDC compliance needs.</p>
+                <div class="p-4 bg-gray-800 rounded-xl">
+                    <h4 class="font-bold text-xl mb-2 text-red-400">Job Boards / LinkedIn</h4>
+                    <p class="text-sm">High volume, zero filter, no standardized skill data, high risk for enterprise.</p>
                 </div>
-
-                <!-- SOM -->
-                <div class="p-6 bg-gray-800 rounded-xl shadow-lg border-b-4 border-green-500">
-                    <h4 class="font-extrabold text-2xl text-green-400 mb-2">SOM</h4>
-                    <p class="text-sm italic mb-3">Serviceable Obtainable Market (Year 1)</p>
-                    <p class="font-bold text-xl">24 Placements / BWP 2.88M</p>
-                    <p class="text-md mt-1">Our achievable target for the first 12 months with focused sales efforts.</p>
+                <div class="p-4 bg-gray-800 rounded-xl border-2 border-green-500">
+                    <h4 class="font-bold text-xl mb-2" style="color: var(--primary-color);">EmpowerHer Pathways (Verified Placements)</h4>
+                    <p class="text-sm font-bold text-green-300">Low Fee, <b>100% Verified Skill Data</b>, Compliance Guarantee, Speed.</p>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <!-- 5. Business Model & Financials -->
-    <section id="financials" class="py-20 bg-gray-900">
-        <div class="max-w-5xl mx-auto pitch-card">
-            <h2 class="pitch-title"><i class="fas fa-dollar-sign mr-3"></i> Business Model & Financials</h2>
-            <div class="grid md:grid-cols-2 gap-8 mt-8">
-                <div>
-                    <h3 class="pitch-subtitle mb-3">High-Margin Revenue Streams</h3>
-                    <ul class="space-y-4 text-lg">
-                        <li><span class="font-bold" style="color: var(--primary-color);">SaaS Subscription:</span> Annual access fee for the verified talent database and compliance dashboard.</li>
-                        <li><span class="font-bold" style="color: var(--primary-color);">Placement Success Fee:</span> A tiered fee (approx. BWP 120,000 per placement) upon successful hire, significantly lower than traditional recruitment firms.</li>
-                    </ul>
-                    <p class="mt-4 text-sm text-gray-400 italic">Average Revenue Per Customer (ARPC) is high, reflecting the B2B enterprise focus.</p>
-                </div>
-                <div>
-                    <h3 class="pitch-subtitle mb-3">Key Financial Metrics (Year 1 Conservative Model)</h3>
-                    <ul class="space-y-4 text-lg font-mono bg-gray-800 p-4 rounded-xl">
-                        <li><span class="font-bold w-1/2 inline-block">Break-Even Point:</span> <b>Month 6</b></li>
-                        <li><span class="font-bold w-1/2 inline-block">Total Revenues (Y1):</span> <b>BWP 2,880,000</b></li>
-                        <li><span class="font-bold w-1/2 inline-block">Net Income (Y1):</span> <b>BWP 392,020</b></li>
-                        <li><span class="font-bold w-1/2 inline-block">Subscribers/Placements:</span> <b>24</b></li>
-                    </ul>
-                </div>
-            </div>
+            <h3 class="pitch-subtitle mt-8 mb-4 text-center">Technology Moat</h3>
+            <p class="text-lg text-center font-semibold">
+                Our proprietary <b>Audit Network and Data Certification system</b> provides the crucial verification step that traditional recruiters and job boards can never replicate, making us the <b>only</b> B2B solution for guaranteed compliance hiring.
+            </p>
         </div>
     </section>
 
@@ -284,69 +290,90 @@
             </ul>
         </div>
     </section>
-
-    <!-- 7. Team Slide (Updated Team) -->
-    <section id="team" class="py-20 bg-gray-900">
+     
+    <!-- 7.     Market & Value Proposition (Updated with TAM, SAM, SOM) -->
+    <section id="market" class="py-20 bg-gray-900/50">
         <div class="max-w-5xl mx-auto pitch-card">
-            <h2 class="pitch-title"><i class="fas fa-users mr-3"></i> The Team: Execution and Vision</h2>
-            <p class="pitch-subtitle mb-6">Our core team combines deep financial expertise with critical technical oversight.</p>
-            
-            <div class="space-y-6">
-                <!-- Botho Neo Profile -->
-                <div class="flex flex-col md:flex-row items-center p-6 bg-gray-800 rounded-xl shadow-xl border-l-4 border-indigo-400">
-                        <img src="neo.jpg" alt="Botho Neo Profile" class="flex-shrink-0 w-24 h-24 rounded-full mx-auto mb-4 border-4 border-primary-color shadow-lg object-cover" onerror="this.onerror=null;this.src='neo.jpg';" loading="lazy">
-                    <div class="md:ml-6 text-center md:text-left">
-                        <h3 class="text-2xl font-bold" style="color: var(--primary-color);">Botho Neo - Founder & CEO</h3>
-                        <p class="text-md italic text-gray-400">B.S.c. Computing With Finance, UB</p>
-                        <p class="mt-2 text-lg"><b>Expertise:</b> B2B Enterprise Sales, Financial Modeling, HRDC Compliance Strategy, and Executive Leadership. The visionary driving revenue.</p>
-                    </div>
-                </div>
-
-                <!-- Unity Ndimande Profile -->
-                <div class="flex flex-col md:flex-row items-center p-6 bg-gray-800 rounded-xl shadow-xl border-l-4 border-green-400">
-                        <img src="unity.jpg" alt="Unity Ndimande Profile" class="flex-shrink-0 w-24 h-24 rounded-full mx-auto mb-4 border-4 border-primary-color shadow-lg object-cover" onerror="this.onerror=null;this.src='unity.jpg';" loading="lazy">
-
-                    <div class="md:ml-6 text-center md:text-left">
-                        <h3 class="text-2xl font-bold" style="color: var(--primary-color);">Unity Ndimande - Technical Lead</h3>
-                        <p class="text-md italic text-gray-400">B.S.c Biomathematics, BUAN</p>
-                        <p class="mt-2 text-lg"><b>Expertise:</b> Technical architecture planning, development roadmap management, and ensuring scalable platform execution.</p>
-                    </div>
-                </div>
-            </div>
-
-            <h3 class="pitch-subtitle mt-8 mb-4">Immediate Team Gap & Need</h3>
-            <div class="p-4 bg-red-900/50 rounded-xl border border-red-500">
-                <p class="text-lg font-semibold text-red-300">
-                    <i class="fas fa-exclamation-circle mr-2"></i> <b>Critical Hire:</b> We are actively seeking a dedicated Lead Developer/CTO to join Unity and accelerate platform development, funded by the seed round.
-                </p>
-            </div>
-        </div>
-    </section>
-
-    <!-- 8. Competition & Technology Moat -->
-    <section id="competition" class="py-20 bg-gray-900/50">
-        <div class="max-w-5xl mx-auto pitch-card">
-            <h2 class="pitch-title"><i class="fas fa-cubes mr-3"></i> Competitive Moat</h2>
-            <div class="grid md:grid-cols-3 gap-6 mt-8 text-center">
-                <div class="p-4 bg-gray-800 rounded-xl">
-                    <h4 class="font-bold text-xl mb-2 text-red-400">Traditional Recruitment</h4>
-                    <p class="text-sm">High fees, zero verification, slow process, no compliance guarantee.</p>
-                </div>
-                <div class="p-4 bg-gray-800 rounded-xl">
-                    <h4 class="font-bold text-xl mb-2 text-red-400">Job Boards / LinkedIn</h4>
-                    <p class="text-sm">High volume, zero filter, no standardized skill data, high risk for enterprise.</p>
-                </div>
-                <div class="p-4 bg-gray-800 rounded-xl border-2 border-green-500">
-                    <h4 class="font-bold text-xl mb-2" style="color: var(--primary-color);">EmpowerHer Pathways (Verified Placements)</h4>
-                    <p class="text-sm font-bold text-green-300">Low Fee, <b>100% Verified Skill Data</b>, Compliance Guarantee, Speed.</p>
-                </div>
-            </div>
-            <h3 class="pitch-subtitle mt-8 mb-4 text-center">Technology Moat</h3>
-            <p class="text-lg text-center font-semibold">
-                Our proprietary <b>Audit Network and Data Certification system</b> provides the crucial verification step that traditional recruiters and job boards can never replicate, making us the <b>only</b> B2B solution for guaranteed compliance hiring.
+            <h2 class="pitch-title"><i class="fas fa-chart-area mr-3"></i> Market Sizing: Focus on Immediate Value</h2>
+            <p class="pitch-subtitle mb-6 text-center text-xl">
+                    We target the high-growth sectors of Tech, Finance, and Mining in Botswana and the SADC region, where the need for certified, senior local talent is critical.
             </p>
+                
+               <div class="flex justify-center items-end h-80 space-x-4">
+                    <!-- TAM -->
+                    <div class="relative flex flex-col justify-end items-center w-1/4 h-full">
+                        <div class="w-full bg-blue-700/80 rounded-t-lg h-full p-2 flex flex-col justify-end">
+                            <p class="text-lg font-bold text-white">P 10.0B+</p>
+                        </div>
+                        <p class="text-2xl font-bold mt-2 text-white">TAM</p>
+                        <p class="text-sm text-gray-400">Total Available Market (Global Re-entry)</p>
+                    </div>
+                    <!-- SAM -->
+                    <div class="relative flex flex-col justify-end items-center w-1/4 h-3/4">
+                        <div class="w-full bg-cyan-600 rounded-t-lg h-full p-2 flex flex-col justify-end">
+                            <p class="text-lg font-bold text-white">P 500M</p>
+                        </div>
+                        <p class="text-2xl font-bold mt-2 text-white">SAM</p>
+                        <p class="text-sm text-gray-400">Serviceable Available Market (SADC)</p>
+                    </div>
+                    <!-- SOM -->
+                    <div class="relative flex flex-col justify-end items-center w-1/4 h-1/2">
+                        <div class="w-full bg-yellow-500/80 rounded-t-lg h-full p-2 flex flex-col justify-end">
+                            <p class="text-lg font-bold text-white">P 23.5M</p>
+                        </div>
+                        <p class="text-2xl font-bold mt-2 text-white">SOM</p>
+                        <p class="text-sm text-gray-400">Serviceable Obtainable Market (Year 3)</p>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
+     
+    
+<!-- 8. Business Model & Financials -->
+    <section id="financials" class="py-20 bg-gray-900">
+        <div class="max-w-5xl mx-auto pitch-card">
+            <h2 class="pitch-title"><i class="fas fa-dollar-sign mr-3"></i> Business Model & Financials</h2>
+                <div class="bg-gray-800 rounded-xl p-6 shadow-2xl">
+                    <div class="grid grid-cols-4 gap-4 text-center border-b border-gray-700 pb-4 mb-4">
+                        <p class="text-xl font-bold text-cyan-400">Metric</p>
+                        <p class="text-xl font-bold text-cyan-400">Year 1 (P)</p>
+                        <p class="text-xl font-bold text-cyan-400">Year 2 (P)</p>
+                        <p class="text-xl font-bold text-cyan-400">Year 3 (P)</p>
+                    </div>
+                    
+                    <div class="grid grid-cols-4 gap-4 py-2 hover:bg-gray-700/50 rounded">
+                        <p class="font-medium">Client Contracts</p>
+                        <p class="text-white">3 Contracts </p>
+                        <p class="text-white">10 Contracts </p>
+                        <p class="text-white">25 Contracts </p>
+                    </div>
+
+                   <div class="grid grid-cols-4 gap-4 py-2 hover:bg-gray-700/50 rounded">
+                        <p class="font-medium">Placements</p>
+                        <p class="text-white">30 Placements</p>
+                        <p class="text-white">100 Placements</p>
+                        <p class="text-white">250 Placements</p>
+                    </div>
+                    
+                    
+                    <div class="grid grid-cols-4 gap-4 py-2 hover:bg-gray-700/50 rounded">
+                        <p class="font-medium">Total Projected Revenue</p>
+                        <p class="text-green-400">~1.9 Million</p>
+                        <p class="text-green-400">~7.9 Million</p>
+                        <p class="text-green-400">~23.5 Million</p>
+                    </div>
+                     <div class="grid grid-cols-4 gap-4 py-2 hover:bg-gray-700/50 rounded">
+                        <p class="font-medium">EBITDA Margin</p>
+                        <p class="text-yellow-400">-10%</p>
+                        <p class="text-yellow-400">15%</p>
+                        <p class="text-yellow-400">28%</p>
+                    </div>
+                    
+                </div>
+                <p class="text-sm text-gray-500 mt-4 text-center">Revenue based on P2.5k B2C fees, P200k-P300k B2B contracts, and 10% placement fees (P40k-P60k avg.).</p>
+            </div>
+        </section>
 
     <!-- 9. The Ask (Funding & Prize) -->
     <section id="ask" class="py-20 bg-gray-900">
@@ -374,18 +401,6 @@
                     <h4 class="font-bold text-3xl" style="color: var(--primary-color);">10%</h4>
                     <p class="text-lg"><b>Legal & Compliance:</b> Finalizing corporate governance and external audit setup.</p>
                 </div>
-            </div>
-
-            <!-- Falling Walls Prize Utilization -->
-            <div class="mt-12 p-6 bg-green-900/50 rounded-xl border border-green-500">
-                <h3 class="pitch-subtitle mb-4 text-green-300"><i class="fas fa-trophy mr-2"></i> Falling Walls Prize Utilization (USD 1,000)</h3>
-                <p class="text-xl font-medium text-gray-200">
-                    The $1,000 prize money will be immediately allocated to <b>critical, non-labor seed expenses</b> to accelerate launch:
-                </p>
-                <ul class="list-disc list-inside text-lg text-left max-w-lg mx-auto mt-4 space-y-2">
-                    <li><b>BWP 8,000 (Approx.):</b> Initial domain registration, cloud hosting setup (AWS/Azure) for the MVP, and purchasing essential developer tools/licenses.</li>
-                    <li>This minimizes operational risk and allows us to focus the BWP 800K seed investment strictly on high-impact personnel (CTO).</li>
-                </ul>
             </div>
         </div>
     </section>
@@ -418,8 +433,46 @@
             </div>
         </div>
     </section>
+    
+    <!-- 11. Team Slide (Updated Team) -->
+    <section id="team" class="py-20 bg-gray-900">
+        <div class="max-w-5xl mx-auto pitch-card">
+            <h2 class="pitch-title"><i class="fas fa-users mr-3"></i> The Team: Execution and Vision</h2>
+            <p class="pitch-subtitle mb-6">Our core team combines deep financial expertise with critical technical oversight.</p>
+            
+            <div class="space-y-6">
+                <!-- Botho Neo Profile -->
+                <div class="flex flex-col md:flex-row items-center p-6 bg-gray-800 rounded-xl shadow-xl border-l-4 border-indigo-400">
+                        <img src="neo.jpg" alt="Botho Neo Profile" class="flex-shrink-0 w-24 h-24 rounded-full mx-auto mb-4 border-4 border-primary-color shadow-lg object-cover" onerror="this.onerror=null;this.src='neo.jpg';" loading="lazy">
+                    <div class="md:ml-6 text-center md:text-left">
+                        <h3 class="text-2xl font-bold" style="color: var(--primary-color);">Botho Neo - Founder </h3>
+                        <p class="text-md italic text-gray-400">B.S.c. Computing With Finance, UB</p>
+                        <p class="mt-2 text-lg"><b>Expertise:</b> Software Developer, B2B Enterprise Sales, Financial Modeling, HRDC Compliance Strategy, and Executive Leadership. The visionary driving revenue.</p>
+                    </div>
+                </div>
 
-    <!-- 11. Conclusion / Contact Slide -->
+                <!-- Unity Ndimande Profile -->
+                <div class="flex flex-col md:flex-row items-center p-6 bg-gray-800 rounded-xl shadow-xl border-l-4 border-green-400">
+                        <img src="unity.jpg" alt="Unity Ndimande Profile" class="flex-shrink-0 w-24 h-24 rounded-full mx-auto mb-4 border-4 border-primary-color shadow-lg object-cover" onerror="this.onerror=null;this.src='unity.jpg';" loading="lazy">
+
+                    <div class="md:ml-6 text-center md:text-left">
+                        <h3 class="text-2xl font-bold" style="color: var(--primary-color);">Unity Ndimande - Technical Lead</h3>
+                        <p class="text-md italic text-gray-400">B.S.c Biomathematics, BUAN</p>
+                        <p class="mt-2 text-lg"><b>Expertise:</b> Technical architecture planning, development roadmap management, and ensuring scalable platform execution.</p>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="pitch-subtitle mt-8 mb-4">Immediate Team Gap & Need</h3>
+            <div class="p-4 bg-red-900/50 rounded-xl border border-red-500">
+                <p class="text-lg font-semibold text-red-300">
+                    <i class="fas fa-exclamation-circle mr-2"></i> <b>Critical Hire:</b> We are actively seeking a dedicated Lead Developer/CTO to join Unity and accelerate platform development, funded by the seed round.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 12. Conclusion / Contact Slide -->
     <section id="contact" class="py-20 bg-gray-900 min-h-[50vh]">
         <div class="max-w-4xl mx-auto pitch-card text-center">
             <h2 class="pitch-title text-5xl sm:text-6xl text-white">Thank You</h2>
