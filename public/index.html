@@ -3,372 +3,715 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EmpowerHer Pathways | Bridging the Professional Gap</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <title>Digital Identity & ePayslip Security Presentation</title>
     <style>
         :root {
-            --primary-purple: #6b21a8; /* Tailwind purple-800 */
-            --secondary-purple: #9333ea; /* Tailwind purple-600 */
-            --light-purple: #f5f3ff;
+            --bg-primary: #0f172a;
+            --bg-card: #1e293b;
+            --accent-blue: #2563eb;
+            --accent-sky: #38bdf8;
+            --accent-green: #22c55e;
+            --accent-red: #ef4444;
+            --accent-amber: #f59e0b;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-color: #334155;
         }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+
         body {
-            font-family: 'Inter', sans-serif;
-            scroll-behavior: smooth;
-            overflow-x: hidden; /* Prevent horizontal scroll */
+            background-color: var(--bg-primary);
+            color: var(--text-main);
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
         }
-        .bg-purple-gradient {
-            background: linear-gradient(135deg, #4c1d95 0%, #7e22ce 100%);
+
+        /* Top Navigation Header */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            background: rgba(15, 23, 42, 0.9);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 10;
         }
-        .text-purple-main { color: var(--primary-purple); }
-        .btn-purple {
-            background-color: var(--primary-purple);
-            transition: all 0.3s ease;
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--accent-sky);
         }
-        .btn-purple:hover {
-            background-color: var(--secondary-purple);
-            transform: translateY(-2px);
+
+        .controls {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
         }
-        .glass-card {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+
+        .btn {
+            background: var(--bg-card);
+            color: var(--text-main);
+            border: 1px solid var(--border-color);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
         }
-        .nav-link:hover {
-            color: var(--primary-purple);
+
+        .btn:hover {
+            background: #2d3d54;
+            border-color: var(--accent-sky);
         }
-        
-        /* Back to Top Button Styles */
-        #backToTop {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background-color: var(--primary-purple);
-            color: white;
+
+        .btn-primary {
+            background: var(--accent-blue);
+            border-color: var(--accent-blue);
+        }
+
+        .btn-primary:hover {
+            background: #1d4ed8;
+        }
+
+        /* Presentation Container */
+        .viewport {
+            flex: 1;
+            position: relative;
             display: flex;
             align-items: center;
             justify-content: center;
-            cursor: pointer;
-            z-index: 1000;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.4s ease;
-            box-shadow: 0 4px 15px rgba(107, 33, 168, 0.3);
-            border: none;
-        }
-        #backToTop.visible {
-            opacity: 1;
-            visibility: visible;
-        }
-        #backToTop:hover {
-            background-color: var(--secondary-purple);
-            transform: translateY(-5px);
+            padding: 2rem;
         }
 
-        /* Fluid typography for larger screens */
-        @media (min-width: 1536px) {
-            h1 { font-size: 4.5rem !important; }
-            .max-w-7xl { max-w-screen-2xl !important; }
+        .slide {
+            position: absolute;
+            width: 100%;
+            max-width: 1100px;
+            height: 100%;
+            max-height: 680px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px) scale(0.98);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .slide.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0) scale(1);
+        }
+
+        /* Typography */
+        h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            line-height: 1.15;
+            margin-bottom: 1rem;
+            background: linear-gradient(to right, #ffffff, var(--accent-sky));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        h2 {
+            font-size: 2.2rem;
+            margin-bottom: 1.5rem;
+            color: #ffffff;
+            border-bottom: 2px solid var(--accent-blue);
+            padding-bottom: 0.5rem;
+            display: inline-block;
+        }
+
+        p.subtitle {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+
+        /* Layout Helpers */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        .grid-4 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.25rem;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Slide 2 Visual Chain */
+        .flow-chain {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .flow-node {
+            background: var(--bg-card);
+            border: 2px solid var(--accent-sky);
+            padding: 2rem 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+            flex: 1;
+            font-weight: 700;
+            font-size: 1.2rem;
+            box-shadow: 0 0 15px rgba(56, 189, 248, 0.1);
+        }
+
+        .flow-arrow {
+            font-size: 2rem;
+            color: var(--accent-sky);
+        }
+
+        /* Game Elements (Slide 4) */
+        .game-card {
+            background: var(--bg-card);
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .password-display {
+            font-family: 'Courier New', monospace;
+            font-size: 2rem;
+            background: #090d16;
+            padding: 1rem;
+            border-radius: 8px;
+            letter-spacing: 2px;
+            margin: 1.5rem 0;
+            color: var(--accent-sky);
+            border: 1px dashed var(--border-color);
+        }
+
+        .game-actions {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .game-btn {
+            padding: 0.75rem 2rem;
+            font-size: 1.1rem;
+            font-weight: 700;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.1s ease;
+        }
+
+        .game-btn:active {
+            transform: scale(0.95);
+        }
+
+        .btn-safe { background: var(--accent-green); color: white; }
+        .btn-risky { background: var(--accent-red); color: white; }
+
+        .game-feedback {
+            min-height: 80px;
+            padding: 1rem;
+            border-radius: 8px;
+            font-weight: 600;
+            display: none;
+        }
+
+        .feedback-safe { background: rgba(34, 197, 94, 0.2); border: 1px solid var(--accent-green); color: #86efac; }
+        .feedback-risky { background: rgba(239, 68, 68, 0.2); border: 1px solid var(--accent-red); color: #fca5a5; }
+
+        /* Portal Walkthrough (Slide 6) */
+        .portal-mock {
+            background: #090d16;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .portal-header {
+            background: var(--bg-card);
+            padding: 0.75rem 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .dot { width: 12px; height: 12px; border-radius: 50%; }
+        .dot-red { background: #ef4444; }
+        .dot-yellow { background: #f59e0b; }
+        .dot-green { background: #22c55e; }
+
+        .portal-tabs {
+            display: flex;
+            border-bottom: 1px solid var(--border-color);
+            background: rgba(30, 41, 59, 0.5);
+        }
+
+        .portal-tab {
+            padding: 0.75rem 1.5rem;
+            cursor: pointer;
+            color: var(--text-muted);
+            border-bottom: 2px solid transparent;
+            font-weight: 600;
+        }
+
+        .portal-tab.active {
+            color: var(--accent-sky);
+            border-bottom-color: var(--accent-sky);
+            background: var(--bg-card);
+        }
+
+        .portal-body {
+            padding: 2rem;
+            min-height: 250px;
+        }
+
+        /* Progress Footer */
+        footer {
+            padding: 1rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(15, 23, 42, 0.9);
+            border-top: 1px solid var(--border-color);
+        }
+
+        .progress-bar {
+            flex: 1;
+            height: 6px;
+            background: var(--bg-card);
+            border-radius: 3px;
+            margin: 0 2rem;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            width: 10%;
+            background: linear-gradient(to right, var(--accent-blue), var(--accent-sky));
+            transition: width 0.3s ease;
+        }
+
+        .slide-number {
+            font-weight: 600;
+            color: var(--text-muted);
+            min-width: 60px;
+        }
+
+        /* Utilities */
+        .icon-box {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            background: rgba(56, 189, 248, 0.1);
+            color: var(--accent-sky);
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
         }
     </style>
 </head>
-<body class="bg-gray-50">
+<body>
 
-    <!-- Navigation -->
-    <nav class="fixed top-0 left-0 w-full z-50 bg-white/90 backdrop-blur-md shadow-sm border-b border-gray-100">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-20 items-center">
-                <div class="flex items-center space-x-2 flex-shrink-0">
-                    <img src="logo.jpg" alt="EmpowerHer Logo" class="w-10 h-10 rounded-lg object-contain shadow-sm" onerror="this.outerHTML='<div class=\'w-10 h-10 bg-purple-800 rounded-lg flex items-center justify-center text-white font-bold\'>EP</div>'">
-                    <span class="text-xl sm:text-2xl font-bold tracking-tight text-gray-900">EmpowerHer <span class="text-purple-700">Pathways</span></span>
-                </div>
-                
-                <!-- Desktop Navigation -->
-                <div class="hidden lg:flex space-x-8 font-medium items-center">
-                    <a href="#about" class="nav-link text-gray-600 transition">About</a>
-                    <a href="#solutions" class="nav-link text-gray-600 transition">Solutions</a>
-                    <a href="#employers" class="nav-link text-gray-600 transition">For Employers</a>
-                    <a href="#contact" class="btn-purple text-white px-6 py-2 rounded-full shadow-md">Join Now</a>
-                </div>
-
-                <!-- Mobile Menu Button -->
-                <div class="lg:hidden flex items-center">
-                    <button id="mobile-menu-button" class="text-gray-600 hover:text-purple-700 focus:outline-none">
-                        <i class="fa-solid fa-bars text-2xl"></i>
-                    </button>
-                </div>
-            </div>
+    <!-- Header Controls -->
+    <header>
+        <div class="brand">
+            <span>🛡️</span> Security Awareness Series
         </div>
-        
-        <!-- Mobile Dropdown -->
-        <div id="mobile-menu" class="hidden lg:hidden bg-white border-t border-gray-100 px-4 py-6 space-y-4 shadow-xl">
-            <a href="#about" class="block text-gray-600 font-medium py-2">About</a>
-            <a href="#solutions" class="block text-gray-600 font-medium py-2">Solutions</a>
-            <a href="#employers" class="block text-gray-600 font-medium py-2">For Employers</a>
-            <a href="#contact" class="block btn-purple text-white px-6 py-3 rounded-xl text-center font-bold">Join Now</a>
+        <div class="controls">
+            <button class="btn" onclick="toggleFullscreen()">🖥️ Fullscreen (F)</button>
         </div>
-    </nav>
-
-    <!-- Hero Section -->
-    <header class="relative pt-32 pb-12 sm:pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div class="grid lg:grid-cols-2 gap-12 xl:gap-20 items-center">
-                <div class="text-center lg:text-left">
-                    <span class="inline-block py-1.5 px-4 rounded-full bg-purple-100 text-purple-700 text-xs sm:text-sm font-semibold mb-6">
-                        Redefining Professional Competency in Botswana
-                    </span>
-                    <h1 class="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold text-gray-900 leading-[1.1] mb-6">
-                        Bridging the gap from <span class="text-purple-700">Potential</span> to <span class="text-purple-700">Placement</span>.
-                    </h1>
-                    <p class="text-base sm:text-lg lg:text-xl text-gray-600 mb-10 leading-relaxed max-w-2xl mx-auto lg:mx-0">
-                        Our SkillBridge AI and Audited Capstones ensure that high-potential female professionals are not just qualified on paper, but verified in practice.
-                    </p>
-                    <div class="flex flex-col sm:flex-row justify-center lg:justify-start space-y-4 sm:space-y-0 sm:space-x-4">
-                        <button class="btn-purple text-white px-8 py-4 rounded-xl font-bold text-lg shadow-lg w-full sm:w-auto">Start Your Roadmap</button>
-                        <button class="bg-white border-2 border-purple-200 text-purple-700 px-8 py-4 rounded-xl font-bold text-lg hover:bg-purple-50 transition w-full sm:w-auto">Partner with Us</button>
-                    </div>
-                </div>
-                <div class="mt-12 lg:mt-0 relative flex justify-center">
-                    <!-- Main Image Container -->
-                    <div class="relative w-full max-w-lg lg:max-w-none">
-                        <div class="rounded-3xl overflow-hidden shadow-2xl border-4 sm:border-8 border-white">
-                            <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&q=80&w=1000" alt="Professional Women Collaboration" class="w-full h-auto object-cover aspect-video sm:aspect-auto">
-                        </div>
-                        <!-- Stats Floating Card -->
-                        <div class="absolute -bottom-6 -left-4 sm:-left-6 bg-white p-4 sm:p-6 rounded-2xl shadow-xl border border-purple-100">
-                            <div class="flex items-center space-x-3 sm:space-x-4">
-                                <div class="p-2 sm:p-3 bg-purple-100 rounded-lg">
-                                    <i class="fa-solid fa-bolt text-purple-700 text-lg sm:text-xl"></i>
-                                </div>
-                                <div>
-                                    <p class="text-[10px] sm:text-sm text-gray-500 font-medium uppercase tracking-wider">Placement Success</p>
-                                    <p class="text-xl sm:text-2xl font-bold text-gray-900">84%</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Background Elements -->
-        <div class="absolute top-0 right-0 -translate-y-1/2 translate-x-1/4 w-64 h-64 sm:w-96 sm:h-96 bg-purple-200 rounded-full blur-3xl opacity-30"></div>
     </header>
 
-    <!-- The Problem / Mission -->
-    <section id="about" class="py-24 sm:py-32 bg-white scroll-mt-20">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-4">The Challenge We Solve</h2>
-                <div class="w-20 h-1.5 bg-purple-600 mx-auto rounded-full"></div>
+    <!-- Main Viewport -->
+    <div class="viewport">
+
+        <!-- Slide 1: Title -->
+        <div class="slide active" id="slide-1">
+            <span class="tag">GOVERNMENT & IT SECURITY</span>
+            <h1>Your Digital Identity</h1>
+            <p class="subtitle" style="font-size: 1.8rem; font-weight: 700; color: var(--accent-sky);">Protect It. Access It. Own It.</p>
+            <p style="color: var(--text-muted); font-size: 1.1rem;">Safe Password Practices & ePayslip Portal Awareness Presentation</p>
+            <div style="margin-top: 2.5rem;">
+                <button class="btn btn-primary" onclick="nextSlide()" style="padding: 0.8rem 2rem; font-size: 1.1rem;">Start Presentation →</button>
             </div>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 text-center">
-                <div class="p-8 rounded-2xl bg-gray-50 border border-gray-100 shadow-sm transition hover:shadow-md">
-                    <div class="text-4xl sm:text-5xl font-bold text-purple-700 mb-3">26.7%</div>
-                    <p class="text-gray-600 font-medium italic">Female Unemployment Rate in Botswana</p>
+        </div>
+
+        <!-- Slide 2: Why This Matters -->
+        <div class="slide" id="slide-2">
+            <h2>Why This Matters</h2>
+            <p class="subtitle">Your password isn't just a code—it's the front door to your personal data.</p>
+            <div class="flow-chain">
+                <div class="flow-node">
+                    <div class="icon-box">👤</div>
+                    You
                 </div>
-                <div class="p-8 rounded-2xl bg-gray-50 border border-gray-100 shadow-sm transition hover:shadow-md">
-                    <div class="text-4xl sm:text-5xl font-bold text-purple-700 mb-3">Skill Gap</div>
-                    <p class="text-gray-600 font-medium">Bridging the delta between academics and industry demands.</p>
+                <div class="flow-arrow">➔</div>
+                <div class="flow-node">
+                    <div class="icon-box">🔑</div>
+                    Password
                 </div>
-                <div class="p-8 rounded-2xl bg-gray-50 border border-gray-100 shadow-sm transition hover:shadow-md sm:col-span-2 lg:col-span-1">
-                    <div class="text-4xl sm:text-5xl font-bold text-purple-700 mb-3">SADC Scale</div>
-                    <p class="text-gray-600 font-medium">A regional talent pipeline designed for Africa's future.</p>
+                <div class="flow-arrow">➔</div>
+                <div class="flow-node">
+                    <div class="icon-box">📂</div>
+                    Account
+                </div>
+                <div class="flow-arrow">➔</div>
+                <div class="flow-node">
+                    <div class="icon-box">💵</div>
+                    Personal Info & Payslip
+                </div>
+            </div>
+            <div class="card" style="margin-top: 2rem; background: rgba(37, 99, 235, 0.1); border-color: var(--accent-blue);">
+                <p>⚠️ <strong>Key Takeaway:</strong> A compromise at the <i>Password</i> stage instantly exposes everything attached to your digital profile.</p>
+            </div>
+        </div>
+
+        <!-- Slide 3: What Makes a Password Safe? -->
+        <div class="slide" id="slide-3">
+            <h2>What Makes a Password Safe?</h2>
+            <p class="subtitle">Move beyond weak single-words to multi-layered credentials.</p>
+            <div class="grid-3">
+                <div class="card">
+                    <div class="icon-box">📏</div>
+                    <h3 style="margin-bottom: 0.5rem; color: var(--accent-sky);">Length</h3>
+                    <p style="color: var(--text-muted);">Aim for <strong>12+ characters</strong>. Length exponentially increases cracking difficulty far more than complexity alone.</p>
+                </div>
+                <div class="card">
+                    <div class="icon-box">🧩</div>
+                    <h3 style="margin-bottom: 0.5rem; color: var(--accent-sky);">Complexity</h3>
+                    <p style="color: var(--text-muted);">Mix uppercase letters, lowercase letters, numbers, and special symbols (e.g., <code>!@#$%</code>).</p>
+                </div>
+                <div class="card">
+                    <div class="icon-box">🗣️</div>
+                    <h3 style="margin-bottom: 0.5rem; color: var(--accent-sky);">Passphrases</h3>
+                    <p style="color: var(--text-muted);">Combine 4 random words into a sentence. Easy for humans to remember, hard for computers to guess.</p>
                 </div>
             </div>
         </div>
-    </section>
 
-    <!-- Solutions Section -->
-    <section id="solutions" class="py-24 sm:py-32 bg-gray-50 scroll-mt-20">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-col lg:flex-row justify-between lg:items-end mb-16 text-center lg:text-left">
-                <div class="max-w-2xl">
-                    <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">Core Pillars of Success</h2>
-                    <p class="text-base sm:text-lg text-gray-600">We leverage AI and audited proof-of-work to de-risk hiring for Botswana's leading enterprises.</p>
+        <!-- Slide 4: Interactive Game -->
+        <div class="slide" id="slide-4">
+            <h2>Interactive Test: SAFE or RISKY?</h2>
+            <p class="subtitle">Test your knowledge! Is the password below secure?</p>
+            
+            <div class="game-card">
+                <div style="font-size: 0.9rem; color: var(--text-muted);">Question <span id="q-num">1</span> of 3</div>
+                <div class="password-display" id="q-password">P@ssword2024</div>
+                
+                <div class="game-actions" id="game-controls">
+                    <button class="game-btn btn-safe" onclick="checkAnswer(false)">SAFE</button>
+                    <button class="game-btn btn-risky" onclick="checkAnswer(true)">RISKY</button>
                 </div>
+
+                <div class="game-feedback" id="game-feedback"></div>
+                
+                <button class="btn" id="next-q-btn" onclick="nextQuestion()" style="display:none; margin: 1rem auto 0;">Next Example →</button>
             </div>
+        </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-start">
-                <!-- Pillar 1 -->
-                <div class="glass-card p-8 rounded-3xl shadow-sm hover:shadow-xl transition duration-300 h-full flex flex-col">
-                    <div class="w-14 h-14 bg-purple-100 rounded-2xl flex items-center justify-center mb-6">
-                        <i class="fa-solid fa-brain text-purple-700 text-2xl"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold text-gray-900 mb-4">SkillBridge AI</h3>
-                    <p class="text-gray-600 leading-relaxed mb-8 flex-grow">Our engine analyzes your background and generates a custom "Job-Readiness Roadmap" to bridge skill gaps instantly.</p>
-                    <ul class="space-y-3 text-gray-700">
-                        <li class="flex items-center"><i class="fa-solid fa-check-circle text-purple-500 mr-3"></i> Gap Analysis</li>
-                        <li class="flex items-center"><i class="fa-solid fa-check-circle text-purple-500 mr-3"></i> Personalized Learning</li>
-                    </ul>
+        <!-- Slide 5: Common Mistakes -->
+        <div class="slide" id="slide-5">
+            <h2>Common Password Mistakes</h2>
+            <p class="subtitle">Habits that put your identity and finances at risk.</p>
+            <div class="grid-4">
+                <div class="card" style="border-left: 4px solid var(--accent-red);">
+                    <h3>🔄 Reusing Passwords</h3>
+                    <p style="color: var(--text-muted); margin-top: 0.5rem;">Using the same password for email, social media, and ePayslip means one leak compromises all accounts.</p>
                 </div>
-
-                <!-- Pillar 2 -->
-                <div class="bg-purple-gradient p-8 rounded-3xl shadow-xl text-white transform md:-translate-y-4 h-full flex flex-col scale-100 md:scale-105">
-                    <div class="w-14 h-14 bg-white/20 rounded-2xl flex items-center justify-center mb-6">
-                        <i class="fa-solid fa-certificate text-white text-2xl"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold mb-4">Audited Capstones</h3>
-                    <p class="text-purple-100 leading-relaxed mb-8 flex-grow">Complete real-world projects designed by industry leaders. Get "Verified Placement" badges upon senior audit review.</p>
-                    <ul class="space-y-3">
-                        <li class="flex items-center"><i class="fa-solid fa-check-circle mr-3 opacity-70"></i> Verified Proof of Skill</li>
-                        <li class="flex items-center"><i class="fa-solid fa-check-circle mr-3 opacity-70"></i> Industry Expert Review</li>
-                    </ul>
+                <div class="card" style="border-left: 4px solid var(--accent-red);">
+                    <h3>📝 Sticky Notes</h3>
+                    <p style="color: var(--text-muted); margin-top: 0.5rem;">Writing credentials on paper attached to monitors or hidden under keyboards.</p>
                 </div>
-
-                <!-- Pillar 3 -->
-                <div class="glass-card p-8 rounded-3xl shadow-sm hover:shadow-xl transition duration-300 h-full flex flex-col md:col-span-2 lg:col-span-1">
-                    <div class="w-14 h-14 bg-purple-100 rounded-2xl flex items-center justify-center mb-6">
-                        <i class="fa-solid fa-graduation-cap text-purple-700 text-2xl"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Graduate Onboarding</h3>
-                    <p class="text-gray-600 leading-relaxed mb-8 flex-grow">We capture top female talent directly from universities, ensuring a seamless transition into professional roles.</p>
-                    <ul class="space-y-3 text-gray-700">
-                        <li class="flex items-center"><i class="fa-solid fa-check-circle text-purple-500 mr-3"></i> Early Career Coaching</li>
-                        <li class="flex items-center"><i class="fa-solid fa-check-circle text-purple-500 mr-3"></i> Direct Pipeline Access</li>
-                    </ul>
+                <div class="card" style="border-left: 4px solid var(--accent-red);">
+                    <h3>📅 Personal Dates</h3>
+                    <p style="color: var(--text-muted); margin-top: 0.5rem;">Using birth dates, names of children, or local sports teams that can be found on public social profiles.</p>
+                </div>
+                <div class="card" style="border-left: 4px solid var(--accent-red);">
+                    <h3>🤝 Sharing Credentials</h3>
+                    <p style="color: var(--text-muted); margin-top: 0.5rem;">Sending passwords over messaging apps, email, or sharing accounts with colleagues.</p>
                 </div>
             </div>
         </div>
-    </section>
 
-    <!-- Partners / For Employers -->
-    <section id="employers" class="py-24 sm:py-32 bg-white overflow-hidden scroll-mt-20">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-                <div class="order-2 lg:order-1">
-                    <div class="relative">
-                        <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&q=80&w=1000" alt="Meeting" class="rounded-3xl shadow-lg w-full object-cover aspect-[4/3] lg:aspect-auto">
-                        <div class="absolute -top-10 -right-10 w-40 h-40 bg-purple-50 rounded-full -z-10 blur-2xl"></div>
-                    </div>
+        <!-- Slide 6: ePayslip Portal Walkthrough -->
+        <div class="slide" id="slide-6">
+            <h2>ePayslip Portal Walkthrough</h2>
+            <p class="subtitle">Safely navigating your online payslip dashboard.</p>
+            
+            <div class="portal-mock">
+                <div class="portal-header">
+                    <div class="dot dot-red"></div>
+                    <div class="dot dot-yellow"></div>
+                    <div class="dot dot-green"></div>
+                    <span style="font-size: 0.8rem; color: var(--text-muted); margin-left: 0.5rem;">https://epayslip.portal.gov/secure</span>
                 </div>
-                <div class="order-1 lg:order-2">
-                    <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-6 leading-tight">A Verified Talent Pipeline for Your Enterprise</h2>
-                    <p class="text-base sm:text-lg text-gray-600 mb-8 leading-relaxed">
-                        Stop guessing with resumes. EmpowerHer Pathways provides access to a pre-vetted pool of female talent in Finance and Technology, backed by psychometric data and audited projects.
-                    </p>
-                    <div class="space-y-8">
-                        <div class="flex items-start space-x-5">
-                            <div class="w-12 h-12 rounded-full bg-purple-100 flex items-center justify-center flex-shrink-0">
-                                <i class="fa-solid fa-shield-halved text-purple-700 text-lg"></i>
-                            </div>
-                            <div>
-                                <h4 class="text-xl font-bold text-gray-900 mb-1">De-Risk Recruitment</h4>
-                                <p class="text-gray-600 text-sm sm:text-base">Reduce costly turnover by hiring candidates with proven hands-on capability.</p>
-                            </div>
-                        </div>
-                        <div class="flex items-start space-x-5">
-                            <div class="w-12 h-12 rounded-full bg-purple-100 flex items-center justify-center flex-shrink-0">
-                                <i class="fa-solid fa-users text-purple-700 text-lg"></i>
-                            </div>
-                            <div>
-                                <h4 class="text-xl font-bold text-gray-900 mb-1">D&I Compliance</h4>
-                                <p class="text-gray-600 text-sm sm:text-base">Meet corporate governance goals with top-tier female leadership candidates.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <button class="mt-12 btn-purple text-white px-10 py-4 rounded-xl font-bold shadow-lg w-full sm:w-auto transition hover:shadow-purple-200">Inquire for B2B Partnership</button>
+                <div class="portal-tabs">
+                    <div class="portal-tab active" onclick="switchPortalTab(0)">Step 1: Secure Login</div>
+                    <div class="portal-tab" onclick="switchPortalTab(1)">Step 2: Navigate Dashboard</div>
+                    <div class="portal-tab" onclick="switchPortalTab(2)">Step 3: Download & Log Out</div>
+                </div>
+                <div class="portal-body" id="portal-content">
+                    <!-- Dynamic Javascript Content -->
                 </div>
             </div>
         </div>
-    </section>
 
-    <!-- Footer -->
-    <footer id="contact" class="bg-gray-900 text-white py-16 sm:py-24">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
-                <div class="lg:col-span-2">
-                    <div class="flex items-center space-x-2 mb-8">
-                    <img src="logo.jpg" alt="EmpowerHer Logo" class="w-10 h-10 rounded-lg object-contain shadow-sm" onerror="this.outerHTML='<div class=\'w-10 h-10 bg-purple-800 rounded-lg flex items-center justify-center text-white font-bold\'>EP</div>'">
-                        <span class="text-xl font-bold uppercase tracking-widest">EmpowerHer Pathways</span>
-                    </div>
-                    <p class="text-gray-400 max-w-sm mb-8 leading-relaxed">
-                        Revolutionizing how professional talent is discovered, developed, and deployed in Botswana and across the SADC region.
-                    </p>
-                    <div class="flex space-x-5">
-                        <a href="https://www.linkedin.com/company/empowerher-pathways-bw/" class="w-10 h-10 rounded-full border border-gray-700 flex items-center justify-center text-gray-400 hover:text-white hover:border-purple-500 transition"><i class="fa-brands fa-linkedin-in"></i></a>
-                        <a href="https://web.facebook.com/people/EmpowerHer-Pathways/61580865684919/" class="w-10 h-10 rounded-full border border-gray-700 flex items-center justify-center text-gray-400 hover:text-white hover:border-purple-500 transition"><i class="fa-brands fa-facebook"></i></a>
-                        <a href="#" class="w-10 h-10 rounded-full border border-gray-700 flex items-center justify-center text-gray-400 hover:text-white hover:border-purple-500 transition"><i class="fa-brands fa-instagram"></i></a>
-                    </div>
+        <!-- Slide 7: Password Recovery -->
+        <div class="slide" id="slide-7">
+            <h2>Forgotten Password?</h2>
+            <p class="subtitle">Follow the official self-service password reset procedure.</p>
+            <div class="grid-3">
+                <div class="card" style="text-align: center;">
+                    <div class="icon-box">1️⃣</div>
+                    <h3>Request Reset</h3>
+                    <p style="color: var(--text-muted); margin-top: 0.5rem;">Click "Forgot Password" on the login page. Enter your official employee ID/email.</p>
                 </div>
-                <div>
-                    <h4 class="text-lg font-bold mb-8">Platform</h4>
-                    <ul class="space-y-4 text-gray-400">
-                        <li><a href="#" class="hover:text-white transition">How it Works</a></li>
-                        <li><a href="#" class="hover:text-white transition">Success Stories</a></li>
-                        <li><a href="#" class="hover:text-white transition">SkillBridge AI</a></li>
-                        <li><a href="#" class="hover:text-white transition">Corporate Pricing</a></li>
-                    </ul>
+                <div class="card" style="text-align: center;">
+                    <div class="icon-box">2️⃣</div>
+                    <h3>Verify Identity</h3>
+                    <p style="color: var(--text-muted); margin-top: 0.5rem;">Check your official inbox/SMS for a single-use verification link or OTP code.</p>
                 </div>
-                <div>
-                    <h4 class="text-lg font-bold mb-8">Contact</h4>
-                    <ul class="space-y-4 text-gray-400">
-                        <li class="flex items-start space-x-3">
-                            <i class="fa-solid fa-location-dot mt-1 text-purple-500"></i>
-                            <span>Gaborone, Botswana</span>
-                        </li>
-                        <li class="flex items-start space-x-3">
-                            <i class="fa-solid fa-envelope mt-1 text-purple-500"></i>
-                            <span>hello@empowerherpathways.com</span>
-                        </li>
-                        <li class="flex items-start space-x-3">
-                            <i class="fa-solid fa-phone mt-1 text-purple-500"></i>
-                            <span>+267 742 784 20</span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="border-t border-gray-800 mt-20 pt-8 flex flex-col sm:flex-row justify-between items-center text-gray-500 text-sm space-y-4 sm:space-y-0">
-                <p>&copy; 2026 EmpowerHer Pathways. Where Technology Meets Opportunity.</p>
-                <div class="flex space-x-6">
-                    <a href="#" class="hover:text-white transition">Privacy Policy</a>
-                    <a href="#" class="hover:text-white transition">Terms of Service</a>
+                <div class="card" style="text-align: center;">
+                    <div class="icon-box">3️⃣</div>
+                    <h3>Set New Password</h3>
+                    <p style="color: var(--text-muted); margin-top: 0.5rem;">Create a fresh, unique passphrase. Never reuse your previous 3 passwords.</p>
                 </div>
             </div>
         </div>
+
+        <!-- Slide 8: Protect Your Digital Identity -->
+        <div class="slide" id="slide-8">
+            <h2>Protect Your Digital Identity</h2>
+            <p class="subtitle">Security is an ongoing habit, not a one-time setup.</p>
+            <div class="card" style="padding: 2.5rem;">
+                <div class="grid-3" style="align-items: center;">
+                    <div style="text-align: center;">
+                        <div style="font-size: 3rem;">🔐</div>
+                        <h4 style="color: var(--accent-sky); margin-top: 0.5rem;">Strong Passwords</h4>
+                        <p style="font-size: 0.9rem; color: var(--text-muted);">First line of defense</p>
+                    </div>
+                    <div style="text-align: center; font-size: 2rem; color: var(--accent-sky);">+</div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 3rem;">📱</div>
+                        <h4 style="color: var(--accent-sky); margin-top: 0.5rem;">2-Factor Auth (2FA)</h4>
+                        <p style="font-size: 0.9rem; color: var(--text-muted);">Second layer of proof</p>
+                    </div>
+                </div>
+                <div style="text-align: center; margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--border-color);">
+                    <p style="font-size: 1.3rem; font-weight: 700; color: var(--accent-green);">= Complete Digital Identity Protection</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 9: 5 Things to Remember -->
+        <div class="slide" id="slide-9">
+            <h2>5 Things to Remember</h2>
+            <p class="subtitle">Quick recap for your daily digital security routine.</p>
+            <div class="card">
+                <ul style="list-style: none; display: flex; flex-direction: column; gap: 1rem;">
+                    <li style="display: flex; align-items: center; gap: 1rem;">
+                        <span style="color: var(--accent-green); font-size: 1.2rem;">✓</span>
+                        <span>Use long, unique passphrases for every official account.</span>
+                    </li>
+                    <li style="display: flex; align-items: center; gap: 1rem;">
+                        <span style="color: var(--accent-green); font-size: 1.2rem;">✓</span>
+                        <span>Never write passwords down or share them with colleagues.</span>
+                    </li>
+                    <li style="display: flex; align-items: center; gap: 1rem;">
+                        <span style="color: var(--accent-green); font-size: 1.2rem;">✓</span>
+                        <span>Always check the URL before logging into the ePayslip portal.</span>
+                    </li>
+                    <li style="display: flex; align-items: center; gap: 1rem;">
+                        <span style="color: var(--accent-green); font-size: 1.2rem;">✓</span>
+                        <span>Log out of your ePayslip account when using shared computers.</span>
+                    </li>
+                    <li style="display: flex; align-items: center; gap: 1rem;">
+                        <span style="color: var(--accent-green); font-size: 1.2rem;">✓</span>
+                        <span>Report suspicious password reset requests to IT immediately.</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 10: Closing -->
+        <div class="slide" id="slide-10" style="text-align: center;">
+            <div style="font-size: 4rem; margin-bottom: 1rem;">🛡️</div>
+            <h1 style="font-size: 2.5rem; max-width: 800px; margin: 0 auto 1.5rem;">
+                “Your password is the key to your digital life. Protect the key.”
+            </h1>
+            <p class="subtitle">Thank you for keeping our systems secure.</p>
+            <div style="margin-top: 2rem;">
+                <button class="btn btn-primary" onclick="goToSlide(1)">🔄 Restart Presentation</button>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Footer Controls -->
+    <footer>
+        <button class="btn" onclick="prevSlide()">← Back</button>
+        <div class="progress-bar">
+            <div class="progress-fill" id="progress"></div>
+        </div>
+        <span class="slide-number" id="slide-num">1 / 10</span>
+        <button class="btn btn-primary" onclick="nextSlide()">Next →</button>
     </footer>
 
-    <!-- Back to Top Button -->
-    <button id="backToTop" title="Go to top">
-        <i class="fa-solid fa-arrow-up"></i>
-    </button>
-
     <script>
-        // Mobile menu toggle
-        const btn = document.getElementById('mobile-menu-button');
-        const menu = document.getElementById('mobile-menu');
+        // Presentation Logic
+        let currentSlide = 1;
+        const totalSlides = 10;
 
-        btn.addEventListener('click', () => {
-            menu.classList.toggle('hidden');
-        });
-
-        // Close menu when clicking links
-        const mobileLinks = menu.querySelectorAll('a');
-        mobileLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                menu.classList.add('hidden');
+        function updateSlide() {
+            document.querySelectorAll('.slide').forEach((slide, index) => {
+                slide.classList.toggle('active', index + 1 === currentSlide);
             });
-        });
+            
+            // Update progress & counter
+            const progressPercent = (currentSlide / totalSlides) * 100;
+            document.getElementById('progress').style.width = `${progressPercent}%`;
+            document.getElementById('slide-num').innerText = `${currentSlide} / ${totalSlides}`;
+        }
 
-        // Back to Top Logic
-        const backToTopBtn = document.getElementById('backToTop');
-
-        window.onscroll = function() {
-            if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
-                backToTopBtn.classList.add('visible');
-            } else {
-                backToTopBtn.classList.remove('visible');
+        function nextSlide() {
+            if (currentSlide < totalSlides) {
+                currentSlide++;
+                updateSlide();
             }
-        };
+        }
 
-        backToTopBtn.addEventListener('click', () => {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
+        function prevSlide() {
+            if (currentSlide > 1) {
+                currentSlide--;
+                updateSlide();
+            }
+        }
+
+        function goToSlide(num) {
+            currentSlide = num;
+            updateSlide();
+        }
+
+        // Keyboard Controls
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === 'Space' || e.key === 'PageDown') {
+                nextSlide();
+            } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+                prevSlide();
+            } else if (e.key.toLowerCase() === 'f') {
+                toggleFullscreen();
+            }
         });
+
+        function toggleFullscreen() {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen().catch(err => {});
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                }
+            }
+        }
+
+        // Interactive Game Logic (Slide 4)
+        const questions = [
+            { password: "P@ssword2024", isRisky: true, reason: "Risky! Common baseline words like 'Password' are instantly guessed by automated dictionary tools, even with basic number substitutions." },
+            { password: "Coffee#Train#78#Blue", isRisky: false, reason: "Safe! Over 20 characters long, combines random words, numbers, and symbols. Extremely difficult to crack." },
+            { password: "John1988", isRisky: true, reason: "Risky! Contains a common name and birth year—information easily accessible on social media." }
+        ];
+
+        let currentQ = 0;
+
+        function checkAnswer(userSaysRisky) {
+            const q = questions[currentQ];
+            const feedbackEl = document.getElementById('game-feedback');
+            const controlsEl = document.getElementById('game-controls');
+            const nextBtn = document.getElementById('next-q-btn');
+
+            controlsEl.style.display = 'none';
+            feedbackEl.style.display = 'block';
+
+            if (userSaysRisky === q.isRisky) {
+                feedbackEl.className = 'game-feedback feedback-safe';
+                feedbackEl.innerHTML = `<strong>Correct!</strong> ${q.reason}`;
+            } else {
+                feedbackEl.className = 'game-feedback feedback-risky';
+                feedbackEl.innerHTML = `<strong>Incorrect.</strong> ${q.reason}`;
+            }
+
+            if (currentQ < questions.length - 1) {
+                nextBtn.style.display = 'inline-block';
+            }
+        }
+
+        function nextQuestion() {
+            currentQ++;
+            document.getElementById('q-num').innerText = currentQ + 1;
+            document.getElementById('q-password').innerText = questions[currentQ].password;
+            document.getElementById('game-controls').style.display = 'flex';
+            document.getElementById('game-feedback').style.display = 'none';
+            document.getElementById('next-q-btn').style.display = 'none';
+        }
+
+        // ePayslip Walkthrough Logic (Slide 6)
+        const portalSteps = [
+            `<h3>Step 1: Authenticate Responsibly</h3>
+             <p style="color: var(--text-muted); margin-top: 0.5rem;">Always verify that the Web Address bar shows the secure government domain lock icon before entering your Employee ID and secure passphrase.</p>`,
+            `<h3>Step 2: Access Payslip Archive</h3>
+             <p style="color: var(--text-muted); margin-top: 0.5rem;">Navigate to <i>My Financial Documents</i>. Select the specific month/year. Avoid saving credentials on public browsers.</p>`,
+            `<h3>Step 3: Download & Logout</h3>
+             <p style="color: var(--text-muted); margin-top: 0.5rem;">Download encrypted PDF files directly to an authorized device. <strong>Always click 'Log Out'</strong> rather than closing the tab.</p>`
+        ];
+
+        function switchPortalTab(index) {
+            const tabs = document.querySelectorAll('.portal-tab');
+            tabs.forEach((tab, i) => tab.classList.toggle('active', i === index));
+            document.getElementById('portal-content').innerHTML = portalSteps[index];
+        }
+
+        // Initialize Portal Slide Content
+        switchPortalTab(0);
     </script>
 </body>
 </html>
